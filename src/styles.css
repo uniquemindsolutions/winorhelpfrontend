@@ -1,0 +1,130 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+    --lt-primary: #0054A8; /**@NEW */
+
+    --lt-secondry: #04535f;
+    --lt-danger: #F44336;
+    --lt-warn: #FDB93F;
+    --lt-orange: #FF933A;
+    --lt-invalid-text: #d32f2f;
+    --lt-dirty: #611a15;
+    --lt-light: #FFFFFF;
+    --lt-blue: #012253;
+    --lt-light-blue: #1957B4;
+    --lt-dark-blue: #1E293B;
+    --lt-green: #2e7d32;
+    --lt-success: #4caf50;
+    --lt-border-color: #D9E5F0;
+    --lt-input-border-color: #CED4DA;
+    --lt-light-green: #20c997;
+    --lt-header-bg: #F4F3F9;
+    --lt-light: #FFF;
+    --lt-light-warn: #FBEDBA;
+    --lt-black: #1E1E1E;
+    --lt-gray: #92A0B3;
+    --lt-bg-color: #F2F8FF;
+    --lt-ultra-gray: #e0e0e0;
+    --lt-light-gray: #f5f5f5;
+    --lt-text-color: #343A40;
+    --lt-text-gray: #74788D;
+    --lt-text-gray-2: #7E7E7E;
+    --lt-place-holder: rgba(52, 76, 122, 0.5);
+    --lt-box-shadow: 0px 0px 6px rgb(0 0 0 / 16%);
+    --lt-sidebar-bg: #f0eff0;
+    --lt-sidebar-menu: rgba(0, 0, 0, 0.05);
+    --lt-toobarcolor: rgb(4, 83, 95);
+    --lt-tooltip: rgba(97, 97, 97, 0.9);
+    --lt-text-dark-gray: rgba(0, 0, 0, 0.87);
+    --lt-mui-toobar-shadow: 0 4px 12px 0 rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.05);
+    --mui-tab-text-label:#515D69;
+    --ff-bold: 'Inter-Bold';
+    --ff-semiBold: 'Inter-SemiBold';
+    --ff-light: 'Inter-Light';
+    --ff-regular: 'Inter-Regular';
+    --ff-medium: 'Inter-Medium';
+    --pos: left center;
+    --size: 0;
+    --header-size-y:64px;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+main{
+    padding: 0px 8px 8px 8px;
+}
+main table{
+    border-radius: 8px;
+    overflow: hidden;
+}
+.breadcrumb {
+    width: 100%;
+    padding: 0;
+    padding-top: 1rem;
+    list-style: none;
+}
+.breadcrumb li {
+    float: left;
+    padding: 0 1rem;
+    position: relative;
+    font-size: 0.875rem;
+    font-family: 'Inter-Medium';
+}
+.breadcrumb li:after {
+    content: "";
+    padding: 0.2rem;
+    display: inline-block;
+    position: absolute;
+    background: transparent;
+    text-indent: -9999px;
+    border-top: 2px solid #bfbfbf;
+    border-left: 2px solid #bfbfbf;
+    transition: all 250ms ease-in-out;
+    text-decoration: none;
+    color: transparent;
+    right: 0;
+    display: inline-block;
+    transform: rotate(135deg);
+    margin-top: 0.393rem;
+}
+.breadcrumb li:last-child:after {
+    content: "";
+    padding: 0px;
+    display: none;
+}
+.breadcrumb li a {
+    color: var(--lt-text-color);
+    text-decoration: none;
+    font-family: 'Inter-Light';
+    font-size: 0.875rem;
+}
+.breadcrumb li a.active {
+    color: var(--lt-text-color);
+    pointer-events: none;
+    font-family: 'Inter-Medium';
+    cursor: default;
+}
+.breadcrumb li a.active:hover {
+    text-decoration: none;
+}
+
+
+.mat-form-field {
+    font-size: 0.74rem !important;
+}
+.mat-form-field input {
+    font-size: 1rem !important;
+}
+.mat-form-field label.mat-form-field-label {
+    font-size: 1rem !important;
+    top: 1.45em !important;
+}
+.mat-form-field.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field.mat-form-field-can-float .mat-input-server:focus + .mat-form-field-label-wrapper .mat-form-field-label {
+    transform: translateY(-1.25em) scale(0.75) !important;
+    width: 133.33333% !important;
+}

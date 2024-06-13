@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="main-header">
+    <div [style.width.%]="100" class="header-bar" [style.marginLeft.rem]="isCollepsed ? 0 :15" >
+        <app-nav-bar (onToggleSidebar)="toggleSidebar()"></app-nav-bar>
+    </div>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"
+        [fixedTopGap]>
+        <mat-toolbar class="p-0 sidebar-header overflow-hidden">
+            <img pointer [src]="sidebarLogo"  routerLink="/admin/dashboard" />
+        </mat-toolbar>
+        <side-menu [sideMenuListObj]="sideMenuListObj" (onChangeRoutes)="onChangeRoutes($event)"></side-menu>
+    </mat-sidenav>
+    <mat-sidenav-content (window:resize)="onSizeChange($event)" [style.height.px]="getScreenHeight">
+        <mat-toolbar id="content-toolbar"></mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

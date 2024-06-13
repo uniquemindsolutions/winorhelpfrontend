@@ -1,0 +1,60 @@
+<div class="nav-item" [ngClass]="headerType">
+    <div>
+        <button color="default" (click)="onToggle()" class="hamburger-sidebar-menu" mat-icon-button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16" fill="none">
+                <path d="M1 1L17 1" stroke="#636E75" stroke-width="2" stroke-linecap="square" />
+                <path d="M1 15L17 15" stroke="#636E75" stroke-width="2" stroke-linecap="square" />
+                <path d="M1 8L11 8" stroke="#636E75" stroke-width="2" stroke-linecap="square" />
+            </svg>
+        </button>
+    </div>
+    <span class="page-title type"></span>
+    <span fxFlex>
+        <span id="contractorName">{{contractorName}} </span>
+    </span>
+
+    <!-- <div>
+        <div serach-input>
+            <svg-icon name="search" height="18" width="19" color="#92A0B3"></svg-icon>
+            <input type="search" placeholder="Search Here" />
+        </div>
+    </div>
+    <div class="notification">
+        <button mat-icon-button color="warn">
+            <svg-icon height="20" width="18" color="#fff" name="notification"></svg-icon>
+            <span budge>52</span>
+        </button>
+    </div> -->
+    <!-- [matMenuTriggerFor]="menu"  -->
+    <div class="user-profile" cursor>
+        <img [src]="userImg" />
+        <div info>
+            <ng-container *ngIf="isSuperAdminProjectSelected && getProjectInfo?.developerLogo">
+                <img [src]="getProjectInfo?.developerLogo" />
+            </ng-container>
+
+            <!-- <img src="assets/Imgs/Default/snager.png" /> -->
+            <!-- <span name>{{authData?.userName || 'NA'}}</span>
+            <span role>{{authData?.userRole}}</span> -->
+        </div>
+    </div>
+
+</div>
+
+<!-- <mat-menu #menu="matMenu">
+    <button mat-menu-item disabled>
+        <mat-icon>manage_accounts</mat-icon>
+        <span>
+            <div class="user-name">{{authData?.name || authData?.userName}}</div>
+            <small style="font-size: 11px;margin-top: -5px;">({{authData.role}})</small>
+        </span>
+    </button>
+    <button (click)="changePassword()" mat-menu-item class="lock">
+        <mat-icon>lock_reset</mat-icon>
+        <span>Change Password</span>
+    </button>
+    <button (click)="logout()" mat-menu-item class="logout-account">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Logout</span>
+    </button>
+</mat-menu> -->

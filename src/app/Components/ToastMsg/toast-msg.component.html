@@ -1,0 +1,16 @@
+<section class="toast-wrapper" [ngClass]="{'success':data.type=='Success', 'warn':data.type=='Warn', 'error':data.type=='Error'}">
+    <div class="toast-header" [ngClass]="{'success':data.type=='Success', 'warn':data.type=='Warn', 'error':data.type=='Error'}">
+        <div id="title">{{data?.config.title}}</div>
+        <div id="close">
+            <span matSnackBarActions>
+                <span matSnackBarAction pointer (click)="snackBarRef.dismissWithAction()">&#x2715;</span>
+            </span>
+        </div>
+    </div>
+    <div id="toast-contaner">
+        <img *ngIf="data.type=='Success'"  msg-icon src="assets/images/SVG/successCheck.svg"/>
+        <img *ngIf="data.type=='Warn'" msg-icon src="assets/images/SVG/warn-circle.svg"/>
+        <img *ngIf="data.type=='Error'" msg-icon src="assets/images/SVG/error-circle.svg"/>
+        <div msg [innerHtml]="data?.config.message"></div> 
+    </div>
+</section>

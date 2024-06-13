@@ -1,0 +1,16 @@
+<div class="confirmation-header">
+    <h2 mat-dialog-title>{{data['title']}}</h2>
+    <!-- <button size="medium" mat-icon-button [mat-dialog-close]="false">
+        <mat-icon>close</mat-icon>
+    </button> -->
+</div>
+<div mat-dialog-content>
+    <p>{{data['message']}}</p>
+</div>
+<!-- <div mat-dialog-actions [align]="'end'"> -->
+<div mat-dialog-actions>
+    <div class="d-flex flex-row justify-content-between" w-100>
+        <div [mat-dialog-close]="false" w-50 [matRippleColor]="'#fdb93f3d'" matRipple  pointer class="t-center cencel">{{data && data['cancelCaption'] ? data.cancelCaption :'Cancel'}}</div>
+        <div [matRippleColor]="'#0054a81f'" [mat-dialog-close]="true" w-50 matRipple pointer class="t-center ok">{{data && data['confirmCaption'] ? data.confirmCaption: 'Ok'}}</div>
+    </div>
+</div>

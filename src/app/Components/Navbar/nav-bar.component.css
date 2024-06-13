@@ -1,0 +1,144 @@
+[fxflex] {
+    flex: 1 1 0%;
+    box-sizing: border-box;
+    text-align: center;
+    user-select: none;
+}
+.nav-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 64px;
+    background: #FFF !important;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 2px -2px #ddedff;
+    padding: 0 1.25rem;
+}
+.nav-item .page-title {
+    margin-left: 4px;
+    font-family: Roboto-Regular;
+    font-size: 18px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.6;
+    letter-spacing: 0.15px;
+    color: var(--lt-black);
+    margin-top: 2px;
+}
+.nav-item.enquiry .page-title {
+    margin-top: -10px;
+}
+[serach-input] {
+    border: 1px solid var(--lt-gray);
+    margin-right: 15px;
+    width: 13vw;
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 125px;
+}
+[serach-input] svg-icon {
+    margin-left: 9px;
+}
+[serach-input] input {
+    border: 0;
+    width: 86%;
+    font-size: 14px;
+    font-family: Roboto-Regular;
+    padding-left: 8px;
+    color: var(--lt-gray);
+}
+[serach-input] input:focus {
+    outline: none;
+}
+[serach-input] input::placeholder {
+    color: var(--lt-gray);
+}
+.notification {
+    margin-right: 20px;
+}
+.notification [budge] {
+    position: absolute;
+    background: var(--lt-budge);
+    height: 20px;
+    width: 20px;
+    color: var(--lt-light);
+    line-height: 20px;
+    font-size: 9px;
+    border-radius: 50px;
+    right: -2px;
+    top: 1px;
+    text-align: center;
+}
+.user-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 1px;
+    color: var(--lt-black);
+}
+.user-profile > img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+    border: 4px solid #f1f5f7;
+}
+.user-profile [info] {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 7px;
+    width: 9rem;
+    height: 2.688rem;
+}
+.user-profile [info] img {
+    width: 50%;
+    height: 47px;
+    margin: 15px;
+    margin-top: 0.2rem;
+}
+.notification-items {
+    height: 500px;
+    position: absolute;
+    background: var(--lt-light);
+    width: 350px;
+    z-index: 9999;
+    right: 5vw;
+    top: 61px;
+}
+@media only screen and (max-width: 600px) {
+    [info] [name] {
+        display: none;
+   }
+}
+.hamburger-sidebar-menu {
+    color: var(--lt-primary);
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+#contractorName {
+    color: var(--lt-primary);
+    font-family: var(--ff-bold);
+}
+.logout-account {
+    color: var(--lt-danger);
+    border-top: 1px solid #eee !important;
+}
+.logout-account mat-icon {
+    color: var(--lt-danger) !important;
+}
+.lock {
+    border-top: 1px solid #eee !important;
+}
+.user-name {
+    text-transform: capitalize !important;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 150px;
+}
+
+

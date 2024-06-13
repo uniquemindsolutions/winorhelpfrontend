@@ -1,0 +1,56 @@
+<div class="container p-4">
+    <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+        <mat-form-field sm appearance="outline" class="mb-2" >
+            <mat-label>Room ID</mat-label>
+            <input matInput formControlName="roomId" required>
+            @if(roomForm.get('roomId') && roomForm.get('roomId')?.hasError('required')){ 
+                <mat-error>Room ID is required</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field xs appearance="outline" class="mb-2" >
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            @if(roomForm.get('date') && roomForm.get('date')?.hasError('required')){ 
+                <mat-error>Date is required</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field xxs appearance="outline" class="mb-2" >
+            <mat-label>Entry Fee</mat-label>
+            <input matInput type="number" formControlName="entryFee" required>
+            @if(roomForm.get('entryFee') && roomForm.get('entryFee')?.hasError('required')){ 
+                <mat-error>Entry Fee is required</mat-error>
+            }
+            @if(roomForm.get('entryFee') && roomForm.get('entryFee')?.hasError('min')){ 
+                <mat-error>Entry Fee must be a positive number</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="mb-2" >
+            <mat-label>Total Participants</mat-label>
+            <input matInput type="number" formControlName="totalParticipants" required>
+            @if(roomForm.get('totalParticipants') && roomForm.get('totalParticipants')?.hasError('required')){ 
+                <mat-error>Total Participants is required</mat-error>
+            }
+            @if(roomForm.get('totalParticipants') && roomForm.get('totalParticipants')?.hasError('min')){ 
+                <mat-error>Total Participants must be a positive number</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="mb-2" >
+            <mat-label>Winning Amount</mat-label>
+            <input matInput type="number" formControlName="winningAmount" required>
+            @if(roomForm.get('winningAmount') && roomForm.get('winningAmount')?.hasError('required')){ 
+                <mat-error>Winning Amount is required</mat-error>
+            }
+            @if(roomForm.get('winningAmount') && roomForm.get('winningAmount')?.hasError('min')){ 
+                <mat-error>Winning Amount must be a positive number</mat-error>
+            }
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
+</div>
