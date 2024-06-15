@@ -78,8 +78,11 @@
               My Wallet
             </button>
             <div ngbDropdownMenu aria-labelledby="dropdownManual">
-              <button ngbDropdownItem>My Transaction</button>
-              <button ngbDropdownItem>Credit/Debit request</button>
+              <button ngbDropdownItem routerLink="/mytransaction">My Transaction</button>
+              <button ngbDropdownItem routerLink="/creditdebit"> Wallet Credit </button>
+              <button ngbDropdownItem routerLink="/withdraw"> WithDraw Request </button>
+              
+              
             </div>
           </div>
         </li>
