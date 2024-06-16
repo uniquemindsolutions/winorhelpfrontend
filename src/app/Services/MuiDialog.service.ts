@@ -30,7 +30,7 @@ class MuiDialogService {
     }
 
     this._snackBar.openFromComponent(ToastMsgComponent, {
-      // duration: 3000,
+      duration: 3000,
       horizontalPosition: 'end',
       verticalPosition: 'bottom',
       data:config,

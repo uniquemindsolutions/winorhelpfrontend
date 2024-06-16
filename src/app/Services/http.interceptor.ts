@@ -30,7 +30,7 @@ export class MyHttpInterceptor implements HttpInterceptor {
         }else{
             return request.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${(token ? token : '')}`,
+                    // Authorization: `Bearer ${(token ? token : '')}`,
                     'Content-type': 'application/json',
                 }
             })

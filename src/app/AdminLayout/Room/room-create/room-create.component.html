@@ -1,22 +1,57 @@
 <div class="container p-4">
     <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
-        <mat-form-field sm appearance="outline" class="mb-2" >
-            <mat-label>Room ID</mat-label>
-            <input matInput formControlName="roomId" required>
-            @if(roomForm.get('roomId') && roomForm.get('roomId')?.hasError('required')){ 
-                <mat-error>Room ID is required</mat-error>
-            }
-        </mat-form-field>
+        <div class="row">
+            <div class="col-8">
+                <mat-form-field xs appearance="outline" class="mb-2" >
+                    <mat-label>Start Date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="startDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    @if(roomForm.get('startDate') && roomForm.get('startDate')?.hasError('required')){ 
+                        <mat-error>Date is required</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field xs appearance="outline" class="mb-2" >
+                    <mat-label>Start Time</mat-label>
+                    <input matInput type="time" formControlName="startTime" required>
+                    @if(roomForm.get('startTime') && roomForm.get('startTime')?.hasError('required')){ 
+                        <mat-error>Date is required</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </div>
 
-        <mat-form-field xs appearance="outline" class="mb-2" >
-            <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="date" required>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            @if(roomForm.get('date') && roomForm.get('date')?.hasError('required')){ 
-                <mat-error>Date is required</mat-error>
-            }
-        </mat-form-field>
+        <div class="row">
+            <div class="col-8">
+                <mat-form-field xs appearance="outline" class="mb-2" >
+                    <mat-label>End Date</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="endDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    @if(roomForm.get('endDate') && roomForm.get('endDate')?.hasError('required')){ 
+                        <mat-error>End Date is required</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field xs appearance="outline" class="mb-2" >
+                    <mat-label>Start Time</mat-label>
+                    <input matInput type="time" formControlName="endTime" required>
+                    @if(roomForm.get('endTime') && roomForm.get('endTime')?.hasError('required')){ 
+                        <mat-error>Date is required</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </div>
+        
+
+<!-- 
+        startDate: ['', [Validators.required, Validators.min(1)]],
+        endDate: ['', [Validators.required, Validators.min(1)]],
+        startTime: ['', [Validators.required, Validators.min(1)]],
+        endTime: ['', [Validators.required, Validators.min(1)]], -->
 
         <mat-form-field xxs appearance="outline" class="mb-2" >
             <mat-label>Entry Fee</mat-label>

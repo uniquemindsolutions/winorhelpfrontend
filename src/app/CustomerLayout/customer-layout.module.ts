@@ -5,13 +5,12 @@ import { CustomerLayoutRoutingModule } from './customer-layout-routing.module';
 import { CustomerLayout } from "./customer-layout.component";
 import { HeaderComponent } from "./../Components/Header/header.component";
 import { FooterComponent } from "./../Components/Footer/footer.component";
-import { CreditdbitComponent } from './creditdbit/creditdbit.component';
 
 @NgModule({
   declarations: [CustomerLayout],
   imports: [
     CommonModule,
-    CustomerLayoutRoutingModule, HeaderComponent, FooterComponent,CreditdbitComponent
+    CustomerLayoutRoutingModule, HeaderComponent, FooterComponent
   ]
 })
 export class CustomerLayoutModule { }

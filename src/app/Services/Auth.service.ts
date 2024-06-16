@@ -115,10 +115,6 @@ export class AuthService {
         return this.http.get(`${this.baseUrl}/api/verify_email/${token}`);
     }
 
-    create_room(data:any) {
-        return this.http.post(`${this.baseUrl}/api/create_room`, data);
-    }
-
     // /**@SIGN_UP_USER */
     // createPassword(body: any) {
     //     return this.http.post(`${this.baseUrl}/auth/signup/verify`, body);
