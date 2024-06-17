@@ -157,4 +157,10 @@ export class AdminService {
 
    
 
+    getRoomDetail(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/getRoomDetails`, data);
+    }
+
+   
+
 }

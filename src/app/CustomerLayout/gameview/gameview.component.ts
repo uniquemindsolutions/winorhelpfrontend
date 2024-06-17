@@ -37,10 +37,12 @@ export class GameviewComponent {
   perPage:any="100";
   userlist:any;
   memberList:any=[];
+  roomDetails:any;
 
   constructor(private route: ActivatedRoute, private api:AdminService,private fb: FormBuilder,  private muiDialog: MuiDialogService) { }
 
   ngOnInit(): void {
+    
     this.route.queryParams.subscribe(params => {
       this.id = params['id'];
     });
@@ -56,6 +58,8 @@ export class GameviewComponent {
 
       }
     })
+
+    this.getRoomDetails();
 
   }
 
@@ -80,11 +84,26 @@ export class GameviewComponent {
   }, 3000);
   }
    getRoomUserList(){
-
+   
     this.api.getroomUserList().subscribe({
       next:(res:any) => {
-        console.log(res.data, 'resultUserlist');
+        // console.log(res.data, 'roomdetails');
         this.memberList=res.data;
+      },
+      error: (err: any) => {
+  
+      }
+    })
+
+   }
+
+   getRoomDetails(){
+    const roomId={"roomId":this.id}
+    console.log(roomId,"roomdetails")
+    this.api.getRoomDetail(roomId).subscribe({
+      next:(res:any) => {
+        console.log(res, 'roomdetails');
+        this.roomDetails=res[0];
       },
       error: (err: any) => {
   
