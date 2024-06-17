@@ -92,8 +92,16 @@ export class CustomeServiceService {
         return this.http.get(`${this.baseUrl}/Wallettoperation/users_getwallet?page=1&limit=50&user_id=45`);
     }
     debitWalletamount(data:any) {
-      return this.http.post(`${this.baseUrl}/Wallettoperation/wallet_withdraw_post`,data);
+      return this.http.post(`${this.baseUrl}/Wallettoperation/walletwithdraw`,data);
   }
+
+  roomuserlistInsert(data:any) {
+    return this.http.post(`${this.baseUrl}/Wallettoperation/roomuserlistInsert`,data);
+}
+
+getCurrentWalletAmount() {
+    return this.http.get(`${this.baseUrl}/Wallettoperation/getCurrentAmount`);
+}
 
     
     

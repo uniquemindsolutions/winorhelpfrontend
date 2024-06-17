@@ -16,6 +16,7 @@ export class WithdrareqComponent {
 
   withdraw!: FormGroup;
   submitted = false;
+  walletAmount:any;
   constructor(
     private formBuilder: FormBuilder,
     private customeservice:CustomeServiceService,
@@ -27,6 +28,18 @@ export class WithdrareqComponent {
     this.withdraw = this.formBuilder.group({
       amount: ['', [Validators.required]],
     });
+
+    
+
+    this.customeservice.getCurrentWalletAmount().subscribe({
+      next:(res:any) => {
+        console.log(res.data, 'currentAmount');
+        this.walletAmount=res.data[0].wallet_amount
+      },
+      error: (err: any) => {
+
+      }
+    })
   }
 
   get f() {
