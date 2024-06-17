@@ -52,7 +52,7 @@ export class WithdrareqComponent {
     if (this.withdraw.valid) {
       
       console.log("formvalues",this.withdraw.value)
-      const data={"amount":this.withdraw.value};
+      const data={"amount":this.withdraw.value,"user_id":localStorage.getItem('user_id')};
      
 
       this.customeservice.debitWalletamount(data).subscribe({

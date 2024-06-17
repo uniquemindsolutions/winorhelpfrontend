@@ -28,6 +28,7 @@ export class LoginComponent {
   ) { }
 
   ngOnInit() {
+    localStorage.setItem("user_id","");
     localStorage.setItem("loginsession", "false");
     this.login = this.formBuilder.group({
       email: ['', [Validators.required]],
@@ -50,6 +51,8 @@ export class LoginComponent {
       this.authService.login(this.login.value).subscribe({
         next: (res: any) => {
           if(res && res.status){
+            console.log(res,"userID");
+            localStorage.setItem("user_id",res.data.id);
             this.dialog.openSnackBar({ message:'Login successfully completed.', title: 'Login Done'}, 'Success');
             localStorage.setItem("loginsession","true");
             this.router.navigate(['/home']);
