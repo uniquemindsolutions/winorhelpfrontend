@@ -4,6 +4,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule, MatDialog} from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 interface Room {
   id: string;
   name: string;
@@ -14,7 +15,7 @@ interface Room {
 @Component({
   selector: 'app-room-detail',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatCardModule],
+  imports: [MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatCardModule,CommonModule],
   templateUrl: './room-detail.component.html',
   styleUrl: './room-detail.component.css'
 })

@@ -14,8 +14,10 @@ export interface SHAIRED_DATA {
     data: any;
 }
 
-@Injectable()
-export class AdminService {
+@Injectable({
+  providedIn: 'root', // This makes the service available application-wide.
+})
+export class CustomeServiceService {
     emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     public STORAGE_KEY = environment.STORAGE_KEY;
     public baseUrl = environment.baseUrl;
@@ -86,51 +88,24 @@ export class AdminService {
         return this.router.url;
     }
 
-    createRoom(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/create_room`, data);
+    getTransList() {
+        return this.http.get(`${this.baseUrl}/Wallettoperation/users_getwallet?page=1&limit=50&user_id=45`);
     }
-
-    roomList(page:number, limit:number) {
-        return this.http.get(`${this.baseUrl}/admin/roomList?page=${page}&limit=${limit}`);
-    }
-
-    usersList(page:number, limit:number) {
-        console.log("baseurlchecking",this.baseUrl);
-        return this.http.get(`${this.baseUrl}/admin/users?page=${page}&limit=${limit}`);
-    }
+    debitWalletamount(data:any) {
+      return this.http.post(`${this.baseUrl}/Wallettoperation/wallet_withdraw_post`,data);
+  }
 
     
-    /**
-     * Marks all controls in a form group as touched
-     * @param formGroup - The form group to touch
-    */
-    markFormGroupTouched(formGroup: FormGroup) {
-        (<any>Object).values(formGroup.controls).forEach((control: any) => {
-            control.markAsTouched();
-            if (control.controls) {
-                this.markFormGroupTouched(control);
-            }
-        });
-    }
+    
+    
 
-    /**
-     * Marks all controls in a form group as unTouched, reset & remove error
-     * @param formGroup - The form group to touch
-     */
-    markUnTouchedAndReset(formGroup: FormGroup) {
-        formGroup.reset();
-        formGroup.markAsPristine({ onlySelf: true });
-        formGroup.markAsUntouched({ onlySelf: true });
-        (<any>Object).keys(formGroup.controls).map((field:any) => {
-            const control = formGroup.get(field);
-            if (control instanceof FormControl) { control.setErrors(null); }
-        });
-    }
 
-    get getBreakPoints() {
-        return this.bPoint.observe(Breakpoints.XSmall);
-    }
 
    
 
 }
+
+
+
+
+
