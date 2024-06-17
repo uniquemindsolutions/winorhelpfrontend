@@ -89,7 +89,8 @@ export class CustomeServiceService {
     }
 
     getTransList() {
-        return this.http.get(`${this.baseUrl}/Wallettoperation/users_getwallet?page=1&limit=50&user_id=45`);
+        const userid=localStorage.getItem('user_id');
+        return this.http.get(`${this.baseUrl}/Wallettoperation/users_getwallet?page=1&limit=50&user_id=`+userid);
     }
     debitWalletamount(data:any) {
       return this.http.post(`${this.baseUrl}/Wallettoperation/walletwithdraw`,data);
