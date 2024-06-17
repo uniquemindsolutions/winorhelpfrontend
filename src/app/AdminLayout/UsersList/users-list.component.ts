@@ -21,7 +21,7 @@ export interface RoomList {
   styleUrl: './users-list.component.css'
 })
 export class UsersListComponent {
-  displayedColumns: string[] = ['sno', 'name', 'email', 'phone', 'email_veri', 'ref_code', 'status'];
+  displayedColumns: string[] = ['sno', 'name', 'email', 'phone', 'email_veri', 'ref_code', 'status','room_allot','debit_action','credit_action'];
   dataSource :RoomList[]=[];
   currentPage:number=1;
   perPage:number=0;

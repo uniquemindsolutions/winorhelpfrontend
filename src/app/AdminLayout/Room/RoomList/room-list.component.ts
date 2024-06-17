@@ -71,8 +71,8 @@ export class RoomListComponent {
     })
   }
 
-  onDelete(){
-    this.dialog.
+  onDelete(e1:any,e2:any){
+    // this.dialog.
   }
 
   openDialog() {
