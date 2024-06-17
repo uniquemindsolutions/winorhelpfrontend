@@ -1,0 +1,13 @@
+.winner-card {
+    width: 30px;
+  }
+  
+  .winner-avatar {
+    /* background-image: url('./../../../../assets/images/win-gift.png'); */
+  }
+
+  [mat-card-image]{
+    height: 35px;
+    width:30px
+  }
+  

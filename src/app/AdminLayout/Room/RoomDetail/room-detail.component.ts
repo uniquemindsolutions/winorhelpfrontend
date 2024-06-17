@@ -19,7 +19,7 @@ interface Room {
   styleUrl: './room-detail.component.css'
 })
 export class RoomDetailComponent {
-
+  winner:any={ name: 'John Doe', position: '1st Place', prize: 'rs. 500', image: './../../../../assets/images/win-gift.png' };
   room: Room = {
     id: '12345',
     name: 'Conference Room A',

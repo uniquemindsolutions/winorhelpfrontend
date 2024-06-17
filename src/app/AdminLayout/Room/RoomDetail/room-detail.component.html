@@ -23,6 +23,27 @@
                   <p><strong>Created By:</strong> {{ room.createdBy }}</p>
                 </mat-card-content>
               </mat-card>
+
+
+              <mat-card class="winner-card mt-4 w-100">
+                <!-- <mat-card-header>
+                  <div mat-card-avatar class="winner-avatar"></div>
+                  <mat-card-title>{{ winner.name }}</mat-card-title>
+                  <mat-card-subtitle>{{ winner.position }}</mat-card-subtitle>
+                </mat-card-header> -->
+                <mat-card-content>
+                  <div class="row">
+                    <div class="col-2">
+                      <img mat-card-image [src]="winner.image" alt="{{ winner.name }}">
+                    </div>
+                    <div class="col-6 text-start">
+                      <h4>{{ winner.name }}</h4>
+                    </div>
+                    <div class="col-4 text-end">{{ winner.prize }}</div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+              
               
               <mat-card class="mt-4">
                 <mat-card-header>
