@@ -1,7 +1,10 @@
 <mat-toolbar color="primary" class="main-header">
     <div [style.width.%]="100" class="header-bar" [style.marginLeft.rem]="isCollepsed ? 0 :15" >
         <app-nav-bar (onToggleSidebar)="toggleSidebar()"></app-nav-bar>
+      
     </div>
+    <div><a routerLink="/auth/login">Logout</a></div>
+    
 </mat-toolbar>
 
 <mat-sidenav-container>
@@ -9,6 +12,7 @@
         [fixedTopGap]>
         <mat-toolbar class="p-0 sidebar-header overflow-hidden">
             <img pointer [src]="sidebarLogo"  routerLink="/admin/dashboard" />
+           
         </mat-toolbar>
         <side-menu [sideMenuListObj]="sideMenuListObj" (onChangeRoutes)="onChangeRoutes($event)"></side-menu>
     </mat-sidenav>
