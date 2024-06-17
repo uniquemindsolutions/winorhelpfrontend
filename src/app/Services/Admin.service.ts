@@ -99,6 +99,10 @@ export class AdminService {
         return this.http.get(`${this.baseUrl}/admin/users?page=${page}&limit=${limit}`);
     }
 
+    updateStatus(id:number, isActive:number) {
+        return this.http.post(`${this.baseUrl}/admin/updateStatus/${id}`,{isActive});
+    }
+
     
     /**
      * Marks all controls in a form group as touched
