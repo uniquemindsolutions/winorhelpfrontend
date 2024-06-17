@@ -103,12 +103,12 @@ export class AuthService {
 
     register(user: any) {
         console.log("regivalues",user)
-         return this.http.post(`${this.baseUrl}/api/register`, user);
+         return this.http.post(`${this.baseUrl}/auth/register`, user);
     }
     
     /**@SIGN_IN_USER */
     login(credentials: any) {
-        return this.http.post(`${this.baseUrl}/api/login`, credentials);
+        return this.http.post(`${this.baseUrl}/auth/login`, credentials);
     }
     
     verifyEmail(token: string) {

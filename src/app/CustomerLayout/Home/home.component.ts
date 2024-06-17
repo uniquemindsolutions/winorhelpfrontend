@@ -35,6 +35,9 @@ export class HomeComponent {
   }
 
   ngOnInit(){
+    if(localStorage.getItem('user_id')==''){
+      this.router.navigate(['/auth/login']);
+    }
     this.getRoomList();
     this.customeservice.getCurrentWalletAmount().subscribe({
       next:(res:any) => {
@@ -70,7 +73,7 @@ export class HomeComponent {
       let text = "OK or Cancel";
   if (confirm(text) == true) {
     if(this.walletAmount>0){
-      const data={"roomnumber":roomid};
+      const data={"roomnumber":roomid,"user_id":localStorage.getItem('user_id')};
       this.customeservice.roomuserlistInsert(data).subscribe({
         next: (result:any) => {
           console.log("resultvalroominsert",result);
