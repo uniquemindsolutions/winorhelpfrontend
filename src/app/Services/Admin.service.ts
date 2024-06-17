@@ -151,6 +151,10 @@ export class AdminService {
         return this.http.get(`${this.baseUrl}/admin/getprivacy`);
     }
 
+    getroomUserList() {
+        return this.http.get(`${this.baseUrl}/admin/getroomUserlist`);
+    }
+
    
 
 }

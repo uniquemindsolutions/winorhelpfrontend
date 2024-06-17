@@ -1,37 +1,33 @@
 import { Component } from '@angular/core';
-import {MatCardModule} from '@angular/material/card';
-import {MatTableModule} from '@angular/material/table';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule, MatDialog} from '@angular/material/dialog';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { AdminService } from '../../Services/Admin.service';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import MuiDialogService from '../../Services/MuiDialog.service';
 import { FormBuilder } from '@angular/forms';
-import MuiDialogService from '../../../Services/MuiDialog.service';
-import { AdminService } from '../../../Services/Admin.service';
-interface Room {
-  id: string;
-  name: string;
-  description: string;
-  createdBy: string;
-}
 
 @Component({
-  selector: 'app-room-detail',
+  selector: 'app-gameview',
   standalone: true,
   imports: [MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatCardModule,CommonModule],
-  templateUrl: './room-detail.component.html',
-  styleUrl: './room-detail.component.css'
+  providers: [
+    AdminService // Register the service here
+  ],
+  templateUrl: './gameview.component.html',
+  styleUrl: './gameview.component.css'
 })
-export class RoomDetailComponent {
+export class GameviewComponent {
   winner:any={ name: 'John Doe', position: '1st Place', prize: 'rs. 500', image: './../../../../assets/images/win-gift.png' };
-  room: Room = {
+  room: any = {
     id: '12345',
     name: 'Conference Room A',
     description: 'A room for holding conferences.',
     createdBy: 'Admin',
   };
-
-  memberList:any=[];
+  id: any;
 
   selectedId:any='';
   winnerId:any='';
@@ -40,13 +36,15 @@ export class RoomDetailComponent {
   currentPage:any="1";
   perPage:any="100";
   userlist:any;
+  memberList:any=[];
 
-  constructor(private fb: FormBuilder,  private muiDialog: MuiDialogService,  private api:AdminService) {
-    // this.termForm = this.fb.group({
-    //   content: ['']
-    // });
-  }
-  ngOnInit(){
+  constructor(private route: ActivatedRoute, private api:AdminService,private fb: FormBuilder,  private muiDialog: MuiDialogService) { }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.id = params['id'];
+    });
+
     this.getRoomUserList();
 
     this.api.usersList(this.currentPage,this.perPage).subscribe({
@@ -58,7 +56,11 @@ export class RoomDetailComponent {
 
       }
     })
-   }
+
+  }
+
+
+
    
    stop(){
     this.selectIdBasedOnTimestamp();
@@ -90,5 +92,4 @@ export class RoomDetailComponent {
     })
 
    }
-
 }
