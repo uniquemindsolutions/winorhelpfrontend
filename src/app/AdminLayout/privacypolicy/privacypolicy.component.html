@@ -1,0 +1,13 @@
+<div class="container p-4">
+    <form [formGroup]="policy" (ngSubmit)="onSubmit()">
+        
+          <div>
+            <label for="content">Content</label>
+            {{dataSource}}
+            <quill-editor formControlName="content" ></quill-editor>
+        
+          <button type="submit">Submit</button>
+          </div>
+    </form>
+</div>
+

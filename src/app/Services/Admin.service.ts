@@ -135,6 +135,22 @@ export class AdminService {
         return this.bPoint.observe(Breakpoints.XSmall);
     }
 
+    updateTerms(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/updateterms`, data);
+    }
+
+    getTerms() {
+        return this.http.get(`${this.baseUrl}/admin/getTerms`);
+    }
+
+    updatePrivacy(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/updateprivacy`, data);
+    }
+
+    getPrivacy() {
+        return this.http.get(`${this.baseUrl}/admin/getprivacy`);
+    }
+
    
 
 }

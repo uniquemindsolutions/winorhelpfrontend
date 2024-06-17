@@ -68,6 +68,23 @@ export class AdminLayout implements OnInit {
         icon: 'dot',
         visibility: true
       },
+      {
+        id: 4,
+        displayName: 'Terms And Conditions',
+        link: '/admin/term-cond',
+        iconType: 'png',
+        icon: 'dot',
+        visibility: true
+      },
+      {
+        id: 5,
+        displayName: 'Privacy Policy',
+        link: '/admin/privacy-policy',
+        iconType: 'png',
+        icon: 'dot',
+        visibility: true
+      },
+    
     ]
   }
 
