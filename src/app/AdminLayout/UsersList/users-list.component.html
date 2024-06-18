@@ -1,92 +1,94 @@
 <main>
-    <div class="row">
-		<div class="col-6">
-			<ol class="breadcrumb">
-				<li class="active p-0">User List</li>
-			</ol>
-		</div>
-		<div class="col-6 text-end">
-			<div class="col-6 text-end">
-        <button style="border-radius: 100px; margin-top: 9px;"  sm mat-flat-button
-          color="primary"><span style="font-size: 18px;">+</span>&nbsp;Create User</button>
-      </div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-12 col-md-12 col-lg-12 col-xl-12">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
-                <ng-container matColumnDef="sno">
-                  <th mat-header-cell *matHeaderCellDef>S.NO.</th>
-                  <td mat-cell *matCellDef="let i=index">{{(i+1)}}</td>
-                </ng-container>
+  <div class="row">
+    <div class="col-6">
+      <ol class="breadcrumb">
+        <li class="active p-0">User List</li>
+      </ol>
+    </div>
+    <div class="col-6 text-end">
+      <button (click)="addUsers()" style="border-radius: 100px; margin-top: 9px;" sm mat-flat-button color="primary"><span
+          style="font-size: 18px;">+</span>&nbsp;Create User</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+        <ng-container matColumnDef="sno">
+          <th mat-header-cell *matHeaderCellDef>S.NO.</th>
+          <td mat-cell *matCellDef="let i=index">{{(i+1)}}</td>
+        </ng-container>
 
-                <!-- Room ID Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef>User Name</th>
-                  <td mat-cell *matCellDef="let el">{{el.username}}</td>
-                </ng-container>
+        <!-- Room ID Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>User Name</th>
+          <td mat-cell *matCellDef="let el">{{el.username}}</td>
+        </ng-container>
 
-                <!-- Date Column -->
-                <ng-container matColumnDef="email">
-                  <th mat-header-cell *matHeaderCellDef>Email</th>
-                  <td mat-cell *matCellDef="let el">{{el.email}}</td>
-                </ng-container>
+        <!-- Date Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let el">{{el.email}}</td>
+        </ng-container>
 
-                
-                <!-- entryFee Column -->
-                <ng-container matColumnDef="phone">
-                  <th mat-header-cell *matHeaderCellDef>Mobile</th>
-                  <td mat-cell *matCellDef="let el">{{el.phone}}</td>
-                </ng-container>
 
-                <!-- entryFee Column -->
-                <ng-container matColumnDef="email_veri">
-                  <th mat-header-cell *matHeaderCellDef>Email Verify</th>
-                  <td mat-cell *matCellDef="let el">{{el.email_veri ===1 ? 'YES' : 'NO'}}</td>
-                </ng-container>
-                <!-- 'name', 'email', 'phone', 'email_veri', 'ref_code' -->
-                <!-- Total Participants Column -->
-                <ng-container matColumnDef="ref_code">
-                  <th mat-header-cell *matHeaderCellDef>Refrel Code</th>
-                  <td mat-cell *matCellDef="let el">{{el.ref_code}}</td>
-                </ng-container>
+        <!-- entryFee Column -->
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef>Mobile</th>
+          <td mat-cell *matCellDef="let el">{{el.phone}}</td>
+        </ng-container>
 
-                <!-- Total Winning Column -->
-                <ng-container matColumnDef="status">
-                  <th mat-header-cell *matHeaderCellDef>Status</th>
-                  <td mat-cell *matCellDef="let el">Active</td>
-                </ng-container>
+        <!-- entryFee Column -->
+        <ng-container matColumnDef="email_veri">
+          <th mat-header-cell *matHeaderCellDef>Email Verify</th>
+          <td mat-cell *matCellDef="let el">{{el.email_veri ===1 ? 'YES' : 'NO'}}</td>
+        </ng-container>
+        <!-- 'name', 'email', 'phone', 'email_veri', 'ref_code' -->
+        <!-- Total Participants Column -->
+        <ng-container matColumnDef="ref_code">
+          <th mat-header-cell *matHeaderCellDef>Refrel Code</th>
+          <td mat-cell *matCellDef="let el">{{el.ref_code}}</td>
+        </ng-container>
 
-                <ng-container matColumnDef="room_allot">
-                  <th mat-header-cell *matHeaderCellDef>Room Allocation Request</th>
-                  <td mat-cell *matCellDef="let el"><button style="border-radius: 100px; margin-top: 9px;"  sm mat-flat-button
-                    color="primary"><span style="font-size: 18px;"></span>&nbsp;Action</button></td>
-                </ng-container>
+        <!-- Total Winning Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let el">Active</td>
+        </ng-container>
 
-                <ng-container matColumnDef="debit_action">
-                  <th mat-header-cell *matHeaderCellDef>Debit Request</th>
-                  <td mat-cell *matCellDef="let el"><button style="border-radius: 100px; margin-top: 9px;"  sm mat-flat-button
-                    color="primary"><span style="font-size: 18px;"></span>&nbsp;Action</button></td>
-                </ng-container>
-                
+        <ng-container matColumnDef="room_allot">
+          <th mat-header-cell *matHeaderCellDef>Room Allocation Request</th>
+          <td mat-cell *matCellDef="let el">
+            <button (click)="openDialog(el, 'allocation')" style="border-radius: 100px; margin-top: 9px;" sm mat-flat-button color="primary"><span
+                style="font-size: 18px;"></span>&nbsp;Action</button>
+          </td>
+        </ng-container>
 
-                <ng-container matColumnDef="credit_action">
-                  <th mat-header-cell *matHeaderCellDef>Credit Request</th>
-                  <td mat-cell *matCellDef="let el"><button style="border-radius: 100px; margin-top: 9px;"  sm mat-flat-button
-                    color="primary"><span style="font-size: 18px;"></span>&nbsp;Action</button></td>
-                </ng-container>
+        <ng-container matColumnDef="debit_action">
+          <th mat-header-cell *matHeaderCellDef>Debit Request</th>
+          <td mat-cell *matCellDef="let el">
+            <button (click)="openDialog(el, 'debit')"  style="border-radius: 100px; margin-top: 9px;" sm mat-flat-button
+              color="primary"><span style="font-size: 18px;"></span>&nbsp;Action</button></td>
+        </ng-container>
 
-                <!-- View Details Column -->
-                <!-- <ng-container matColumnDef="viewDetails">
+
+        <ng-container matColumnDef="credit_action">
+          <th mat-header-cell *matHeaderCellDef>Credit Request</th>
+          <td mat-cell *matCellDef="let el">
+            <button (click)="openDialog(el, 'credit')"  style="border-radius: 100px; margin-top: 9px;" sm mat-flat-button
+              color="primary"><span style="font-size: 18px;"></span>&nbsp;Action</button></td>
+        </ng-container>
+
+        <!-- View Details Column -->
+        <!-- <ng-container matColumnDef="viewDetails">
                   <th mat-header-cell *matHeaderCellDef>View Details</th>
                   <td mat-cell *matCellDef="let el">
                     <button style="border-radius: 100px;" mat-flat-button color="primary">Primary</button>
                   </td>
                 </ng-container> -->
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-        </div>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </div>
+  </div>
 </main>
