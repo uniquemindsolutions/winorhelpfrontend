@@ -59,6 +59,7 @@ export class UsersListComponent {
     const dialogRef = this.dialog.open(NewUserComponent, {width:'40%'});
     dialogRef.afterClosed().subscribe((result:any) => {
       console.log(`Dialog result: ${result}`);
+      this.gerUsersList();
     });
   }
 
