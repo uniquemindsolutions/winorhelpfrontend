@@ -9,6 +9,8 @@ import { CreditdbitComponent } from './creditdbit/creditdbit.component';
 import { WithdrareqComponent } from './withdrareq/withdrareq.component';
 import { MytransactionComponent } from './mytransaction/mytransaction.component';
 import { GameviewComponent } from './gameview/gameview.component';
+import { TermscondComponent } from './termscond/termscond.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,8 @@ const routes: Routes = [
       { path: 'withdraw', component: WithdrareqComponent },
       { path: 'mytransaction', component: MytransactionComponent },
       { path: 'gameview', component: GameviewComponent },
+      { path: 'terms', component: TermscondComponent },
+      { path: 'privacy', component: PrivacyComponent },
     ]
   }
 ];
