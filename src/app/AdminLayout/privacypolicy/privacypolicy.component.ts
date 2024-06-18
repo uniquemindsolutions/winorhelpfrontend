@@ -37,14 +37,14 @@ export class PrivacypolicyComponent {
 // }
 
 ngOnInit(){
-  this.gettermsCondition();
+  this.getprivacy();
  }
 
  onEditorContentChange(event: any) {
   this.policy.get('content')?.setValue(event.html, { emitEvent: false });
 }
 
- gettermsCondition(){
+getprivacy(){
   this.api.getPrivacy().subscribe({
     next:(res:any) => {
       console.log(res.data[0].content, 'resultTerms');
