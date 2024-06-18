@@ -103,6 +103,18 @@ export class AdminService {
         return this.http.post(`${this.baseUrl}/admin/updateStatus/${id}`,{isActive});
     }
 
+    roomAllocation(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/roomAllocation`,data);
+    }
+
+    debitRequest(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/debitRequest`,data);
+    }
+
+    creditRequest(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/creditRequest`,data);
+    }
+
     
     /**
      * Marks all controls in a form group as touched

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule, MatDialog} from '@angular/material/dialog';
 import { AdminService } from '../../Services/Admin.service';
+import { PaymemtComponent } from './Paymemt/paymemt.component';
+import { NewUserComponent } from './NewUser/new-user.component';
 
 export interface RoomList {
   sno:number;
@@ -16,7 +18,7 @@ export interface RoomList {
 @Component({
   selector: 'app-users-list',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatDialogModule],
+  imports: [MatTableModule, MatButtonModule, MatDialogModule, MatButtonModule, MatDialogModule],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css'
 })
@@ -25,6 +27,7 @@ export class UsersListComponent {
   dataSource :RoomList[]=[];
   currentPage:number=1;
   perPage:number=0;
+
   constructor(public dialog: MatDialog, private api:AdminService) {
   }
 
@@ -35,7 +38,7 @@ export class UsersListComponent {
   gerUsersList(){
     this.api.usersList(this.currentPage,this.perPage).subscribe({
       next:(res:any) => {
-        console.log(res.data, 'res.data;');
+        
         
         this.dataSource=res.data;
       },
@@ -43,7 +46,20 @@ export class UsersListComponent {
 
       }
     })
+  }
 
+  openDialog(item:any, action:string) {
+    const dialogRef = this.dialog.open(PaymemtComponent, {data:{item, action}, width:'40%'});
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  addUsers() {
+    const dialogRef = this.dialog.open(NewUserComponent, {width:'40%'});
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
 
