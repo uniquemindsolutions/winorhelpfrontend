@@ -11,6 +11,7 @@ import { MytransactionComponent } from './mytransaction/mytransaction.component'
 import { GameviewComponent } from './gameview/gameview.component';
 import { TermscondComponent } from './termscond/termscond.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { TimergameComponent } from './timergame/timergame.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'gameview', component: GameviewComponent },
       { path: 'terms', component: TermscondComponent },
       { path: 'privacy', component: PrivacyComponent },
+      { path: 'timergame', component: TimergameComponent },
     ]
   }
 ];

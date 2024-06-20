@@ -3,7 +3,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule, MatDialog} from '@angular/material/dialog';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
 import MuiDialogService from '../../../Services/MuiDialog.service';
@@ -40,13 +40,21 @@ export class RoomDetailComponent {
   currentPage:any="1";
   perPage:any="100";
   userlist:any;
+  roomId:any;
 
-  constructor(private fb: FormBuilder,  private muiDialog: MuiDialogService,  private api:AdminService) {
+  constructor(private fb: FormBuilder,  private muiDialog: MuiDialogService,  private api:AdminService,private router: Router,
+    private route: ActivatedRoute
+  ) {
     // this.termForm = this.fb.group({
     //   content: ['']
     // });
   }
   ngOnInit(){
+
+    this.route.queryParams.subscribe(params => {
+      this.roomId = params['id'];
+    });
+
     this.getRoomUserList();
 
     this.api.usersList(this.currentPage,this.perPage).subscribe({
@@ -79,7 +87,8 @@ export class RoomDetailComponent {
   }
    getRoomUserList(){
 
-    this.api.getroomUserList().subscribe({
+    const data={"roomId":this.roomId};
+    this.api.getroomUserList(data).subscribe({
       next:(res:any) => {
         console.log(res.data, 'resultUserlist');
         this.memberList=res.data;
@@ -90,5 +99,12 @@ export class RoomDetailComponent {
     })
 
    }
+
+   refreshComponent() {
+    location.reload();
+    // this.router.navigateByUrl('/room-details', { skipLocationChange: true }).then(() => {
+    //   this.router.navigate([this.router.url]);
+    // });
+  }
 
 }

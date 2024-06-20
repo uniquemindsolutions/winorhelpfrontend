@@ -65,7 +65,9 @@
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let el;let i=index">
             <!-- [routerLink]="" -->
-            <button routerLink="/admin/room-details" style="border-radius: 100px;" mat-icon-button color="primary">
+
+
+            <button routerLink="/admin/room-details" [queryParams]="{id: el.roomId}" style="border-radius: 100px;" mat-icon-button color="primary">
               <i style="font-size: 20px;" class="fa fa-eye"></i> </button>
 
               <button (click)="onDelete(el, i)" style="border-radius: 100px;" mat-icon-button color="warn">
