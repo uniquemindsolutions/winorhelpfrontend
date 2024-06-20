@@ -4,11 +4,12 @@ import { AuthService } from '../../../Services/Auth.service';
 import MuiDialogService from '../../../Services/MuiDialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-new-user',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule,CommonModule],
   templateUrl: './new-user.component.html',
   styleUrl: './new-user.component.css'
 })

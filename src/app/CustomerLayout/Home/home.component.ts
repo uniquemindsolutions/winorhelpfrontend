@@ -15,7 +15,7 @@ import { CustomeServiceService } from '../../Services/custome-service.service';
   standalone: true,
   imports: [MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatSlideToggleModule,CommonModule],
   providers: [
-    AdminService // Register the service here
+    AdminService // Register the service hereng 
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
