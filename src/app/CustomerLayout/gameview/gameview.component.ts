@@ -85,7 +85,8 @@ export class GameviewComponent {
   }
    getRoomUserList(){
    
-    this.api.getroomUserList().subscribe({
+    const data={"roomId":this.id};
+    this.api.getroomUserList(data).subscribe({
       next:(res:any) => {
         // console.log(res.data, 'roomdetails');
         this.memberList=res.data;
