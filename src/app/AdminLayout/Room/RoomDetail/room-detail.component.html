@@ -15,12 +15,22 @@
             <mat-card>
                 <mat-card-header>
                   <mat-card-title>Room Details</mat-card-title>
-                  <mat-card-subtitle>{{ room.name }}</mat-card-subtitle>
+                  <mat-card-subtitle>{{ room.roomId }}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-                  <p><strong>Room ID:</strong> {{ this.roomId }}</p>
-                  <p><strong>Description:</strong> {{ room.description }}</p>
-                  <p><strong>Created By:</strong> {{ room.createdBy }}</p>
+                  <p><strong>Room ID:</strong> {{ room.roomId }}</p>
+                  <p>
+                    <strong>Description:</strong>
+                  </p>
+                  <ol>
+                    <li>Winning Amount : {{room.winningAmount}}</li>
+                    <li>Entry Fee : {{room.entryFee}}</li>
+                    <li>Start Date : {{room.startDate | date:'dd-MMM, YYYY'}}</li>
+                    <li>End Date : {{room.endDate | date:'dd-MMM, YYYY'}}</li>
+                    <li>Start Time : {{room.startTime | date:'hh:mm a}} </li>
+                    <li>End Time : {{room.endTime | date:'hh:mm a'}} </li>
+                  </ol>
+                  <!-- <p><strong>Created By:</strong> {{ room.createdBy }}</p> -->
                 </mat-card-content>
               </mat-card>
 

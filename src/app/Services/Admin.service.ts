@@ -164,7 +164,7 @@ export class AdminService {
     }
 
     getroomUserList(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/getroomUserlist`,data);
+        return this.http.get(`${this.baseUrl}/admin/getroomUserlist`);
     }
 
    
