@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Make Manual Winner list</h2>
+
+<mat-dialog-content class="mat-typography">
+    @if(!isLoading){
+        <div cdkDropListGroup>
+            <div class="example-container">
+                <h4>Participate Users</h4>
+    
+                <div cdkDropList [cdkDropListData]="users" class="example-list" (cdkDropListDropped)="drop($event)">
+                    @for (item of users; track item;let i=$index) {
+                    <div class="example-box" cdkDrag><span class="sno">{{i+1}}</span>{{item.username}}</div>
+                    }
+                </div>
+            </div>
+    
+            <div class="example-container">
+                <h4>Winner List</h4>
+                <div cdkDropList [cdkDropListData]="winners" class="example-list" (cdkDropListDropped)="drop($event)">
+                    @for (item of winners; track item; let i=$index) {
+                    <div class="example-box" cdkDrag><span class="sno">{{i+1}}</span> {{item.username}}</div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    @else {
+        <h2>Loading...</h2>
+    }
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="onSubmit()" cdkFocusInitial>Save Winner</button>
+</mat-dialog-actions>

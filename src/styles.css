@@ -128,3 +128,15 @@ main table{
     transform: translateY(-1.25em) scale(0.75) !important;
     width: 133.33333% !important;
 }
+
+[pointer],.pointer{
+    cursor: pointer !important;
+}
+
+[mui-btn]{
+    padding: 8px 10px;
+    border-radius: 4px;
+    width: auto;
+    text-align: center;
+    display: block;
+}

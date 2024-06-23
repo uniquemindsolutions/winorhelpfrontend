@@ -45,13 +45,29 @@
                 </mat-form-field>
             </div>
         </div>
-        
 
-<!-- 
-        startDate: ['', [Validators.required, Validators.min(1)]],
-        endDate: ['', [Validators.required, Validators.min(1)]],
-        startTime: ['', [Validators.required, Validators.min(1)]],
-        endTime: ['', [Validators.required, Validators.min(1)]], -->
+        <div class="row">
+            <div class="col-8">
+                <mat-form-field xs appearance="outline" class="mb-2" >
+                    <mat-label>Lottery Date</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="lotteryDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    @if(roomForm.get('lotteryDate') && roomForm.get('lotteryDate')?.hasError('required')){ 
+                        <mat-error>Lottery Date is required</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field xs appearance="outline" class="mb-2" >
+                    <mat-label>Lottery Time</mat-label>
+                    <input matInput type="time" formControlName="lotteryTime" required>
+                    @if(roomForm.get('lotteryTime') && roomForm.get('lotteryTime')?.hasError('required')){ 
+                        <mat-error>Lottery Time is required</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </div>
 
         <mat-form-field xxs appearance="outline" class="mb-2" >
             <mat-label>Entry Fee</mat-label>
@@ -65,17 +81,6 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="mb-2" >
-            <mat-label>Total Participants</mat-label>
-            <input matInput type="number" formControlName="totalParticipants" required>
-            @if(roomForm.get('totalParticipants') && roomForm.get('totalParticipants')?.hasError('required')){ 
-                <mat-error>Total Participants is required</mat-error>
-            }
-            @if(roomForm.get('totalParticipants') && roomForm.get('totalParticipants')?.hasError('min')){ 
-                <mat-error>Total Participants must be a positive number</mat-error>
-            }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="mb-2" >
             <mat-label>Winning Amount</mat-label>
             <input matInput type="number" formControlName="winningAmount" required>
             @if(roomForm.get('winningAmount') && roomForm.get('winningAmount')?.hasError('required')){ 
@@ -85,6 +90,78 @@
                 <mat-error>Winning Amount must be a positive number</mat-error>
             }
         </mat-form-field>
+
+        <div formArrayName="winingPercentageInfo">
+            @for(item of winingPercentageInfo.controls; track item; let i = $index){
+                <div class="row mb-1" [formGroupName]="i">
+                    <div class="col-4">
+                        <input class="form-control" 
+                            style="font-size: 14px;" type="number"
+                            formControlName="winAmountPer" 
+                            placeholder="Winning amount %" 
+                        />
+                        @if(item.get('winAmountPer') && item.get('winAmountPer')?.touched && item.get('winAmountPer')?.hasError('required')){
+                            <mat-error style="font-size: 12px;">This field is required</mat-error>
+                        }
+                    </div>
+                    
+                    <div class="col-4">
+                        <input class="form-control" 
+                            style="font-size: 14px;" required type="number"
+                            formControlName="deductAmountPer" 
+                            placeholder="Deduct amount %"
+                        />
+                        @if(item.get('deductAmountPer') && item.get('deductAmountPer')?.touched && item.get('deductAmountPer')?.hasError('required')){
+                            <mat-error style="font-size: 12px;">This field is required</mat-error>
+                        }
+                    </div>
+                    <div class="col-3 pt-2">Round {{(i+1)}}</div>
+                    <div class="col-1 ps-0 text-end">
+                        @if(i>0){
+                            <button type="button" class="btn btn-sm" (click)="removeItem(i)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        }@else{
+                            <button type="button" style="opacity:0.2;" class="btn btn-sm">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-end pb-4">
+            <button type="button" (click)="addItem('')" class="btn btn-sm btn-primary">Add Round</button>
+        </div>
+<!-- 
+        startDate: ['', [Validators.required, Validators.min(1)]],
+        endDate: ['', [Validators.required, Validators.min(1)]],
+        startTime: ['', [Validators.required, Validators.min(1)]],
+        endTime: ['', [Validators.required, Validators.min(1)]], -->
+
+        
+
+        <!-- <mat-form-field appearance="outline" class="mb-2" >
+            <mat-label>Total Participants</mat-label>
+            <input matInput type="number" formControlName="totalParticipants" required>
+            @if(roomForm.get('totalParticipants') && roomForm.get('totalParticipants')?.hasError('required')){ 
+                <mat-error>Total Participants is required</mat-error>
+            }
+            @if(roomForm.get('totalParticipants') && roomForm.get('totalParticipants')?.hasError('min')){ 
+                <mat-error>Total Participants must be a positive number</mat-error>
+            }
+        </mat-form-field> -->
+
+        <!-- <mat-form-field appearance="outline" class="mb-2" >
+            <mat-label>Winning Amount</mat-label>
+            <input matInput type="number" formControlName="winningAmount" required>
+            @if(roomForm.get('winningAmount') && roomForm.get('winningAmount')?.hasError('required')){ 
+                <mat-error>Winning Amount is required</mat-error>
+            }
+            @if(roomForm.get('winningAmount') && roomForm.get('winningAmount')?.hasError('min')){ 
+                <mat-error>Winning Amount must be a positive number</mat-error>
+            }
+        </mat-form-field> -->
 
         <button mat-raised-button color="primary" type="submit">Submit</button>
     </form>
