@@ -1,0 +1,5 @@
+.set-winner{
+    background-color: var(--lt-light-blue);
+    color: var(--lt-light);
+    cursor: pointer;
+}

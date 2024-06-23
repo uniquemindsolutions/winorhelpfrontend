@@ -12,9 +12,9 @@
         <div class="row">
             <div class="col-lg-4" *ngFor="let item of dataSource">
                 <div class="single-ticket">
-                    <span class="ticket-rate">Room ID:{{item.roomId}}</span><br>
-                    <span class="win-price">Win price:{{item.winningAmount}}</span>
-                    <span class="win-money">Entry Fee:${{item.entryFee}}</span>
+                    <span class="ticket-rate">Room ID:&nbsp;{{item.roomId}}</span><br>
+                    <span class="win-price">Win price:&nbsp;₹{{item.winningAmount || '0.00'}}</span>
+                    <span class="win-money">Entry Fee:&nbsp;₹{{item.entryFee}}</span>
                     <img src="../../assets/images/win-gift.png" alt="" class="img-fluid w-25">
                     <div class="mt-3">
                         <ul class="winning-number">
@@ -26,7 +26,7 @@
                         </ul>
                     </div>
                     <div class="text-center mt-5">
-                        <a href="#" [routerLink]="['/gameview']" [queryParams]="{id: item.roomId}">View Details </a>
+                        <a href="javasceipt:void(0)" (click)="viewDetails(item)">View Details </a>
                         
                     </div>
                     <div class="text-center mt-5">

@@ -1,10 +1,7 @@
 <mat-toolbar color="primary" class="main-header">
     <div [style.width.%]="100" class="header-bar" [style.marginLeft.rem]="isCollepsed ? 0 :15" >
         <app-nav-bar (onToggleSidebar)="toggleSidebar()"></app-nav-bar>
-      
     </div>
-    <div><a routerLink="/auth/login">Logout</a></div>
-    
 </mat-toolbar>
 
 <mat-sidenav-container>

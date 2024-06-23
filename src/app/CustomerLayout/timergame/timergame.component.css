@@ -1,5 +1,6 @@
 .room-container {
     padding: 20px;
+    height: calc(100% - 176px);
   }
   
   .room {
@@ -9,7 +10,7 @@
   }
   
   .user-list {
-    max-height: 50px; /* Adjust based on your needs */
+    max-height: 30px; /* Adjust based on your needs */
     overflow: hidden;
     border: 1px solid #ccc;
     padding: 10px;
@@ -22,7 +23,8 @@
     padding: 0;
     margin: 0;
     position: relative;
-    height: 50px; /* Adjust based on your needs */
+    height: 30px; /* Adjust based on your needs */
+    margin-top: -32px;
   }
   
   .user-list li {

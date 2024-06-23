@@ -38,8 +38,6 @@ export class UsersListComponent {
   gerUsersList(){
     this.api.usersList(this.currentPage,this.perPage).subscribe({
       next:(res:any) => {
-        
-        
         this.dataSource=res.data;
       },
       error: (err: any) => {
