@@ -48,19 +48,76 @@ export class HomeComponent {
 
       }
     })
-  }
-
-  getRoomList() {
-    this.api.roomList(this.currentPage, this.perPage).subscribe({
-      next: (res: any) => {
-        console.log(res.data, 'Roomlist');
-        this.dataSource = res.data;
+    this.masterdata();
+   }
+   masterdata(){
+    this.api.getmasterdata().subscribe({
+      next:(res:any) => {
+        localStorage.setItem("refper",res.data[0].ref_per);
+        console.log(localStorage.getItem('refper'), 'getmasterdata');
       },
       error: (err: any) => {
-
+  
       }
     })
+   }
+  
+  
+   getRoomList(){
+    
+      this.api.roomList(this.currentPage,this.perPage).subscribe({
+        next:(res:any) => {
+          console.log(res.data, 'Roomlist');
+          
+          this.dataSource=res.data;
+        },
+        error: (err: any) => {
+  
+        }
+      })
+    
+      
+  
+    }
+
+    roomalocate(roomid:any,roomamount:any){
+     
+
+      let text = "OK or Cancel";
+  if (confirm(text) == true) {
+    if(this.walletAmount>0){
+
+      const refpercentage=localStorage.getItem('refper');
+      const data={"roomnumber":roomid,"roomamount":roomamount,"refpercentage":refpercentage,"user_id":localStorage.getItem('user_id')};
+      this.customeservice.roomuserlistInsert(data).subscribe({
+        next: (result:any) => {
+          console.log("resultvalroominsert",result);
+          //this.router.navigate(['/mytransaction']);
+          alert("Added to room"+roomid);
+        },
+        error: (err: any) => {
+
+        }
+      })
+    }else{
+      alert("Wallet not having amount"+this.walletAmount);
+    }
+  } else {
+    // text = "You canceled!";
   }
+}
+
+  // getRoomList() {
+  //   this.api.roomList(this.currentPage, this.perPage).subscribe({
+  //     next: (res: any) => {
+  //       console.log(res.data, 'Roomlist');
+  //       this.dataSource = res.data;
+  //     },
+  //     error: (err: any) => {
+
+  //     }
+  //   })
+  // }
 
 
   viewDetails(item: any) {
@@ -68,31 +125,6 @@ export class HomeComponent {
     this.router.navigate(['/timergame'], { queryParams: { id: item.roomId } });
   }
 
-  roomalocate(roomid: any) {
-    let text = "OK or Cancel";
-    if (confirm(text) == true) {
-      if (this.walletAmount > 0) {
-        const data = { "roomnumber": roomid, "user_id": localStorage.getItem('user_id') };
-        this.customeservice.roomuserlistInsert(data).subscribe({
-          next: (result: any) => {
-            console.log("resultvalroominsert", result);
-            //this.router.navigate(['/mytransaction']);
-            alert("Added to room" + roomid);
-          },
-          error: (err: any) => {
-
-          }
-        })
-      } else {
-        alert("Wallet not having amount" + this.walletAmount);
-      }
-    } else {
-      // text = "You canceled!";
-    }
-
-
-
-
-  }
+ 
 
 }

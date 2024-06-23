@@ -7,6 +7,8 @@ import {RoomListComponent} from './Room/RoomList/room-list.component';
 import {RoomDetailComponent} from './Room/RoomDetail/room-detail.component';
 import { TermscondComponent } from './termscond/termscond.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
+import { WinnerpercentageComponent } from './winnerpercentage/winnerpercentage.component';
+import { MastervalueComponent } from './mastervalue/mastervalue.component';
 
 const routes: Routes = [
 { path: '', redirectTo: '/admin/dashboard', pathMatch: 'full' },
@@ -20,6 +22,8 @@ const routes: Routes = [
       { path: 'room-details', component: RoomDetailComponent },
       { path: 'term-cond', component: TermscondComponent },
       { path: 'privacy-policy', component: PrivacypolicyComponent },
+      { path: 'winnerper', component: WinnerpercentageComponent },
+      { path: 'masterdata', component: MastervalueComponent },
 
       // { path: 'dashboard', loadChildren: () => import('./Dashboard/dashboard.component').then(m => m.DashboardComponent) },
       // { path: 'user-list', loadChildren: () => import('./UsersList/users-list.component').then(m => m.UsersListComponent) },
