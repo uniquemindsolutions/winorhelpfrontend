@@ -173,6 +173,14 @@ export class AdminService {
         return this.http.post(`${this.baseUrl}/admin/getRoomDetails`, data);
     }
 
+    saveWinners(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/winnerSave`, data);
+    }
+
+    getRoomUsersList(roomId:any) {
+        return this.http.post(`${this.baseUrl}/admin/getRoomUsersList`, {roomId});
+    }
+
    
 
 }

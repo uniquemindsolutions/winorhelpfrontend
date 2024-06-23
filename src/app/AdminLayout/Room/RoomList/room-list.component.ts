@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild, viewChild } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule, MatDialog} from '@angular/material/dialog';
+import {MatDialogModule, MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {RoomCreateComponent} from '../room-create/room-create.component'
 import { AdminService } from '../../../Services/Admin.service';
 import { RouterModule } from '@angular/router';
 import {MatSlideToggleChange, MatSlideToggleModule} from '@angular/material/slide-toggle';
 import MuiDialogService from './../../../Services/MuiDialog.service';
+import {MatRippleModule} from '@angular/material/core';
+import { SetWinnerComponent } from '../SetWinner/set-winner.component';
+import { CommonModule, DatePipe } from '@angular/common';
 
 export interface RoomList {
   roomId: string;
@@ -24,12 +27,13 @@ export interface RoomList {
 @Component({
   selector: 'app-room-list',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatSlideToggleModule],
+  imports: [MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatSlideToggleModule, MatRippleModule, CommonModule],
+  providers: [DatePipe],
   templateUrl: './room-list.component.html',
   styleUrl: './room-list.component.css'
 })
 export class RoomListComponent {
-  displayedColumns: string[] = ['sno', 'roomId', 'date', 'entryFee', 'totalParticipants', 'winningAmount', 'action', 'viewDetails'];
+  displayedColumns: string[] = ['sno', 'roomId', 'endDate', 'entryFee', 'totalParticipants', 'winningAmount', 'action', 'viewDetails', 'manualWinner'];
   dataSource:RoomList[]=[];
   currentPage:number=1;
   perPage:number=0;
@@ -44,14 +48,12 @@ export class RoomListComponent {
     this.api.roomList(this.currentPage,this.perPage).subscribe({
       next:(res:any) => {
         console.log(res.data, 'res.data;');
-        
         this.dataSource=res.data;
       },
       error: (err: any) => {
 
       }
     })
-
   }
 
 
@@ -78,7 +80,24 @@ export class RoomListComponent {
   openDialog() {
     const dialogRef = this.dialog.open(RoomCreateComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if(result.reload){
+        this.gerRoomList();
+      }
     });
+  }
+
+
+  openWinnerTemplate(roomId:string){
+    this.dialog.open(SetWinnerComponent, {width:'70%', minHeight:'400px', data:{roomId}})
+  }
+
+ 
+  convertToAmPm(time: string): string {
+    const hours = Number(time.split(':')[0]);
+    const minutes = Number(time.split(':')[1]);
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const adjustedHours = hours % 12 || 12; // Adjust hours
+    const adjustedMinutes = minutes < 10 ? `0${minutes}` : minutes; // Adjust minutes
+    return `${adjustedHours}:${adjustedMinutes} ${ampm}`;
   }
 }

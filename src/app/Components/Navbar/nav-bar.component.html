@@ -9,9 +9,7 @@
         </button>
     </div>
     <span class="page-title type"></span>
-    <span fxFlex>
-        <span id="contractorName">{{contractorName}} </span>
-    </span>
+    <span fxFlex></span>
 
     <!-- <div>
         <div serach-input>
@@ -28,6 +26,7 @@
     <!-- [matMenuTriggerFor]="menu"  -->
     <div class="user-profile" cursor>
         <img [src]="userImg" />
+        <span name>&nbsp;&nbsp;&nbsp;&nbsp;<a style="text-decoration: none;" routerLink="/auth/login">Logout</a></span>
         <div info>
             <ng-container *ngIf="isSuperAdminProjectSelected && getProjectInfo?.developerLogo">
                 <img [src]="getProjectInfo?.developerLogo" />

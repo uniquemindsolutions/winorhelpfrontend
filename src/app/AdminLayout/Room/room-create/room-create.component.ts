@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -25,13 +25,33 @@ export class RoomCreateComponent {
   constructor(private fb: FormBuilder, private authService: AuthService, private muiDialog: MuiDialogService,  private api:AdminService) {
     this.roomForm = this.fb.group({
       entryFee: ['', [Validators.required, Validators.min(1)]],
-      totalParticipants: ['', [Validators.required, Validators.min(1)]],
+      // totalParticipants: ['', [Validators.required, Validators.min(1)]],
       winningAmount: ['', [Validators.required, Validators.min(1)]],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
       startTime: ['', [Validators.required]],
       endTime: ['', [Validators.required]],
+      lotteryDate: ['', [Validators.required]],
+      lotteryTime: ['', [Validators.required]],
+      winingPercentageInfo: this.fb.array([]),
     });
+    this.addItem(null);
+  }
+
+
+  get winingPercentageInfo(): FormArray {
+    return this.roomForm.get('winingPercentageInfo') as FormArray;
+  }
+
+  addItem(val:any): void {
+    this.winingPercentageInfo.push(this.fb.group({
+      winAmountPer:[(val ? val.winAmountPer :''), [Validators.required]],
+      deductAmountPer:[(val ? val.deductAmountPer :''), [Validators.required]]
+    }));
+  }
+
+  removeItem(index: number): void {
+    this.winingPercentageInfo.removeAt(index);
   }
 
   onSubmit() {
@@ -39,14 +59,15 @@ export class RoomCreateComponent {
       this.api.createRoom(this.roomForm.value).subscribe({
         next: (any) => {
           this.muiDialog.openSnackBar({ title: 'Success!', message: 'Room Created Successfully' }, 'Success')
-          this.dialogRef.close();
+          this.dialogRef.close({reload:true});
         },
         error: (err: any) => {
 
         }
       })
     } else {
-      console.log('Form is not valid');
+      this.api.markFormGroupTouched(this.roomForm);
+      console.log('Form is not valid', this.roomForm);
     }
   }
 }

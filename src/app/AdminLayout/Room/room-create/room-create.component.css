@@ -1,6 +1,10 @@
 .container {
-    max-width: 600px;
+    max-width: 650px;
+    min-width:650px;
     margin: 0 auto;
     padding: 1rem;
 }
 mat-form-field{width: 100% !important;font-size: 14px;}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type=number]{ -moz-appearance: textfield; }
