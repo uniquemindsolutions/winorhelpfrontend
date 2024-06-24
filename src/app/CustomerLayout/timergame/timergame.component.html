@@ -1,40 +1,51 @@
-<div class="room-container">
-  <div class="room">
-    <h3>{{ roomInfo.roomId}}</h3>
-    <div *ngIf="room.timeRemaining">
-      <p>Countdown Timer: {{ room.timeRemaining.days }}d {{ room.timeRemaining.hours }}h {{ room.timeRemaining.minutes
-        }}m {{ room.timeRemaining.seconds }}s</p>
-    </div>
-    
-    @if(!isRoundComplited){
-      <div>
-        <h4>Users:</h4>
-        <div class="user-list">
-          <ul>
-            <li *ngFor="let user of room.users; let i = index"
-              [class.previous]="i === getPreviousUserIndex(currentScrollingUserIndex)"
-              [class.current]="i === currentScrollingUserIndex"
-              [class.next]="i === getNextUserIndex(currentScrollingUserIndex)">
-              {{ user.username }}
-            </li>
-          </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 mt-5">
+      <div class="card">
+        <div class="card-header"> <h3 class="mb-1">{{ roomInfo.roomId}}</h3></div>
+        <div class="card-body">
+          <div class="room-container">
+            <div class="room">
+             
+              <div *ngIf="room.timeRemaining">
+                <p>Countdown Timer: {{ room.timeRemaining.days }}d {{ room.timeRemaining.hours }}h {{ room.timeRemaining.minutes
+                  }}m {{ room.timeRemaining.seconds }}s</p>
+              </div>
+          
+              @if(!isRoundComplited){
+              <div>
+                <h4>Users:</h4>
+                <div class="user-list">
+                  <ul>
+                    <li *ngFor="let user of room.users; let i = index"
+                      [class.previous]="i === getPreviousUserIndex(currentScrollingUserIndex)"
+                      [class.current]="i === currentScrollingUserIndex"
+                      [class.next]="i === getNextUserIndex(currentScrollingUserIndex)">
+                      {{ user.username }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              }
+          
+              <ol>
+                @for(user of room.winners; track user; let i=$index){
+                <li>
+                  <b>#Round {{i + 1}}</b>
+                  <h4 style="display: flex;align-items: center;">
+                    <div style="width: 250px; font-size: 16px;">{{ user.username }}</div>
+                    <span style="font-size: 14px; color: brown;">Winner {{ i + 1 }}</span>
+                  </h4>
+                </li>
+                }
+                @for(user of room.users; track user){
+                <li>{{user.username}}</li>
+                }
+              </ol>
+            </div>
+          </div>
         </div>
-      </div>  
-    }
-    
-    <ol>
-      @for(user of room.winners; track user; let i=$index){
-        <li> 
-          <b>#Round {{i + 1}}</b>
-          <h4 style="display: flex;align-items: center;">
-            <div style="width: 250px; font-size: 16px;">{{ user.username }} ------Winning Amount {{((roomInfo.winningAmount * percentagearray[i].winAmountPer) / 100)-(((roomInfo.winningAmount * percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100)           }}</div>
-            <span style="font-size: 14px; color: brown;">-----Winner {{ i + 1 }}</span>
-          </h4>
-        </li>
-      }
-      @for(user of room.users; track user){
-        <li>{{user.username}}</li>
-      }
-    </ol>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,86 +1,89 @@
 <main>
-    <div class="row">
-        <div class="col-6">
-            <ol class="breadcrumb">
-                <li class="active p-0">Rooms Details</li>
-            </ol>
+  <div class="row">
+    <div class="col-md-6 offset-md-3 mt-4">
+      <div class="card">
+        <div class="card-header">
+          <ol class="breadcrumb">
+            <li class="active p-0 fs-4">Rooms Details</li>
+          </ol>
         </div>
-        <div class="col-6 text-end">
-           
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card-body">
+          <div class="">
 
             <mat-card>
-                <mat-card-header>
-                  <mat-card-title>Room Details</mat-card-title>
-                  <mat-card-subtitle>{{ roomDetails.name }}</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                  <p><strong>Room ID:</strong> {{ roomDetails.roomId }}</p>
-                  <p><strong>Entry Fee:</strong> {{ roomDetails.entryFee }}</p>
-                  <p><strong>Winning Amount:</strong> {{ roomDetails.winningAmount }}</p>
-                  <!-- <p><strong>Description:</strong> {{ roomDetails.description }}</p> -->
-                  <p><strong>Created By:</strong> {{ room.createdBy }}</p>
-                </mat-card-content>
-              </mat-card>
+              <mat-card-header>
+                <mat-card-title>Room Details</mat-card-title>
+                <mat-card-subtitle>{{ roomDetails.name }}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p><strong>Room ID:</strong> {{ roomDetails.roomId }}</p>
+                <p><strong>Entry Fee:</strong> {{ roomDetails.entryFee }}</p>
+                <p><strong>Winning Amount:</strong> {{ roomDetails.winningAmount }}</p>
+                <!-- <p><strong>Description:</strong> {{ roomDetails.description }}</p> -->
+                <p><strong>Created By:</strong> {{ room.createdBy }}</p>
+              </mat-card-content>
+            </mat-card>
 
 
-              <mat-card class="winner-card mt-4 w-100">
-                <!-- <mat-card-header>
-                  <div mat-card-avatar class="winner-avatar"></div>
-                  <mat-card-title>{{ winner.name }}</mat-card-title>
-                  <mat-card-subtitle>{{ winner.position }}</mat-card-subtitle>
-                </mat-card-header> -->
-                <mat-card-content>
-                  Winner Details
-                  <div class="row">
-                    <div class="col-2">
-                      <img mat-card-image [src]="winner.image" alt="{{ winner.name }}">
-                    </div>
-                    <div class="col-6 text-start">
-                      <h4> {{ roomDetails.winner_id }}</h4>
-                    </div>
-                    <div class="col-4 text-end">{{ roomDetails.winningAmount }}</div>
+            <mat-card class="winner-card mt-4 w-100">
+              <!-- <mat-card-header>
+                      <div mat-card-avatar class="winner-avatar"></div>
+                      <mat-card-title>{{ winner.name }}</mat-card-title>
+                      <mat-card-subtitle>{{ winner.position }}</mat-card-subtitle>
+                    </mat-card-header> -->
+              <mat-card-content>
+                Winner Details
+                <div class="row">
+                  <div class="col-2">
+                    <img mat-card-image [src]="winner.image" alt="{{ winner.name }}">
                   </div>
-                </mat-card-content>
-              </mat-card>
-              
-
-              <!-- <div *ngIf="isLoading" class="loader"></div> -->
-
-              <!-- <mat-card  class="mt-4">
-                <mat-card-header>
-                  <mat-card-title>Winner Timer</mat-card-title>
-                  <mat-card-subtitle></mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                </mat-card-content>
-              </mat-card> -->
-
-              <!-- <div class="marquee-container mt-4" *ngIf="!marquedisplay">
-                <button (click)="stop()">Start Game</button>
-                <div class="marquee">
-                  <span *ngFor="let userId of memberList" [class.selected]="userId.user_id === selectedId">
-                    {{ userId.user_id }}
-                  </span>
-                 
+                  <div class="col-6 text-start">
+                    <h4> {{ roomDetails.winner_id }}</h4>
+                  </div>
+                  <div class="col-4 text-end">{{ roomDetails.winningAmount }}</div>
                 </div>
-              </div> -->
+              </mat-card-content>
+            </mat-card>
 
-             
-              
-              <mat-card class="mt-4">
-                <mat-card-header>
-                  <mat-card-title>Room Members</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <ul>
-                    <li *ngFor="let v of memberList">{{ v.user_id }}</li>
-                  </ul>
-                </mat-card-content>
-              </mat-card>
+
+            <!-- <div *ngIf="isLoading" class="loader"></div> -->
+
+            <!-- <mat-card  class="mt-4">
+                    <mat-card-header>
+                      <mat-card-title>Winner Timer</mat-card-title>
+                      <mat-card-subtitle></mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                    </mat-card-content>
+                  </mat-card> -->
+
+            <!-- <div class="marquee-container mt-4" *ngIf="!marquedisplay">
+                    <button (click)="stop()">Start Game</button>
+                    <div class="marquee">
+                      <span *ngFor="let userId of memberList" [class.selected]="userId.user_id === selectedId">
+                        {{ userId.user_id }}
+                      </span>
+                     
+                    </div>
+                  </div> -->
+
+
+
+            <mat-card class="mt-4">
+              <mat-card-header>
+                <mat-card-title>Room Members</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <ul>
+                  <li *ngFor="let v of memberList">{{ v.user_id }}</li>
+                </ul>
+              </mat-card-content>
+            </mat-card>
+          </div>
         </div>
+      </div>
     </div>
+
+  </div>
+
 </main>
