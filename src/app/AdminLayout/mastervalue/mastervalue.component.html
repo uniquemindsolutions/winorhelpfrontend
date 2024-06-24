@@ -1,0 +1,43 @@
+<div class="payment-history-area bg-color-2 fix area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h3>List of Winners</h3>
+                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="deposite-content">
+                    <div class="diposite-box">
+                        <div class="deposite-table">
+                            <form (ngSubmit)="onSubmit()" >
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="bg-secondary">
+                                   
+                                    <th>Amount</th>
+                                    <!-- <th>Submit</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr  *ngFor="let item of dataSource;let i = index">
+                                    
+                                   <!-- <td><img src="assets/images/avatar.png" alt="">Ragner Lorth</td> -->
+                                   <td><input type="text" [(ngModel)]="item.ref_per	" name="ref_per" class="textboxsize" value="{{item.ref_per}}"></td> 
+                                  
+                                </tr>
+                                
+                                
+                            </tbody></table>
+                            <button type="submit">Submit</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

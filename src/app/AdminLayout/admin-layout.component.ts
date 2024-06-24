@@ -84,6 +84,15 @@ export class AdminLayout implements OnInit {
         icon: 'dot',
         visibility: true
       },
+
+      // {
+      //   id: 3,
+      //   displayName: 'Winner List Calculation',
+      //   link: '/admin/winnerper',
+      //   iconType: 'png',
+      //   icon: 'dot',
+      //   visibility: true
+      // },
     
     ]
   }

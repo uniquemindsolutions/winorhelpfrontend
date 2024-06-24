@@ -2,13 +2,13 @@
     padding: 20px;
     height: calc(100% - 176px);
   }
-  
+
   .room {
     border: 1px solid #ccc;
     padding: 20px;
     margin-bottom: 20px;
   }
-  
+
   .user-list {
     max-height: 30px; /* Adjust based on your needs */
     overflow: hidden;
@@ -17,7 +17,7 @@
     margin-bottom: 20px;
     position: relative;
   }
-  
+
   .user-list ul {
     list-style: none;
     padding: 0;
@@ -26,7 +26,7 @@
     height: 30px; /* Adjust based on your needs */
     margin-top: -32px;
   }
-  
+
   .user-list li {
     display: none;
     transition: opacity 0.5s, transform 0.5s;
@@ -34,22 +34,21 @@
     width: 100%;
     text-align: center;
   }
-  
+
   .user-list li.previous {
     display: block;
     opacity: 0.5;
     transform: translateY(-20px);
   }
-  
+
   .user-list li.current {
     display: block;
     opacity: 1;
     transform: translateY(0);
   }
-  
+
   .user-list li.next {
     display: block;
     opacity: 0.5;
     transform: translateY(20px);
   }
-  

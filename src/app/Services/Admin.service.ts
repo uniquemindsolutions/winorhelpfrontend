@@ -181,6 +181,24 @@ export class AdminService {
         return this.http.post(`${this.baseUrl}/admin/getRoomUsersList`, {roomId});
     }
 
+    winnerpecr(page:number, limit:number) {
+        return this.http.get(`${this.baseUrl}/admin/roomWinnerList?page=${page}&limit=${limit}`);
+    }
+
+    roomwinerperUpdate(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/roomwinerperUpdate`,data);
+    }
+
+    getmasterdata() {
+        return this.http.get(`${this.baseUrl}/admin/masterdata`);
+    }
+
+    masterdataUpdate(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/masterdataupdate`,data);
+    }
+
+
+
    
 
 }

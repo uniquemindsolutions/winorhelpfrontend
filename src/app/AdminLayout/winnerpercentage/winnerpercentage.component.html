@@ -1,0 +1,59 @@
+<div class="payment-history-area bg-color-2 fix area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h3>List of Winners</h3>
+                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="deposite-content">
+                    <div class="diposite-box">
+                        <div class="deposite-table">
+                            <form (ngSubmit)="onSubmit()" >
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="bg-secondary">
+                                   
+                                    <th>ROOM ID</th>
+                                    <th>WINNER ID</th>
+                                    <th>winner_orderid</th>
+                                    <th>winning_amount_per%</th>
+                                    <th>winning_amount</th>
+                                    <th>deduct_amount_per%</th>
+                                    <th>deduct_amount</th>
+                                    <th>Sending amount</th>
+                                    <!-- <th>Submit</th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr  *ngFor="let item of dataSource;let i = index">
+                                    
+                                   <!-- <td><img src="assets/images/avatar.png" alt="">Ragner Lorth</td> -->
+                                   <td><input type="text" [(ngModel)]="item.room_id" name="room_id_{{i}}" readonly class="textboxsize" value="{{item.room_id}}"></td> 
+                                   <td><input type="text" [(ngModel)]="item.user_id" name="user_id_{{i}}" readonly class="textboxsize" value="{{item.user_id}}"></td> 
+                                   <td><input type="text" [(ngModel)]="item.winner_orderid" readonly name="winner_orderid_{{i}}" class="textboxsize" value="{{item.winner_orderid}}"></td>
+                                   <td><input type="text" [(ngModel)]="item.winning_amount_per" name="winning_amount_per_{{i}}" class="textboxsize" value="{{item.winning_amount_per}}"></td>
+                                   <td><input type="text" [(ngModel)]="item.winning_amount" readonly  name="winning_amount_{{i}}" class="textboxsize" value="{{item.winning_amount}}"></td>
+                                   <td><input type="text" [(ngModel)]="item.deduct_amount_per"  name="deduct_amount_per_{{i}}" class="textboxsize"  value="{{item.deduct_amount_per}}"></td>
+                                   <td><input type="text" [(ngModel)]="item.deduct_amount"  readonly name="deduct_amount_{{i}}" class="textboxsize" value="{{item.deduct_amount}}"></td>
+                                   <td><input type="text" [(ngModel)]="item.tot_amount_send" readonly  name="tot_amount_send_{{i}}" class="textboxsize" value="{{item.tot_amount_send}}"></td>
+                             
+                                   
+                                   
+                                </tr>
+                                
+                                
+                            </tbody></table>
+                            <button type="submit">Submit</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+/* .area-padding {
+    padding: 100px 0px;
+}
+.bg-color-2 {
+    background: #e8faed;
+}
+.fix {
+    overflow: hidden;
+}
+.section-headline {
+    padding-bottom: 40px;
+    position: relative;
+}
+.section-headline h3 {
+    font-size: 40px;
+    text-transform: capitalize;
+    line-height: 48px;
+    color: #29446e;
+}
+.section-headline p {
+    max-width: 560px;
+    font-size: 17px;
+    margin: 0 auto;
+}
+.deposite-content {
+    position: relative;
+}
+.diposite-box {
+    width: 100%;
+    margin: 0 auto;
+    background: #e5edf1;
+    position: relative;
+}
+.deposite-content table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.deposite-content th {
+    text-align: left;
+    padding: 8px 10px 8px 30px;
+    height: 80px;
+    text-transform: uppercase;
+}
+.deposite-content td {
+    text-align: left;
+    padding: 8px 10px 8px 30px;
+    height: 80px;
+}
+.deposite-table td img {
+    margin-right: 15px;
+    border-radius: 50%;
+}
+.deposite-content tr:nth-child(even) {
+    background-color: #f4f6f7;
+} */
+.textboxsize{
+    width: 100px;
+}
