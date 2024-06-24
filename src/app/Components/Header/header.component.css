@@ -6,6 +6,11 @@ body {
     color: #848484;
     padding: 5px 0 5px;
 }
+a.nav-link {
+    color: #444;
+    font-weight: 400;
+    margin-right: 20px;
+}
 .address-bar {
     background-color: #eee;
     /* margin-left: 104px; */

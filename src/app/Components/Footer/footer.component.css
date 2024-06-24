@@ -1,8 +1,8 @@
 .footer {
   color: #fff;
-  padding: 25px 0;
-  /* background-color: #fe5619; */
+  padding: 20px 0 0px;
   background: linear-gradient(to left, #00438b, #4a54e8);
+  margin-top: 2rem;
 }
 .footer .copyright {
   margin: 6px 0 0;

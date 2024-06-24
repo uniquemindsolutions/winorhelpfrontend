@@ -1,27 +1,31 @@
 <div class="container h-100">
     <div class="row mt-4 mb-4">
-        <div class="col-md-4"></div>
 
-        <div class="col-md-4">
-            <form class="mx-1 mx-md-4" [formGroup]="withdraw" (ngSubmit)="onSubmit()">
-                <h3 class="text-center">Request for bank tranfer</h3>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">wallent amount: </label>
-                    <span>{{walletAmount}}</span>
-                </div>
-                <div class="mb-1">
-                    <label for="exampleFormControlInput1" class="form-label">Amount</label>
-                    <input type="text" id="form3Example3c"  formControlName="amount" class="form-control"  />
-                    <div *ngIf="submitted && f['amount'].errors" class="invalid-feedback d-block">
-                      <div *ngIf="f['amount'].errors['required']">Amount is required</div>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
+        <div class="col-md-6 offset-md-3 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <form class="mx-1 mx-md-4" [formGroup]="withdraw" (ngSubmit)="onSubmit()">
+                        <h3 class="">Request for bank tranfer</h3>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label fw-medium">wallent amount: </label> &nbsp;
+                            <span class="me-2 text-primary fs-5 fw-medium">{{walletAmount}}</span>
+                        </div>
+                        <div class="mb-1">
+                            <label for="exampleFormControlInput1" class="form-label fw-medium">Amount</label>
+                            <input type="text" id="form3Example3c" formControlName="amount" class="form-control" />
+                            <div *ngIf="submitted && f['amount'].errors" class="invalid-feedback d-block">
+                                <div *ngIf="f['amount'].errors['required']">Amount is required</div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success px-4">Submit</button>
+                        </div>
 
-            </form>
+                    </form>
+                </div>
+            </div>
+
         </div>
-        <div class="col-md-4"></div>
+       
     </div>
 </div>
