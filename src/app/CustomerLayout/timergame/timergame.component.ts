@@ -29,6 +29,7 @@ export class TimergameComponent {
   isLoading:boolean=true;
   totalNoOfRoundGame:number=0;
   isRoundComplited:boolean=false;
+  percentagearray:any;
   
   room: Room = {
     id: 1,
@@ -48,31 +49,45 @@ export class TimergameComponent {
 
   }
 
-  ngOnInit(): void {
+ngOnInit(): void {
     this.getRoomUsersList();
   }
 
-
+  splitStringToArray(input: string): string[] {
+    return input.split(',');
+  }
 
   getRoomUsersList() {
     this.isLoading = true;
     let that = this;
     this.api.getRoomUsersList(this.roomInfo.roomId).subscribe({
       next: (res: any) => {
+        const jsonstringfy=res.roomsInfo.winingPercentageInfo;
+        console.log("roomdetails",res.roomsInfo);
         this.isLoading = false;
         if (res && res.status && res.users.length) {
           that.isLoading = false;
           this.users = res.users;
           this.roomsInfo = res.roomsInfo;
+          this.percentagearray=JSON.parse(res.roomsInfo.winingPercentageInfo);
+          console.log(this.percentagearray[0],"percentagearray");
           this.winners = [];
           if(this.roomsInfo['manuval_winners']){
-            let win:any[]=JSON.parse(this.roomsInfo['manuval_winners']);
-            for (let i = 0; i < win.length; i++) {
+            let win:any[]=this.roomsInfo['manuval_winners'];
+            let arrwin=this.roomsInfo['manuval_winners'].split(',')
+            console.log("manuvalist",arrwin);
+            for (let i = 0; i < arrwin.length; i++) {
               this.winners.push({
-                user_id:win[i],
+                user_id:arrwin[i],
                 username:''
               })
             }
+          
+
+           
+        
+
+
           }
 
           this.totalNoOfRoundGame=0;
@@ -106,7 +121,7 @@ export class TimergameComponent {
       const index = this.users.findIndex((itemA: any) => Number(itemA.user_id) === Number(itemB.user_id));
       if (index !== -1) {
         itemB.username = this.users[index].username;
-        this.users.splice(index, 1);
+        // this.users.splice(index, 1);
       }
     });
     this.room.users=this.users;
@@ -117,7 +132,7 @@ export class TimergameComponent {
     // this.updateCountdown();
    
 
-    let timer=this.users.length * 2000;
+    let timer=this.users.length * 3000;
     console.log(timer, 'timer');
     
     console.log(new Date(), 'AA');
@@ -198,8 +213,8 @@ export class TimergameComponent {
 
   selectWinnerForRound(): void {
     let winner: User;
-    if (this.winners && this.winners.length > this.room.currentRound) {
-      winner = this.winners[this.room.currentRound];
+    if (this.room.manualWinners && this.room.manualWinners.length > this.room.currentRound) {
+      winner = this.room.manualWinners[this.room.currentRound];
     } else {
       winner = this.selectAutomaticWinner();
     }

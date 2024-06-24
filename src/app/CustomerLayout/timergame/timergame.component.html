@@ -27,8 +27,8 @@
         <li> 
           <b>#Round {{i + 1}}</b>
           <h4 style="display: flex;align-items: center;">
-            <div style="width: 250px; font-size: 16px;">{{ user.username }}</div>
-            <span style="font-size: 14px; color: brown;">Winner {{ i + 1 }}</span>
+            <div style="width: 250px; font-size: 16px;">{{ user.username }} ------Winning Amount {{((roomInfo.winningAmount * percentagearray[i].winAmountPer) / 100)-(((roomInfo.winningAmount * percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100)           }}</div>
+            <span style="font-size: 14px; color: brown;">-----Winner {{ i + 1 }}</span>
           </h4>
         </li>
       }

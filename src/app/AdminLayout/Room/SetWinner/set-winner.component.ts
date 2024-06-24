@@ -56,7 +56,7 @@ export class SetWinnerComponent {
           this.users = res.users;
           this.roomsInfo = res.roomsInfo;
           this.winners = [];
-
+          console.log(this.roomsInfo['manuval_winners'], 'this.winners');
           if(this.roomsInfo['manuval_winners']){
             let win:any[]=JSON.parse(this.roomsInfo['manuval_winners']);
             for (let i = 0; i < win.length; i++) {
