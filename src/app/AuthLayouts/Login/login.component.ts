@@ -55,7 +55,12 @@ export class LoginComponent {
             localStorage.setItem("user_id",res.data.id);
             this.dialog.openSnackBar({ message:'Login successfully completed.', title: 'Login Done'}, 'Success');
             localStorage.setItem("loginsession","true");
-            this.router.navigate(['/home']);
+            if(this.login.value.email=='admin@gmail.com'){
+              this.router.navigate(['/admin']);
+            }else{
+              this.router.navigate(['/home']);
+            }
+           
             this.authService.markUnTouchedAndReset(this.login);
           }else{
             this.dialog.openSnackBar({ message:'Login failed. Please try again.', title: 'Login failed'}, 'Error');
