@@ -11,6 +11,7 @@ import { FormBuilder } from '@angular/forms';
 import { CustomeServiceService } from '../../Services/custome-service.service';
 import { environment } from '../../../environments/environment';
 import { ConfirmationComponent } from '../../Components/Confirmation/confirmation.component';
+import { interval } from 'rxjs';
 
 
 
@@ -27,9 +28,12 @@ import { ConfirmationComponent } from '../../Components/Confirmation/confirmatio
 export class HomeComponent {
   displayedColumns: string[] = ['sno', 'roomId', 'date', 'entryFee', 'totalParticipants', 'winningAmount', 'action', 'viewDetails'];
   dataSource: any;
+  dataSourcenew:any=[];
   currentPage: number = 1;
   perPage: number = 0;
   walletAmount: any = 100;
+  roomlistdata:any=[];
+  timeRemaining:any;
   constructor(public dialog: MatDialog, private muiService: MuiDialogService, private api: AdminService,
     private formBuilder: FormBuilder,
     private customeservice: CustomeServiceService,
@@ -52,6 +56,12 @@ export class HomeComponent {
       }
     })
     this.masterdata();
+
+    interval(1000).subscribe(() => {
+      this.getRoomList();
+    });
+
+
    }
    masterdata(){
     this.api.getmasterdata().subscribe({
@@ -73,6 +83,57 @@ export class HomeComponent {
           console.log(res.data, 'Roomlist');
           
           this.dataSource=res.data;
+          for (let i = 0; i < this.dataSource.length; i++) {
+          
+            // this.dataSource[i].push("testdata");
+            // console.log('Iteration:', this.dataSource[i]);
+           
+            // const now = new Date().getTime();
+            // console.log('Iteration:', new Date());
+    // const distance = this.dataSource[i].latter_datetime.getTime() - now;
+
+
+    // const specificDate = new Date('2024-07-05T23:01:00');
+    // const currentDate = new Date();
+
+    // const distance = this.calculateDaysDifference(specificDate, currentDate);
+    // console.log('Iteration:', distance);
+
+    //         const timerval = {
+    //           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+    //           hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    //           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+    //           seconds: Math.floor((distance % (1000 * 60)) / 1000)
+    //         };
+
+     const now = new Date().getTime();
+    // const distance = this.dataSource[i].latter_datetime.getTime() - now;
+
+    //const now = new Date(this.dataSource[i].startDate+' '+this.dataSource[i].startTime).getTime();
+    const end = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+    const distance = end - now;
+
+
+
+    console.log('Iteration:', this.dataSource[i]);
+    if (distance < 0) {
+      this.timeRemaining = {};
+      // this.timerEnded = true;
+      // this.subscription.unsubscribe();
+    } else {
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      //this.timeRemaining = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      this.timeRemaining={"days":days,"hours":hours,"minutes":minutes,"seconds":seconds}
+    }
+
+            this.dataSource[i]['timerdata'] = this.timeRemaining;
+
+            console.log('Iteration:', this.dataSource[i]);
+            
+          }
         },
         error: (err: any) => {
   
@@ -81,6 +142,15 @@ export class HomeComponent {
     
       
   
+    }
+
+    calculateDaysDifference(date1: Date, date2: Date): number {
+      const millisecondsPerDay = 1000 * 60 * 60 * 24;
+      const utc1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
+      const utc2 = Date.UTC(date2.getFullYear(), date2.getMonth(), date2.getDate());
+  
+      const differenceInMilliseconds = utc1 - utc2;
+      return Math.floor(differenceInMilliseconds / millisecondsPerDay);
     }
 
     roomalocate(roomid:any,roomamount:any){

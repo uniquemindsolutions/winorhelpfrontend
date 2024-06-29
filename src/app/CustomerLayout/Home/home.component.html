@@ -12,33 +12,37 @@
         <div class="row">
             <div class="col-lg-4" *ngFor="let item of dataSource">
                 <div class="single-ticket" [ngStyle]="{'background': item.css}">
-                    <span class="ticket-rate">Room ID:&nbsp;{{item.roomId}}</span><br>
+                  
+                    <span class="ticket-rate">Room ID:&nbsp;{{item.roomId}}  </span><br>
                     <span class="win-price">Win price:&nbsp;₹{{item.winningAmount || '0.00'}}</span>
                     <span class="win-money">Entry Fee:&nbsp;₹{{item.entryFee}}</span>
                     <img src="../../assets/images/win-gift.png" alt="" class="img-fluid w-25">
+                   
                     <div class="mt-3">
                         <ul class="winning-number">
                             <li>
                                 <a href="#">
-                                    <div class="nums">00</div>
-                                    <div class="strings">Days</div>       
+                                    <div class="nums">{{item.timerdata.days}}</div>
+                                    <div class="strings">Days
+
+                                    </div>       
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <div class="nums">00</div>
+                                    <div class="nums">{{item.timerdata.hours}}</div>
                                     <div class="strings">Hours</div>       
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
                                     <div class="nums">0</div>
-                                    <div class="strings">Minutes</div>       
+                                    <div class="strings">{{item.timerdata.minutes}}</div>       
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <div class="nums">0</div>
+                                    <div class="nums">{{item.timerdata.seconds}}</div>
                                     <div class="strings">Seconds</div>       
                                 </a>
                             </li>

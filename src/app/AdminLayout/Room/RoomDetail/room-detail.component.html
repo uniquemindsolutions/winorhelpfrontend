@@ -1,99 +1,45 @@
 <main>
-    <div class="row">
-        <div class="col-6">
-            <ol class="breadcrumb">
-                <li class="active p-0">Rooms Details</li>
-            </ol>
-        </div>
-        <div class="col-6 text-end">
-           
-        </div>
-    </div>
+    <h4 class="mt-4">Rooms Details</h4>
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12 col-xl-12">
 
-            <mat-card>
-                <mat-card-header>
-                  <mat-card-title>Room Details</mat-card-title>
-                  <mat-card-subtitle>{{ room.roomId }}</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                  <p><strong>Room ID:</strong> {{ room.roomId }}</p>
-                  <p>
+            
+
+              <div class="card">
+                <div class="card-header">
+                  <h4> Room ID:  <span class="text-primary">{{ room.roomId }}</span></h4>
+                  <!-- <p class="mb-0">
                     <strong>Description:</strong>
-                  </p>
-                  <ol>
-                    <li>Winning Amount : {{room.winningAmount}}</li>
-                    <li>Entry Fee : {{room.entryFee}}</li>
-                    <li>Start Date : {{room.startDate | date:'dd-MMM, YYYY'}}</li>
-                    <li>End Date : {{room.endDate | date:'dd-MMM, YYYY'}}</li>
-                    <li>Start Time : {{room.startTime | date:'hh:mm a}} </li>
-                    <li>End Time : {{room.endTime | date:'hh:mm a'}} </li>
-                  </ol>
-                  <!-- <p><strong>Created By:</strong> {{ room.createdBy }}</p> -->
-                </mat-card-content>
-              </mat-card>
-
-
-              <mat-card class="winner-card mt-4 w-100">
-                <!-- <mat-card-header>
-                  <div mat-card-avatar class="winner-avatar"></div>
-                  <mat-card-title>{{ winner.name }}</mat-card-title>
-                  <mat-card-subtitle>{{ winner.position }}</mat-card-subtitle>
-                </mat-card-header> -->
-                <mat-card-content>
-                  Winner Details
-                  <div class="row">
-                    <div class="col-2">
-                      <img mat-card-image [src]="winner.image" alt="{{ winner.name }}">
-                    </div>
-                    <div class="col-6 text-start">
-                      <h4> {{winnerId}}</h4>
-                    </div>
-                    <div class="col-4 text-end">{{ winner.prize }}</div>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-              
-
-              <div *ngIf="isLoading" class="loader"></div>
-
-              <!-- <mat-card  class="mt-4">
-                <mat-card-header>
-                  <mat-card-title>Winner Timer</mat-card-title>
-                  <mat-card-subtitle></mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                </mat-card-content>
-              </mat-card> -->
-              <button (click)="refreshComponent()">Refresh</button>
-              <div class="marquee-container mt-4" *ngIf="!marquedisplay">
-                <button (click)="stop()">Start Game</button>
-                
-                
-                <div class="marquee">
-                  <span *ngFor="let userId of memberList" [class.selected]="userId.user_id === selectedId">
-                    {{ userId.user_id }}
-                  </span>
-                 
+                  </p> -->
+                </div>
+                <div class="card-body">
+                  <ul class="list-unstyled">
+                    <li><span style="width:200px; display: inline-flex;">Winning Amount </span>: <b>{{room.winningAmount}}</b> </li>
+                    <li><span style="width:200px; display: inline-flex;">Entry Fee </span>: <b>{{room.entryFee}}</b></li>
+                    <li><span style="width:200px; display: inline-flex;">Start Date </span>: <b>{{room.startDate | date:'dd-MMM, YYYY'}}</b></li>
+                    <li><span style="width:200px; display: inline-flex;">End Date </span>: <b>{{room.endDate | date:'dd-MMM, YYYY'}}</b></li>
+                    <li><span style="width:200px; display: inline-flex;">Start Time </span>: <b>{{room.startTime}}</b> </li>
+                    <li><span style="width:200px; display: inline-flex;">End Time </span>: <b>{{room.endTime}} </b></li>
+                  </ul>
                 </div>
               </div>
-
-              <!-- <div class="mt-4">
-                <span>Winner ID:</span>
-                {{winnerId}}
-              </div> -->
-              
-              <mat-card class="mt-4">
-                <mat-card-header>
-                  <mat-card-title>Room Members</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <ul>
-                    <li *ngFor="let v of memberList">{{ v.user_id }}</li>
-                  </ul>
-                </mat-card-content>
-              </mat-card>
+             
+              <table class="table table-hover mt-4">
+                <thead>
+                  <tr>
+                    <th style="width: 100px;">User Id</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let v of memberList">
+                    <td>{{ v.user_id  }}</td>
+                    <td>{{ v.username  }}</td>
+                    <td>{{ v.email  }}</td>
+                  </tr>
+                </tbody>
+              </table>
         </div>
     </div>
 </main>

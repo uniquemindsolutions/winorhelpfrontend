@@ -26,7 +26,7 @@ export class RoomCreateComponent {
     this.roomForm = this.fb.group({
       entryFee: ['', [Validators.required, Validators.min(1)]],
       // totalParticipants: ['', [Validators.required, Validators.min(1)]],
-      winningAmount: ['', [Validators.required, Validators.min(1)]],
+      // winningAmount: ['', [Validators.required, Validators.min(1)]],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
       startTime: ['', [Validators.required]],
