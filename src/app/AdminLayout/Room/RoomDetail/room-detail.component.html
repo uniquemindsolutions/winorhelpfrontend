@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body">
                   <ul class="list-unstyled">
-                    <li><span style="width:200px; display: inline-flex;">Winning Amount </span>: <b>{{room.winningAmount}}</b> </li>
+                    <li><span style="width:200px; display: inline-flex;">Winning Amount </span>: <b> {{ + room.entryFee * +roommemberscount }}</b> </li>
                     <li><span style="width:200px; display: inline-flex;">Entry Fee </span>: <b>{{room.entryFee}}</b></li>
                     <li><span style="width:200px; display: inline-flex;">Start Date </span>: <b>{{room.startDate | date:'dd-MMM, YYYY'}}</b></li>
                     <li><span style="width:200px; display: inline-flex;">End Date </span>: <b>{{room.endDate | date:'dd-MMM, YYYY'}}</b></li>

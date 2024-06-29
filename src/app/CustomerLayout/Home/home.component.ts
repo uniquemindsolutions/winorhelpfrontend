@@ -132,6 +132,16 @@ export class HomeComponent {
             this.dataSource[i]['timerdata'] = this.timeRemaining;
 
             console.log('Iteration:', this.dataSource[i]);
+
+            this.api.getRoomUsersList(this.dataSource[i].roomId).subscribe({
+              next: (res: any) => {
+                console.log(res.users, 'resultUserlist22');
+                this.dataSource[i]['winningtot'] = res.users.length*this.dataSource[i].entryFee;
+              },
+              error: (err: any) => {
+        
+              }
+            })
             
           }
         },

@@ -178,7 +178,7 @@ export class AdminService {
     }
 
     getRoomUsersList(roomId:any) {
-        return this.http.post(`${this.baseUrl}/admin/getRoomUsersListnew`, {roomId});
+        return this.http.post(`${this.baseUrl}/admin/getRoomUsersList`, {roomId});
     }
     
     winnerpecr(page:number, limit:number) {
