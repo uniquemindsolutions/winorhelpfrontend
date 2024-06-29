@@ -91,116 +91,53 @@
           <a class="nav-link" routerLink="/contact">Contact Us</a>
         </li>
         <li class="nav-item" *ngIf="loginheader">
-          <a class="nav-link" routerLink="/auth/login">Logout</a>
+          <!-- <a class="nav-link" routerLink="/auth/login">Logout</a> -->
+          <!-- <a class="nav-link" routerLink="/auth/login">Logout</a> -->
+         
         </li>
 
       </ul>
-
+      <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+       My Profile
+      </button>
+          <button type="button" routerLink="/auth/login" class="btn btn-warning">
+       Logout
+      </button>
     </div>
   </div>
 </nav>
 
 
-<!-- <nav class="navbar navbar-expand-lg navbar-light" [ngClass]="{'fixed-top': isFixed}">
-    <a class="navbar-brand" href="#">Logo</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarColor03" [ngbCollapse]="isCollapsed">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">List of Winners</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Our Games</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Register/Login</a>
-        </li>
-        <li class="nav-item">
-            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                <button
-                    type="button"
-                    class="btn btn-outline-primary me-2"
-                    id="dropdownManual"
-                    ngbDropdownAnchor
-                    (focus)="myDrop.open()"
-                >
-                 My Wallet
-                </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                    <button ngbDropdownItem>My Transaction</button>
-                    <button ngbDropdownItem>Credit/Debit request</button>
-                </div>
-            </div>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body py-5">
+
+        <table class="table table-borderless">
+           <tbody>
+            <tr>
+              <td>User Name</td>
+              <td>: <b>Raghu Master </b></td>
+            </tr>
+            <tr>
+              <td>Wallet Amount</td>
+              <td>: ₹ <b>2000</b></td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>: <b>Raghu&#64;gmail.com</b></td>
+            </tr>
+          </tbody>
+        </table>
+     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
-  </nav> -->
-
-<!-- <p>Is Fixed: {{ isFixed }}</p> -->
-
-
-
-
-
-<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-
-    <div class="container-fluid ">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex" id="collapsibleNavbar">
-
-            <ul class="navbar-nav ">
-                <li class="nav-item">
-                    <a class="nav-link handpick"  routerLink="/">Home</a>
-                </li>
-               
-                <li class="nav-item">
-                    <a class="nav-link handpick" routerLink="/our-approch">List of Winners</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link handpick" routerLink="/">Our Games</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link handpick" routerLink="/login">Register/Login</a>
-                </li>
-                <li class="nav-item">
-                <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                    <button
-                        type="button"
-                        class="btn btn-outline-primary me-2"
-                        id="dropdownManual"
-                        ngbDropdownAnchor
-                        (focus)="myDrop.open()"
-                    >
-                     My Wallet
-                    </button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                        <button ngbDropdownItem>My Transaction</button>
-                        <button ngbDropdownItem>Credit/Debit request</button>
-                    </div>
-                </div>
-            </li>
-                <li class="nav-item">
-                    <a class="nav-link handpick" routerLink="/">Referral</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link handpick" routerLink="/contact">Contact Us</a>
-                </li>
-
-            </ul>
-        </div>
-
-    </div>
-</nav> -->
+  </div>
+</div>

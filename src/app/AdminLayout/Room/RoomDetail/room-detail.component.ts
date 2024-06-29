@@ -111,10 +111,10 @@ export class RoomDetailComponent {
 
   getRoomUserList() {
     const data = { "roomId": this.roomId };
-    this.api.getroomUserList(data).subscribe({
+    this.api.getRoomUsersList(this.roomId).subscribe({
       next: (res: any) => {
-        console.log(res.data, 'resultUserlist');
-        this.memberList = res.data;
+        console.log(res.users, 'resultUserlist');
+        this.memberList = res.users;
       },
       error: (err: any) => {
 
@@ -127,8 +127,8 @@ export class RoomDetailComponent {
     const data = { "roomId": this.roomId };
     this.api.getRoomDetail(data).subscribe({
       next: (res: any) => {
-        console.log(res.data, 'resultUserlist');
-        this.room = res.data;
+        console.log(res, 'resultUserlist22');
+        this.room = res;
       },
       error: (err: any) => {
 
