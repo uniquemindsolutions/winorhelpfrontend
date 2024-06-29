@@ -61,6 +61,7 @@ export class RoomDetailComponent {
   perPage: any = "100";
   userlist: any;
   roomId: any;
+  roommemberscount:any
 
   constructor(private fb: FormBuilder, private muiDialog: MuiDialogService, private api: AdminService, private router: Router,
     private route: ActivatedRoute
@@ -115,6 +116,7 @@ export class RoomDetailComponent {
       next: (res: any) => {
         console.log(res.users, 'resultUserlist');
         this.memberList = res.users;
+        this.roommemberscount=this.memberList.length;
       },
       error: (err: any) => {
 
