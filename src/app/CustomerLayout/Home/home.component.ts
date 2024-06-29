@@ -10,6 +10,9 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
 import { CustomeServiceService } from '../../Services/custome-service.service';
 import { environment } from '../../../environments/environment';
+import { ConfirmationComponent } from '../../Components/Confirmation/confirmation.component';
+
+
 
 @Component({
   selector: 'app-home',
@@ -30,7 +33,7 @@ export class HomeComponent {
   constructor(public dialog: MatDialog, private muiService: MuiDialogService, private api: AdminService,
     private formBuilder: FormBuilder,
     private customeservice: CustomeServiceService,
-    private router: Router
+    private router: Router,
   ) {
   }
 
@@ -82,30 +85,50 @@ export class HomeComponent {
 
     roomalocate(roomid:any,roomamount:any){
      
+      const dialogRef = this.dialog.open(ConfirmationComponent, {
+        width: '250px',
+        data: { title: 'Confirm Action', message: 'Are you sure you want to do this?' }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        if (result) {
+          // Perform the action confirmed
+          //console.log('User confirmed action');
 
-      let text = "OK or Cancel";
-  if (confirm(text) == true) {
-    if(this.walletAmount>0){
+          if(this.walletAmount>0){
 
-      const refpercentage=localStorage.getItem('refper');
-      const data={"roomnumber":roomid,"roomamount":roomamount,"refpercentage":refpercentage,"user_id":localStorage.getItem('user_id')};
-      this.customeservice.roomuserlistInsert(data).subscribe({
-        next: (result:any) => {
-          console.log("resultvalroominsert",result);
-          //this.router.navigate(['/mytransaction']);
-          alert("Added to room"+roomid);
-        },
-        error: (err: any) => {
+            const refpercentage=localStorage.getItem('refper');
+            const data={"roomnumber":roomid,"roomamount":roomamount,"refpercentage":refpercentage,"user_id":localStorage.getItem('user_id')};
+            this.customeservice.roomuserlistInsert(data).subscribe({
+              next: (result:any) => {
+                console.log("resultvalroominsert",result);
+                //this.router.navigate(['/mytransaction']);
+                // alert("Added to room"+roomid);
+                this.muiService.openSnackBar({ message:'Successfully added to room', title: 'Successfully Added'}, 'Success');
+              },
+              error: (err: any) => {
+                this.muiService.openSnackBar({ message:'Already Entered into the room or not having suffient balance ', title: 'Room Registration Failed!'}, 'Error');
+              }
+            })
+          }else{
+            this.muiService.openSnackBar({ message:'not having suffient balance', title: 'Room Registration Failed!'}, 'Error');
+          }
 
+
+        } else {
+          console.log('User cancelled action');
         }
-      })
-    }else{
-      alert("Wallet not having amount"+this.walletAmount);
-    }
-  } else {
-    // text = "You canceled!";
-  }
-}
+      });
+
+   
+//       let text = "OK or Cancel";
+//   if (confirm(text) == true) {
+   
+//   } else {
+//     // text = "You canceled!";
+//   }
+// }
 
   // getRoomList() {
   //   this.api.roomList(this.currentPage, this.perPage).subscribe({
@@ -118,7 +141,7 @@ export class HomeComponent {
   //     }
   //   })
   // }
-
+    }
 
   viewDetails(item: any) {
     sessionStorage.setItem(`${environment.STORAGE_KEY}/roomDetail`, btoa(JSON.stringify(item)));
