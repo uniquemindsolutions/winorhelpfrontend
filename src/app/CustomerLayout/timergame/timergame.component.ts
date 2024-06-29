@@ -30,6 +30,7 @@ export class TimergameComponent {
   totalNoOfRoundGame:number=0;
   isRoundComplited:boolean=false;
   percentagearray:any;
+  winningamount:any;
   
   room: Room = {
     id: 1,
@@ -50,7 +51,10 @@ export class TimergameComponent {
   }
 
 ngOnInit(): void {
+ 
     this.getRoomUsersList();
+
+    console.log("roomsInfo",this.roomsInfo);
   }
 
   splitStringToArray(input: string): string[] {
@@ -63,12 +67,14 @@ ngOnInit(): void {
     this.api.getRoomUsersList(this.roomInfo.roomId).subscribe({
       next: (res: any) => {
         const jsonstringfy=res.roomsInfo.winingPercentageInfo;
-        console.log("roomdetails",res.roomsInfo);
+        console.log("roomdetails",res);
         this.isLoading = false;
         if (res && res.status && res.users.length) {
           that.isLoading = false;
           this.users = res.users;
+          this.winningamount=this.users.length*res.roomsInfo.entryFee;
           this.roomsInfo = res.roomsInfo;
+          console.log("roomsInfo",this.roomsInfo);
           this.percentagearray=JSON.parse(res.roomsInfo.winingPercentageInfo);
           console.log(this.percentagearray[0],"percentagearray");
           this.winners = [];
@@ -84,10 +90,6 @@ ngOnInit(): void {
             }
           
 
-           
-        
-
-
           }
 
           this.totalNoOfRoundGame=0;
@@ -97,8 +99,17 @@ ngOnInit(): void {
           }
 
           this.addUsernameAndRemoveMatchingItems();
-          this.startCountdown();
-          this.startScrolling();
+         
+          
+            const now = new Date().getTime();
+            const end = new Date(this.roomsInfo.latter_datetime).getTime();
+            const distance = end - now;
+            console.log("roomsInfo",distance);
+            if(distance<=0){
+              this.startCountdown();
+              this.startScrolling();
+            }
+         
           this.changeDetectorRef.detectChanges();
         }
       },

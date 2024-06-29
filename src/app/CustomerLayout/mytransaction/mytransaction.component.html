@@ -1,8 +1,10 @@
 <div class="container h-100">
   <div class="row mt-4 mb-4">
     <div class="col-md-12 myTranscTbl">
-      <table class="table table-bordered">
-        <thead bg-color="red">
+      <div><b>Wallet Amount:</b>{{walletamount}}</div>
+      <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+      <table class="table table-bordered" >
+        <thead bg-color="red"  class="thead-dark sticky-header">
           <tr>
             <th scope="col">USERID</th>
             <th scope="col">Transaction Type</th>
@@ -23,6 +25,7 @@
         </tbody>
 
       </table>
+    </div>
     </div>
   </div>
 </div>

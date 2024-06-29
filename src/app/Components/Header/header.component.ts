@@ -15,12 +15,7 @@ import { AdminService } from '../../Services/Admin.service';
 })
 export class HeaderComponent {
   public isCollapsed = true;
-//   public isFixed = false;
-//   @HostListener('window:scroll', [])
-//  onWindowScroll() {
-//     const offset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-//     this.isFixed = offset > 100; 
-//   }
+  visiblelable:boolean=false;
 
 userDetails: any;
 
@@ -32,11 +27,16 @@ constructor(private admin: AdminService) {
 
 loginheader:boolean=true;
   ngOnInit() {
+    const userid=localStorage.getItem('user_id');
+    if(userid!=''){
+     this.visiblelable=true;
+    }
     const data = {"user_id": localStorage.getItem('user_id')}
     this.admin.getUserMasterDetails(data).subscribe({
       next: (res: any) => {
 
       this.userDetails = res.data;
+      localStorage.setItem("walletamount",res.data.wallet_amount);
       console.log(res.data, "res test")
       }, error: (err: any) => {
         //this.dialog.openSnackBar({ message:'Login failed. Please try again.', title: 'Login failed'}, 'Error');

@@ -63,17 +63,11 @@
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="visiblelable">
           <a class="nav-link" routerLink="/listofwin">List of Winners</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Our Games</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Register/Login</a>
-        </li> -->
         <li class="nav-item">
-          <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+          <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown" *ngIf="visiblelable">
             <button type="button" class="btn me-2" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">
               My Wallet
             </button>
@@ -84,9 +78,9 @@
             </div>
           </div>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#">Referral</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" routerLink="/contact">Contact Us</a>
         </li>
@@ -97,12 +91,15 @@
         </li>
 
       </ul>
-      <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#exampleModal"  *ngIf="visiblelable">
        My Profile
       </button>
-          <button type="button" routerLink="/auth/login" class="btn btn-warning">
+          <button type="button" routerLink="/auth/login" class="btn btn-warning" *ngIf="visiblelable">
        Logout
       </button>
+      <div class="col-lg-1 col-md-1">
+        <a class="nav-link" routerLink="/auth/login" *ngIf="!visiblelable">Register/Login</a>
+      </div>
     </div>
   </div>
 </nav>
