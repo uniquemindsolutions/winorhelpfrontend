@@ -44,7 +44,7 @@ export class RegistraionComponent implements OnInit {
   }
 
   onSubmit(): void {
-   
+   alert("hiii");
     this.submitted = true;
 
     if (this.registrationForm.invalid) {
@@ -57,16 +57,21 @@ export class RegistraionComponent implements OnInit {
       
       const formValuesJson = JSON.stringify(this.registrationForm.value);
       this.authService.register(this.registrationForm.value).subscribe({
+        
         next:(res:any) => {
           if(res.status==true){
+           // alert("hiii");
             this.dialog.openSnackBar({ message:'Registration successfully completed.', title: 'Registration Done'}, 'Success');
             this.router.navigate(['/auth/login']);
           }else{
+            //alert("byee");
             this.dialog.openSnackBar({ message:'Sorry, Email id Already Exist', title: 'Registration Failed!'}, 'Error');
           }
         },
         error:(err:any) => {
-          this.dialog.openSnackBar('Sorry, Email id Already Exist', 'Error');
+          //alert("error");
+          //this.dialog.openSnackBar('Sorry, Email id Already Exist', 'Error');
+          this.dialog.openSnackBar({ message:'Sorry, Email id Already Exist.', title: 'Registration Failed!'}, 'Error');
         }
       });
     }
