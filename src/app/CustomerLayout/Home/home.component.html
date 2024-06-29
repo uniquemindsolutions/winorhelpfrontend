@@ -49,11 +49,11 @@
                             
                         </ul>
                     </div>
-                    <div class="text-center mt-4">
+                    <div class="text-center mt-4" *ngIf="visiblelable">
                         <a class="viewDetailsTxt" href="javasceipt:void(0)" (click)="viewDetails(item)">View Details </a>
                     </div>
                         
-                    <div class="text-center mt-3">
+                    <div class="text-center mt-3" *ngIf="visiblelable">
                         <button class="custom-button" (click)="roomalocate(item.roomId,item.entryFee)">
                             Click Here
                         </button>
