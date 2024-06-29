@@ -80,6 +80,15 @@
             }
         </mat-form-field>
 
+        <mat-form-field xxs appearance="outline" class="mb-2" >
+            <mat-label>Background COlor</mat-label>
+            <input matInput type="text" formControlName="bgcolor" required>
+            @if(roomForm.get('bgcolor') && roomForm.get('bgcolor')?.hasError('required')){ 
+                <mat-error>Bgcolor Fee is required</mat-error>
+            }
+           
+        </mat-form-field>
+
         <mat-form-field appearance="outline" class="mb-2" >
             <mat-label>Winning Amount</mat-label>
             <input matInput type="number" formControlName="winningAmount" required>

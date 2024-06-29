@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4" *ngFor="let item of dataSource">
-                <div class="single-ticket">
+                <div class="single-ticket" [ngStyle]="{'background': item.css}">
                     <span class="ticket-rate">Room ID:&nbsp;{{item.roomId}}</span><br>
                     <span class="win-price">Win price:&nbsp;₹{{item.winningAmount || '0.00'}}</span>
                     <span class="win-money">Entry Fee:&nbsp;₹{{item.entryFee}}</span>
