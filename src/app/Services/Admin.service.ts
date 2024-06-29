@@ -180,7 +180,7 @@ export class AdminService {
     getRoomUsersList(roomId:any) {
         return this.http.post(`${this.baseUrl}/admin/getRoomUsersListnew`, {roomId});
     }
-
+    
     winnerpecr(page:number, limit:number) {
         return this.http.get(`${this.baseUrl}/admin/roomWinnerList?page=${page}&limit=${limit}`);
     }
@@ -197,7 +197,9 @@ export class AdminService {
         return this.http.post(`${this.baseUrl}/admin/masterdataupdate`,data);
     }
 
-
+    getUserMasterDetails(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/getUserMasterDetails`, data);
+    }
 
    
 
