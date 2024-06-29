@@ -34,6 +34,7 @@ export class HomeComponent {
   walletAmount: any = 100;
   roomlistdata:any=[];
   timeRemaining:any;
+  visiblelable:boolean=false;
   constructor(public dialog: MatDialog, private muiService: MuiDialogService, private api: AdminService,
     private formBuilder: FormBuilder,
     private customeservice: CustomeServiceService,
@@ -42,8 +43,13 @@ export class HomeComponent {
   }
 
   ngOnInit() {
+
+    const userid=localStorage.getItem('user_id');
+    if(userid!=''){
+     this.visiblelable=true;
+    }
     if (localStorage.getItem('user_id') == '') {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/home']);
     }
     this.getRoomList();
     this.customeservice.getCurrentWalletAmount().subscribe({
@@ -85,31 +91,8 @@ export class HomeComponent {
           this.dataSource=res.data;
           for (let i = 0; i < this.dataSource.length; i++) {
           
-            // this.dataSource[i].push("testdata");
-            // console.log('Iteration:', this.dataSource[i]);
-           
-            // const now = new Date().getTime();
-            // console.log('Iteration:', new Date());
-    // const distance = this.dataSource[i].latter_datetime.getTime() - now;
-
-
-    // const specificDate = new Date('2024-07-05T23:01:00');
-    // const currentDate = new Date();
-
-    // const distance = this.calculateDaysDifference(specificDate, currentDate);
-    // console.log('Iteration:', distance);
-
-    //         const timerval = {
-    //           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-    //           hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-    //           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-    //           seconds: Math.floor((distance % (1000 * 60)) / 1000)
-    //         };
 
      const now = new Date().getTime();
-    // const distance = this.dataSource[i].latter_datetime.getTime() - now;
-
-    //const now = new Date(this.dataSource[i].startDate+' '+this.dataSource[i].startTime).getTime();
     const end = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
     const distance = end - now;
 
