@@ -1,5 +1,5 @@
 .area-padding {
-    padding: 100px 0px;
+    padding: 40px 0px;
 }
 .bg-color-2 {
     background: #e8faed;
@@ -38,13 +38,13 @@
 .deposite-content th {
     text-align: left;
     padding: 8px 10px 8px 30px;
-    height: 80px;
+    height: 55px;
     text-transform: uppercase;
 }
 .deposite-content td {
     text-align: left;
     padding: 8px 10px 8px 30px;
-    height: 80px;
+    height: 50px;
 }
 .deposite-table td img {
     margin-right: 15px;

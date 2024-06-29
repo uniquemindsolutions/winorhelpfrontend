@@ -51,9 +51,9 @@
   </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light"> <!--[ngClass]="{'fixed-top': isFixed}"-->
+<nav class="navbar navbar-expand-lg bg-light shadow sticky-top"> <!--[ngClass]="{'fixed-top': isFixed}"-->
   <div class="container">
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand py-0" href="#"><img src="./../../../assets/images/logo.jpeg" class="img-fluid" style="height: 70px; width: auto;" alt=""></a>
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -66,9 +66,9 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/listofwin">List of Winners</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#">Our Games</a>
-        </li>
+        </li> -->
         <!-- <li class="nav-item">
           <a class="nav-link" routerLink="/login">Register/Login</a>
         </li> -->

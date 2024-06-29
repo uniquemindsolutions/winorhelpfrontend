@@ -29,48 +29,57 @@
 }
 
 .single-ticket {
-   
     position: relative;
     display: block;
     overflow: hidden;
-   
     text-align: center;
-    background: #fff;
-    border-radius: 3px;
+    border-radius: 16px;
     transition: all 0.5s;
     border-bottom: 2px solid transparent;
-    padding: 30px;
+    padding: 40px 20px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-    margin: 15px;
+    margin: 15px 0;
+    /* background: #198754; */
+    color: white;
 }
 .ticket-rate {
     position: absolute;
     left: 0px;
-    top: 10px;
-    background: #e62e7c;
+    top: 15px;
+    background: linear-gradient(45deg, #3f51b5, #0d6efd);
     color: #fff;
     font-weight: 600;
-    font-size: 18px;
-    padding: 2px 15px;
+    font-size: 21px;
+    padding: 5px 15px;
     line-height: 26px;
     border-radius: 0px 3px 3px 0px;
+}
+.viewDetailsTxt {
+    font-size: 16px;
+    color: white;
+    text-decoration: underline!important;
+}
+.viewDetailsTxt:hover {
+    text-decoration: none!important;
 }
 .ticket-image {
     display: block;
 }
 .win-price {
     display: block;
-    font-size: 18px;
-    margin-bottom: 15px;
+    font-size: 22px;
+    margin: 15px 0 15px 0;
     text-transform: uppercase;
     font-weight: 600;
+    letter-spacing: 1px;
 }
 .win-money {
     display: block;
-    font-size: 20px;
-    margin-bottom: 15px;
+    font-size: 22px;
+    margin: 15px 0 2% 0;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 .winning-number {
     display: block;
@@ -83,16 +92,19 @@
 .winning-number li a {
     display: block;
     color: #fff;
-    background: #00438b;
-    border: 1px solid #00438b;
-    border-radius: 2px;
-    font-size: 12px;
-    font-weight: 700;
-    width: 34px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    margin: 0px 1px;
+    background: linear-gradient(45deg, #00438b, #0d6efd);
+    border: 2px solid #5796da;
+    border-radius: 5px;
+    min-width: 70px;
+    min-height: 50px;
+    justify-content: center;
+    align-items: center;
+    line-height: 25px;
+    margin: 0px 5px;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    outline: 2px solid #00438b;
+    box-shadow: 2px 2px 4px 4px #00000020;
 }
 * a{
     text-decoration: none;
@@ -103,19 +115,34 @@
     text-align: center;
 }
 .custom-button {
-    color: #ffffff;
+    color: #198754;
     border-radius: 30px;
     font-weight: 500;
     text-transform: uppercase;
-    padding: 12px 30px 10px;
-    font-size: 18px;
-    background: -webkit-linear-gradient(90deg, rgb(61, 169, 245) 0%, rgb(104, 61, 245) 100%);
-    box-shadow: -1.04px 4.891px 20px 0px rgba(69, 49, 183, 0.5);
+    padding: 8px 30px;
+    font-size: 20px;
+    background: #f3f1f1;
+    box-shadow: -1.04px 4.891px 20px 0px rgb(27 27 27 / 50%);
     font-family: "Roboto", sans-serif;
-    transition: all 0.4s;
+    border: solid 3px #ffffff;
+    outline: solid 2px #d1cfcf;
+    transition: .5s;
+}
+.custom-button:hover {
+    background-color: #333;
+    color: white;
+    transition: .5s;
 }
 @media only screen and (max-width: 767px) {
     .section-title-bg {
         display: none;
     }
+}
+.nums {
+    font-size: 20px;
+    font-weight: 600;
+}
+.strings {
+    font-size: 14px;
+    font-weight: 300;
 }
