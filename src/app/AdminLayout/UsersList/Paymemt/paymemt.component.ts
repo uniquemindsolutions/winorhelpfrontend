@@ -30,7 +30,7 @@ export class PaymemtComponent {
   ngOnInit(){
     console.log(this.data);
     
-    this.api.roomList(1, 4).subscribe({
+    this.api.roomList(1, 100).subscribe({
       next:(res:any)=>{
         if(res.status){
           this.roomList=res.data;

@@ -99,10 +99,11 @@ export class HomeComponent {
 
 
     console.log('Iteration:', this.dataSource[i]);
-    if (distance < 0) {
+    if (distance <= 0) {
       this.timeRemaining = {};
       // this.timerEnded = true;
       // this.subscription.unsubscribe();
+      //this.visiblelable=false;
     } else {
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -116,15 +117,48 @@ export class HomeComponent {
 
             console.log('Iteration:', this.dataSource[i]);
 
+                const now_valid = new Date().getTime();
+                const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                const distance_valid = end_valid - now_valid;
+
+                if(distance_valid<=0){
+                  this.dataSource[i]['visibility'] = false;
+                }else{
+                  this.dataSource[i]['visibility'] = true;
+                }
+
+              
+
+                const today =new Date().toISOString().split('T')[0];
+                
+                const future = this.dataSource[i].startDate;
+
+                if (future > today) {
+                 
+                  this.dataSource[i]['showroom'] = false;
+                  
+                } else if (future < today) {
+                 
+                  this.dataSource[i]['showroom'] = false;
+                } else {
+                  
+                  this.dataSource[i]['showroom'] = true;
+                }
+
+
             this.api.getRoomUsersList(this.dataSource[i].roomId).subscribe({
               next: (res: any) => {
-                console.log(res.users, 'resultUserlist22');
+             
                 this.dataSource[i]['winningtot'] = res.users.length*this.dataSource[i].entryFee;
+                this.masterroomUpdate(this.dataSource[i].roomId,res.users.length*this.dataSource[i].entryFee,res.users.length)
+               
               },
               error: (err: any) => {
         
               }
             })
+
+            console.log(this.dataSource, 'dataSourcenew');
             
           }
         },
@@ -210,7 +244,18 @@ export class HomeComponent {
     sessionStorage.setItem(`${environment.STORAGE_KEY}/roomDetail`, btoa(JSON.stringify(item)));
     this.router.navigate(['/timergame'], { queryParams: { id: item.roomId } });
   }
+  masterroomUpdate(roomId:any,winningAmount:any,totusers:any){
 
+    const payload={"roomId":roomId,"winningAmount":winningAmount,"totalParticipants":totusers}
+    this.api.roommasterdataupdate(payload).subscribe({
+      next: (res: any) => {
+      },
+      error: (err: any) => {
+
+      }
+    })
+      
+  }
  
 
 }

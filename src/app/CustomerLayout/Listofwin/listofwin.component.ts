@@ -33,7 +33,6 @@ export class ListofwinComponent {
       this.api.roomList(this.currentPage,this.perPage).subscribe({
         next:(res:any) => {
           console.log(res.data, 'Roomlist');
-          
           this.dataSource=res.data;
         },
         error: (err: any) => {
@@ -42,5 +41,22 @@ export class ListofwinComponent {
       })
   
     }
+
+
+    // getroomuserscount(roomId:any,entryFee:any){
+
+    //   this.api.getRoomUsersList(roomId).subscribe({
+    //     next: (res: any) => {
+       
+    //       const result= res.users.length*entryFee;
+    //       return result;
+         
+    //     },
+    //     error: (err: any) => {
+  
+    //     }
+    //   })
+    // }
+   
 
 }
