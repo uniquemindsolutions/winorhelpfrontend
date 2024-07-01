@@ -17,7 +17,6 @@
                                 <tbody><tr>
                                    
                                     <th>ROOM ID</th>
-                                    <th>WINNER ID</th>
                                     <th>Draw Date</th>
                                     <th>Entry Fee</th>
                                     <th>Total Participants</th>
@@ -26,15 +25,13 @@
                                 </tr>
                                 <tr  *ngFor="let item of dataSource">
                                     
-                                   <!-- <td><img src="assets/images/avatar.png" alt="">Ragner Lorth</td> -->
                                    <td>{{item.roomId}}</td> 
-                                   <td>{{item.winner_id}}</td> 
-                                   <td>{{item.startDate}}</td>
-                                    <td>Rs.{{item.entryFee}}</td>
-                                    <td>20</td>
+                                   <td>{{item.latter_datetime}}</td>
+                                    <td>{{item.entryFee}} </td>
+                                    <td>{{item.totalParticipants}}</td>
                                     <td>Rs.{{item.winningAmount}}</td>
-                                    <td><a href="#" [routerLink]="['/gameview']" [queryParams]="{id: item.roomId}">View Details </a></td>
-                                    <!-- <td><img src="img/icon/j.png" alt="">Red Jackpot</td> -->
+                                    <td><a href="#" [routerLink]="['/listwindetails']" [queryParams]="{id: item.roomId}">View Details </a></td>
+                              
                                 </tr>
                                 
                                 
