@@ -42,6 +42,7 @@ export class TimergameComponent {
   gameviewWinners:boolean=false;
   winnerlistfinalresult:any;
   intervalId: any;
+  filtermanuvallist:any=[];
   
   room: Room = {
     id: 1,
@@ -106,6 +107,7 @@ ngOnInit(): void {
       next: (res: any) => {
         const jsonstringfy=res.roomsInfo.winingPercentageInfo;
         console.log("roomdetails",res);
+       
         this.isLoading = false;
         if (res && res.status && res.users.length) {
           that.isLoading = false;
@@ -119,8 +121,13 @@ ngOnInit(): void {
           if(this.roomsInfo['manuval_winners']){
             let win:any[]=this.roomsInfo['manuval_winners'];
             let arrwin=this.roomsInfo['manuval_winners'].split(',')
+           
             console.log("manuvalist",arrwin);
             for (let i = 0; i < arrwin.length; i++) {
+             const filterdata =this.findUserById(arrwin[i]);
+              
+              this.filtermanuvallist.push(filterdata);
+              console.log("manuvalist",filterdata);
               this.winners.push({
                 user_id:arrwin[i],
                 username:''
@@ -129,7 +136,7 @@ ngOnInit(): void {
           
 
           }
-
+          console.log("manuvalist",this.filtermanuvallist); 
           this.totalNoOfRoundGame=0;
           if(this.roomsInfo && this.roomsInfo['winingPercentageInfo']){
               let temp:any=JSON.parse(this.roomsInfo['winingPercentageInfo']);
@@ -176,6 +183,7 @@ ngOnInit(): void {
     });
     this.room.users=this.users;
     this.changeDetectorRef.detectChanges();
+    console.log("manuvalsetlist", this.room.users)
   }
 
   startCountdown(): void {
@@ -274,13 +282,19 @@ ngOnInit(): void {
   }
 
   selectWinnerForRound(): void {
+    console.log("usersdata",this.users);
+    console.log("usersdata",this.filtermanuvallist);
+   this.room.manualWinners=this.filtermanuvallist;
     let winner: User;
-    if (this.room.manualWinners && this.room.manualWinners.length > this.room.currentRound) {
-      winner = this.room.manualWinners[this.room.currentRound];
+    if (this.room.manualWinners && this.room.manualWinners.length >= this.room.currentRound) {
+      //console.log("checkingmanuvalwinners",this.room.manualWinners);
+      winner = this.room.manualWinners[this.room.currentRound-1];
+      console.log("winnersdatadddd",winner);
     } else {
+     // console.log("checkingmanuvalwinners",this.room.manualWinners);
       winner = this.selectAutomaticWinner();
     }
-
+    console.log("this.winnerlistfinal",winner)
     if (winner) {
       
       this.room.winners.push(winner);
@@ -288,6 +302,7 @@ ngOnInit(): void {
       this.winnerlistfinal=this.room.winners;
     
     }
+    
   }
 
   selectAutomaticWinner(): User {
@@ -377,5 +392,15 @@ ngOnInit(): void {
 
   }) 
     
+  }
+
+
+  findUserById(id: any) {
+    console.log("Userdetails",id);
+    const user = this.users.find((user: any) => user.user_id === id);
+    
+    //this.filtermanuvallist.push(user)
+    return user;
+    //console.log("Userdetails22",user);
   }
 }

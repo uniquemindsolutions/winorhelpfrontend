@@ -215,6 +215,10 @@ export class AdminService {
     roommasterdataupdate(data:any) {
         return this.http.post(`${this.baseUrl}/admin/roommasterdataupdate`,data);
     }
+
+    roomListWinners(page:number, limit:number) {
+        return this.http.get(`${this.baseUrl}/admin/roomListWinners?page=${page}&limit=${limit}`);
+    }
    
 
 }
