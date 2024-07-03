@@ -1,0 +1,45 @@
+<div class="payment-history-area bg-color-2 fix area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="section-headline text-center">
+                    <h3>List of Winners</h3>
+                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p> -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="deposite-content">
+                    <div class="diposite-box">
+                        <div class="deposite-table">
+                            <table>
+                                <tbody><tr>
+                                   
+                                    <th>ROOM ID</th>
+                                    <th>Draw Date</th>
+                                    <th>Entry Fee</th>
+                                    <th>Total Participants</th>
+                                    <th>Total Winning price</th>
+                                    <th>Vied Details</th>
+                                </tr>
+                                <tr  *ngFor="let item of dataSource">
+                                    
+                                   <td>{{item.roomId}}</td> 
+                                   <td>{{item.latter_datetime}}</td>
+                                    <td>{{item.entryFee}} </td>
+                                    <td>{{item.totalParticipants}}</td>
+                                    <td>Rs.{{item.winningAmount}}</td>
+                                    <td><a href="#" [routerLink]="['/admin/winnersdatadetails']" [queryParams]="{id: item.roomId}">View Details </a></td>
+                              
+                                </tr>
+                                
+                                
+                            </tbody></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

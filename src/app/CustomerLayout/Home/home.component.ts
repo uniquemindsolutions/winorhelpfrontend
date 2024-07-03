@@ -118,7 +118,8 @@ export class HomeComponent {
             console.log('Iteration:', this.dataSource[i]);
 
                 const now_valid = new Date().getTime();
-                const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+               // const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                const end_valid = new Date(this.dataSource[i].latter_datetime).getTime();
                 const distance_valid = end_valid - now_valid;
 
                 if(distance_valid<=0){

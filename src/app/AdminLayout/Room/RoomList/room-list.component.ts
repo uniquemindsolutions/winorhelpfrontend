@@ -33,7 +33,7 @@ export interface RoomList {
   styleUrl: './room-list.component.css'
 })
 export class RoomListComponent {
-  displayedColumns: string[] = ['sno', 'roomId', 'endDate', 'entryFee', 'totalParticipants', 'winningAmount', 'action', 'viewDetails', 'manualWinner'];
+  displayedColumns: string[] = ['sno', 'roomId', 'endDate', 'entryFee', 'totalParticipants', 'winningAmount', 'action', 'viewDetails'];
   dataSource:RoomList[]=[];
   currentPage:number=1;
   perPage:number=0;
@@ -105,6 +105,6 @@ export class RoomListComponent {
   isDateValid(itemDate: string): boolean {
     const today = this.today.setHours(0, 0, 0, 0); // Set today's date to midnight to only compare the date part
     const date = new Date(itemDate).setHours(0, 0, 0, 0);
-    return date <= today;
+    return date < today;
   }
 }

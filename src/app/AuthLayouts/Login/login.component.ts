@@ -52,7 +52,7 @@ export class LoginComponent {
         next: (res: any) => {
           if(res && res.status){
             console.log(res,"userID");
-            localStorage.setItem("user_id",res.data.id);
+            localStorage.setItem("user_id",res.data.uniq_id);
             this.dialog.openSnackBar({ message:'Login successfully completed.', title: 'Login Done'}, 'Success');
             localStorage.setItem("loginsession","true");
             if(this.login.value.email=='admin@gmail.com'){

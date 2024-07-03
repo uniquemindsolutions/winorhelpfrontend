@@ -35,6 +35,8 @@ export class RoomCreateComponent {
       lotteryTime: ['', [Validators.required]],
       winingPercentageInfo: this.fb.array([]),
       bgcolor: ['', [Validators.required]],
+      // manuval_winners: ['', [Validators.required]],
+      
       
     });
     this.addItem(null);
@@ -58,6 +60,7 @@ export class RoomCreateComponent {
 
   onSubmit() {
     if (this.roomForm.valid) {
+      //console.log("roomcreatedpayload",date(this.roomForm.value.startDate));
       this.api.createRoom(this.roomForm.value).subscribe({
         next: (any) => {
           this.muiDialog.openSnackBar({ title: 'Success!', message: 'Room Created Successfully' }, 'Success')

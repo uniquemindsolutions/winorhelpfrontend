@@ -46,7 +46,7 @@ export class PaymemtComponent {
     console.log(this.data.item,'this.data', this.data.item);
 
     const objData={
-      userId:this.data.item?.id,
+      userId:this.data.item?.uniq_id,
       roomId:this.roomId.value,
       startDate:'',
       endDate:"",
@@ -85,7 +85,7 @@ export class PaymemtComponent {
     console.log(this.data.item,'this.data', this.data.item);
     if(this.transationAmount.valid){
       const objData={
-        userId:this.data.item?.id,
+        userId:this.data.item?.uniq_id,
         amount:this.transationAmount.value
       }
 
