@@ -5,10 +5,15 @@
         <div class="card-header">
           <h3 class="mb-1">{{ roomInfo.roomId}}</h3>
         </div>
-        <div class="card-body">
+        <div class="card-header">
+          <h3 class="mb-1"><b>Fund Allocation Date:</b>{{ roomInfo.latter_datetime }}</h3>
+        
+        </div>
+        <div class="card-body" >
           <div class="room-container">
             <div class="room">
 
+              <div *ngIf="gameview">
               <div *ngIf="room.timeRemaining">
                 <p>Countdown Timer: {{ room.timeRemaining.days }}d {{ room.timeRemaining.hours }}h {{
                   room.timeRemaining.minutes
@@ -30,28 +35,87 @@
                 </div>
               </div>
               }
+            </div>
 
-              <ol>
-                @for(user of room.winners; track user; let i=$index){
-                <li>
-                  <b>#Round {{i + 1}}</b>
-                  <h4 style="display: flex;align-items: center;">
 
-                    <span style="min-width: 350px; font-size: 16px;">
-                      {{ user.username }}  &nbsp;&nbsp;&nbsp;&nbsp;Winning Amount
-                      {{((winningamount * percentagearray[i].winAmountPer) / 100)-(((winningamount *
-                      percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100) }}</span>
-                    <span style="font-size: 14px; color: brown;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Winner {{ i + 1 }}</span>
-                  </h4>
-                </li>
-                }
-                @for(user of room.users; track user){
-                <li>{{user.username}}</li>
-                }
-              </ol>
+              <div *ngIf="!gameviewWinners ">
+                <table class="table table-bordered" >
+                  <thead bg-color="red"  class="thead-dark sticky-header">
+                   
+                    <tr>
+                      <!-- <th scope="col">ID</th> -->
+                      <th scope="col">Username</th>
+                      <th scope="col">Winning Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+          
+                    <tr *ngFor="let item of room.winners;let i=index">
+                      <!-- <td>{{i+1}}</td> -->
+                      <td>{{ item.username }}</td>
+                      <td> {{((winningamount * percentagearray[i].winAmountPer) / 100)-(((winningamount *
+                        percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100) }}</td>
+                    </tr>
+                    <tr *ngFor="let item of room.users;let i=index">
+                      <!-- <td>{{i+1}}</td> -->
+                      <td>{{ item.username }}</td>
+                      <td> </td>
+                    </tr>
+          
+                  </tbody>
+          
+                </table>
+              </div>
+
             </div>
           </div>
         </div>
+        <!-- <div>
+          <ol>
+            @for(user of room.users; track user){
+              <li>{{user.username}} </li>
+                   
+              }
+          </ol>
+        </div> -->
+
+        <!-- {{gameviewWinners}} -->
+        
+        <div class="card-body" *ngIf="gameviewWinners">
+          
+          <div>
+            <div><b>Winners Data</b></div>
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+              <table class="table table-bordered" >
+                <thead bg-color="red"  class="thead-dark sticky-header">
+                 
+                  <tr>
+                    <th scope="col">ID</th>
+                    <!-- <th scope="col">ROOM ID</th> -->
+                    <th scope="col">USERID</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Winning Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+             
+                  <tr *ngFor="let winitem of winnerlistfinalresult;let i=index">
+                    <td>{{i+1}}</td>
+                    <!-- <td>{{ winitem.room_id  }}</td> -->
+                    <td>{{ winitem.user_id }}</td>
+                    <td>{{ winitem.username }}</td>
+                    <td>{{ winitem.tot_amount_send	 }}</td>
+                    <!-- <td> {{((winningamount * percentagearray[i].winAmountPer) / 100)-(((winningamount *
+                      percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100) }}</td> -->
+                  </tr>
+
+                </tbody>
+        
+              </table>
+            </div>
+
+          </div>
+          </div>
       </div>
     </div>
   </div>

@@ -1,18 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink, RouterModule } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 import { Room, User } from '../room.model';
 import { environment } from '../../../environments/environment';
 import { AdminService } from '../../Services/Admin.service';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
   selector: 'app-timergame',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, CommonModule, HttpClientModule],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule, HttpClientModule,
+    MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatCardModule,FormsModule,
+  ],
   providers:[AdminService],
   templateUrl: './timergame.component.html',
   styleUrl: './timergame.component.css'
@@ -31,6 +37,12 @@ export class TimergameComponent {
   isRoundComplited:boolean=false;
   percentagearray:any;
   winningamount:any;
+  winnerlistfinal:any=[];
+  gameview:boolean=false;
+  gameviewWinners:boolean=false;
+  winnerlistfinalresult:any;
+  intervalId: any;
+  filtermanuvallist:any=[];
   
   room: Room = {
     id: 1,
@@ -52,9 +64,36 @@ export class TimergameComponent {
 
 ngOnInit(): void {
  
-    this.getRoomUsersList();
+    
+    // console.log("roomsInfointial",this.roomsInfo);
+    // console.log("userwinning",this.users);        
+    this.getwinnersdata();
 
-    console.log("roomsInfo",this.roomsInfo);
+    this.checkingEntitlements();
+
+    this.intervalId = setInterval(() => {
+      if(this.gameview===true){
+        clearInterval(this.intervalId);
+      }else{
+        this.checkingEntitlements();
+      }
+    }, 10000);
+   
+  
+  }
+
+  checkingEntitlements(){
+    setTimeout(() => {
+      console.log("winnerlistfinalresult",this.winnerlistfinalresult);  
+      if(this.winnerlistfinalresult?.length>0){
+        //alert("Hii");
+        this.gameview=false;
+        this.gameviewWinners=true;
+      }else{
+       // alert("byee");
+        this.getRoomUsersList();
+      }
+      },2000)
   }
 
   splitStringToArray(input: string): string[] {
@@ -68,6 +107,7 @@ ngOnInit(): void {
       next: (res: any) => {
         const jsonstringfy=res.roomsInfo.winingPercentageInfo;
         console.log("roomdetails",res);
+       
         this.isLoading = false;
         if (res && res.status && res.users.length) {
           that.isLoading = false;
@@ -81,8 +121,13 @@ ngOnInit(): void {
           if(this.roomsInfo['manuval_winners']){
             let win:any[]=this.roomsInfo['manuval_winners'];
             let arrwin=this.roomsInfo['manuval_winners'].split(',')
+           
             console.log("manuvalist",arrwin);
             for (let i = 0; i < arrwin.length; i++) {
+             const filterdata =this.findUserById(arrwin[i]);
+              
+              this.filtermanuvallist.push(filterdata);
+              console.log("manuvalist",filterdata);
               this.winners.push({
                 user_id:arrwin[i],
                 username:''
@@ -91,7 +136,7 @@ ngOnInit(): void {
           
 
           }
-
+          console.log("manuvalist",this.filtermanuvallist); 
           this.totalNoOfRoundGame=0;
           if(this.roomsInfo && this.roomsInfo['winingPercentageInfo']){
               let temp:any=JSON.parse(this.roomsInfo['winingPercentageInfo']);
@@ -106,6 +151,7 @@ ngOnInit(): void {
             const distance = end - now;
             console.log("roomsInfo",distance);
             if(distance<=0){
+              this.gameview=true;
               this.startCountdown();
               this.startScrolling();
             }
@@ -137,6 +183,7 @@ ngOnInit(): void {
     });
     this.room.users=this.users;
     this.changeDetectorRef.detectChanges();
+    console.log("manuvalsetlist", this.room.users)
   }
 
   startCountdown(): void {
@@ -164,6 +211,18 @@ ngOnInit(): void {
         this.isRoundComplited=true;
         if (this.countdownSubscription) {
           this.countdownSubscription.unsubscribe(); // Properly unsubscribe from the interval
+          console.log("enduser","test");
+          setTimeout(() => {
+          this.submitWinners(this.winnerlistfinal);
+          this.gameview=false;
+          this.gameviewWinners=true;
+          },6000);
+
+          setTimeout(() => {
+            this.getwinnersdata();
+            },7000)
+
+
         }
       }
     });
@@ -223,17 +282,27 @@ ngOnInit(): void {
   }
 
   selectWinnerForRound(): void {
+    console.log("usersdata",this.users);
+    console.log("usersdata",this.filtermanuvallist);
+   this.room.manualWinners=this.filtermanuvallist;
     let winner: User;
-    if (this.room.manualWinners && this.room.manualWinners.length > this.room.currentRound) {
-      winner = this.room.manualWinners[this.room.currentRound];
+    if (this.room.manualWinners && this.room.manualWinners.length >= this.room.currentRound) {
+      //console.log("checkingmanuvalwinners",this.room.manualWinners);
+      winner = this.room.manualWinners[this.room.currentRound-1];
+      console.log("winnersdatadddd",winner);
     } else {
+     // console.log("checkingmanuvalwinners",this.room.manualWinners);
       winner = this.selectAutomaticWinner();
     }
-
+    console.log("this.winnerlistfinal",winner)
     if (winner) {
+      
       this.room.winners.push(winner);
       this.room.scrolling = false;
+      this.winnerlistfinal=this.room.winners;
+    
     }
+    
   }
 
   selectAutomaticWinner(): User {
@@ -275,5 +344,63 @@ ngOnInit(): void {
 
   getNextUserIndex(index: number): number {
     return (index + 1) % this.room.users.length;
+  }
+
+  submitWinners(winnersdata:any){
+   
+    
+
+    winnersdata.forEach((item:any, index:any) => {
+     //console.log("winnersfinaldata",item);
+     const amounttobepaid=((this.winningamount * this.percentagearray[index].winAmountPer) / 100)-(((this.winningamount *
+      this.percentagearray[index].winAmountPer) / 100)*this.percentagearray[index].deductAmountPer/100);
+      const payload={
+        "room_id":item.room_id,
+        "user_id":item.user_id,
+        "username":item.username,
+        "winner_orderid":index+1,
+        "tot_amount_send":amounttobepaid
+      }
+      // console.log("winnersfinaldata",payload);
+
+
+      this.api.submitWinners(payload).subscribe({
+      });
+
+
+
+    });
+   // this.getwinnersdata();
+    
+  }
+
+  getwinnersdata(){
+
+    
+    const getpayload={"room_id":this.roomInfo.roomId}
+
+
+    this.api.getsubmitWinners(getpayload).subscribe({
+      next: (res: any) => {
+    console.log("winnersfinaldata",res);
+    
+    this.winnerlistfinalresult=res.data;
+    console.log("winnerlistfinalresult",this.winnerlistfinalresult);  
+      }, error: (err: any) => {
+        //this.dialog.openSnackBar({ message:'Login failed. Please try again.', title: 'Login failed'}, 'Error');
+      }
+
+  }) 
+    
+  }
+
+
+  findUserById(id: any) {
+    console.log("Userdetails",id);
+    const user = this.users.find((user: any) => user.user_id === id);
+    
+    //this.filtermanuvallist.push(user)
+    return user;
+    //console.log("Userdetails22",user);
   }
 }

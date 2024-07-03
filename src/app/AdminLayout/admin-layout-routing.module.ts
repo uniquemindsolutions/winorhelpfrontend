@@ -9,6 +9,8 @@ import { TermscondComponent } from './termscond/termscond.component';
 import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 import { WinnerpercentageComponent } from './winnerpercentage/winnerpercentage.component';
 import { MastervalueComponent } from './mastervalue/mastervalue.component';
+import { WinnersdataComponent } from './winnersdata/winnersdata.component';
+import { WinnersdataDetailComponent } from './winnersdata-detail/winnersdata-detail.component';
 
 const routes: Routes = [
 { path: '', redirectTo: '/admin/dashboard', pathMatch: 'full' },
@@ -24,6 +26,8 @@ const routes: Routes = [
       { path: 'privacy-policy', component: PrivacypolicyComponent },
       { path: 'winnerper', component: WinnerpercentageComponent },
       { path: 'masterdata', component: MastervalueComponent },
+      { path: 'winnersdata', component: WinnersdataComponent },
+      { path: 'winnersdatadetails', component: WinnersdataDetailComponent },
 
       // { path: 'dashboard', loadChildren: () => import('./Dashboard/dashboard.component').then(m => m.DashboardComponent) },
       // { path: 'user-list', loadChildren: () => import('./UsersList/users-list.component').then(m => m.UsersListComponent) },

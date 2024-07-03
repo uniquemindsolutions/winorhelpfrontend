@@ -85,6 +85,15 @@ export class AdminLayout implements OnInit {
         visibility: true
       },
 
+      {
+        id: 5,
+        displayName: 'Winners Data',
+        link: '/admin/winnersdata',
+        iconType: 'png',
+        icon: 'dot',
+        visibility: true
+      },
+
       // {
       //   id: 3,
       //   displayName: 'Winner List Calculation',

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AdminService } from '../../Services/Admin.service';
 import MuiDialogService from '../../Services/MuiDialog.service';
@@ -7,18 +6,19 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-listofwin',
+  selector: 'app-winnersdata',
   standalone: true,
   imports: [MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatCardModule,CommonModule],
   providers: [
     AdminService // Register the service here
   ],
-  templateUrl: './listofwin.component.html',
-  styleUrl: './listofwin.component.css'
+  templateUrl: './winnersdata.component.html',
+  styleUrl: './winnersdata.component.css'
 })
-export class ListofwinComponent {
+export class WinnersdataComponent {
   displayedColumns: string[] = ['sno', 'roomId', 'date', 'entryFee', 'totalParticipants', 'winningAmount', 'action', 'viewDetails'];
   dataSource:any=[];
   currentPage:number=1;

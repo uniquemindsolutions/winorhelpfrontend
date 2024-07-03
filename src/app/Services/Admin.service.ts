@@ -93,6 +93,9 @@ export class AdminService {
     roomList(page:number, limit:number) {
         return this.http.get(`${this.baseUrl}/admin/roomList?page=${page}&limit=${limit}`);
     }
+    adminroomList(page:number, limit:number) {
+        return this.http.get(`${this.baseUrl}/admin/adminroomList?page=${page}&limit=${limit}`);
+    }
 
     usersList(page:number, limit:number) {
         console.log("baseurlchecking",this.baseUrl);
@@ -201,6 +204,21 @@ export class AdminService {
         return this.http.post(`${this.baseUrl}/admin/getUserMasterDetails`, data);
     }
 
+    submitWinners(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/submitWinners`, data);
+    }
+    getsubmitWinners(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/getsubmitWinners`, data);
+    }
+
+
+    roommasterdataupdate(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/roommasterdataupdate`,data);
+    }
+
+    roomListWinners(page:number, limit:number) {
+        return this.http.get(`${this.baseUrl}/admin/roomListWinners?page=${page}&limit=${limit}`);
+    }
    
 
 }

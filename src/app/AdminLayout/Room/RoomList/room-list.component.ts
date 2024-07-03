@@ -33,10 +33,11 @@ export interface RoomList {
   styleUrl: './room-list.component.css'
 })
 export class RoomListComponent {
-  displayedColumns: string[] = ['sno', 'roomId', 'endDate', 'entryFee', 'totalParticipants', 'winningAmount', 'action', 'viewDetails', 'manualWinner'];
+  displayedColumns: string[] = ['sno', 'roomId', 'endDate', 'entryFee', 'totalParticipants', 'winningAmount', 'action', 'viewDetails'];
   dataSource:RoomList[]=[];
   currentPage:number=1;
   perPage:number=0;
+  today: Date = new Date();
   constructor(public dialog: MatDialog, private api:AdminService, private muiService:MuiDialogService) {
   }
 
@@ -45,7 +46,7 @@ export class RoomListComponent {
  }
 
   gerRoomList(){
-    this.api.roomList(this.currentPage,this.perPage).subscribe({
+    this.api.adminroomList(this.currentPage,this.perPage).subscribe({
       next:(res:any) => {
         console.log(res.data, 'res.data;');
         this.dataSource=res.data;
@@ -99,5 +100,11 @@ export class RoomListComponent {
     const adjustedHours = hours % 12 || 12; // Adjust hours
     const adjustedMinutes = minutes < 10 ? `0${minutes}` : minutes; // Adjust minutes
     return `${adjustedHours}:${adjustedMinutes} ${ampm}`;
+  }
+
+  isDateValid(itemDate: string): boolean {
+    const today = this.today.setHours(0, 0, 0, 0); // Set today's date to midnight to only compare the date part
+    const date = new Date(itemDate).setHours(0, 0, 0, 0);
+    return date < today;
   }
 }
