@@ -1,6 +1,8 @@
 export interface User {
     id: number;
     username: string;
+    user_id:string;
+    room_id:string;
   }
 
   export interface Room {
