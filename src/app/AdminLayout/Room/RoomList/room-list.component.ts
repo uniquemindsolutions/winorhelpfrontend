@@ -41,6 +41,8 @@ export class RoomListComponent {
   constructor(public dialog: MatDialog, private api:AdminService, private muiService:MuiDialogService) {
   }
 
+  
+
  ngOnInit(){
   this.gerRoomList();
  }

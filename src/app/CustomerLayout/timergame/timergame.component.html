@@ -4,10 +4,15 @@
       <div class="card">
         <div class="card-header">
           <h3 class="mb-1">{{ roomInfo.roomId}}</h3>
+          <table>
+            <tr><td>Entry Amount</td> <td></td></tr>
+            <tr><td>Total Fund Amount</td> <td></td></tr>
+            <tr><td>No of Winners</td> <td></td></tr>
+          </table>
         </div>
         <div class="card-header">
           <h3 class="mb-1"><b>Fund Allocation Date:</b>{{ roomInfo.latter_datetime }}</h3>
-        
+       
         </div>
         <div class="card-body" >
           <div class="room-container">
@@ -45,6 +50,7 @@
                     <tr>
                       <!-- <th scope="col">ID</th> -->
                       <th scope="col">Username</th>
+                      <th scope="col">User ID</th>
                       <th scope="col">Winning Amount</th>
                     </tr>
                   </thead>
@@ -53,12 +59,15 @@
                     <tr *ngFor="let item of room.winners;let i=index">
                       <!-- <td>{{i+1}}</td> -->
                       <td>{{ item.username }}</td>
+                      <td>{{ item.user_id }}</td>
                       <td> {{((winningamount * percentagearray[i].winAmountPer) / 100)-(((winningamount *
                         percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100) }}</td>
                     </tr>
                     <tr *ngFor="let item of room.users;let i=index">
                       <!-- <td>{{i+1}}</td> -->
+                      <!-- {{item.user_id }} -->
                       <td>{{ item.username }}</td>
+                      <td>{{ item.user_id }}</td>
                       <td> </td>
                     </tr>
           
