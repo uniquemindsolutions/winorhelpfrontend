@@ -219,6 +219,10 @@ export class AdminService {
     roomListWinners(page:number, limit:number) {
         return this.http.get(`${this.baseUrl}/admin/roomListWinners?page=${page}&limit=${limit}`);
     }
+
+    deleteRoom(id:number) {
+        return this.http.post(`${this.baseUrl}/admin/deleteroom`,{id});
+    }
    
 
 }
