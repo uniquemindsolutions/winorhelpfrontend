@@ -183,7 +183,7 @@ ngOnInit(): void {
     });
     this.room.users=this.users;
     this.changeDetectorRef.detectChanges();
-    console.log("manuvalsetlist", this.room.users)
+    console.log("displayusers", this.room.users)
   }
 
   startCountdown(): void {

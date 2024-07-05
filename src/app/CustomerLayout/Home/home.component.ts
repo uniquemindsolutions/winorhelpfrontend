@@ -136,7 +136,7 @@ export class HomeComponent {
 
                 if (future > today) {
                  
-                  this.dataSource[i]['showroom'] = false;
+                  this.dataSource[i]['showroom'] = true;
                   
                 } else if (future < today) {
                  

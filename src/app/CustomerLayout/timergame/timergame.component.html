@@ -4,10 +4,15 @@
       <div class="card">
         <div class="card-header">
           <h3 class="mb-1">{{ roomInfo.roomId}}</h3>
+          <table>
+            <tr><td><b>Entry Amount:</b></td> <td>{{ roomInfo.entryFee}}</td></tr>
+            <tr><td><b>Total Fund Amount:</b></td> <td>{{ roomInfo.entryFee *  room.users.length}}</td></tr>
+            <tr><td><b>No of Winners:</b></td> <td>{{ room.users.length}}</td></tr>
+          </table>
         </div>
         <div class="card-header">
           <h3 class="mb-1"><b>Fund Allocation Date:</b>{{ roomInfo.latter_datetime }}</h3>
-        
+       
         </div>
         <div class="card-body" >
           <div class="room-container">
@@ -29,7 +34,7 @@
                       [class.previous]="i === getPreviousUserIndex(currentScrollingUserIndex)"
                       [class.current]="i === currentScrollingUserIndex"
                       [class.next]="i === getNextUserIndex(currentScrollingUserIndex)">
-                      {{ user.username }}
+                      {{ user.user_id }}
                     </li>
                   </ul>
                 </div>
@@ -45,6 +50,7 @@
                     <tr>
                       <!-- <th scope="col">ID</th> -->
                       <th scope="col">Username</th>
+                      <th scope="col">User ID</th>
                       <th scope="col">Winning Amount</th>
                     </tr>
                   </thead>
@@ -53,12 +59,15 @@
                     <tr *ngFor="let item of room.winners;let i=index">
                       <!-- <td>{{i+1}}</td> -->
                       <td>{{ item.username }}</td>
+                      <td>{{ item.user_id }}</td>
                       <td> {{((winningamount * percentagearray[i].winAmountPer) / 100)-(((winningamount *
                         percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100) }}</td>
                     </tr>
                     <tr *ngFor="let item of room.users;let i=index">
                       <!-- <td>{{i+1}}</td> -->
+                      <!-- {{item.user_id }} -->
                       <td>{{ item.username }}</td>
+                      <td>{{ item.user_id }}</td>
                       <td> </td>
                     </tr>
           

@@ -41,6 +41,8 @@ export class RoomListComponent {
   constructor(public dialog: MatDialog, private api:AdminService, private muiService:MuiDialogService) {
   }
 
+  
+
  ngOnInit(){
   this.gerRoomList();
  }
@@ -76,6 +78,21 @@ export class RoomListComponent {
 
   onDelete(e1:any,e2:any){
     // this.dialog.
+
+    console.log(e1.id,"---",e2,"delete");
+
+    this.api.deleteRoom(e1.id).subscribe({
+      next:(res:any) => {
+        console.log(res.data, 'res.data;');
+        if(res.status){
+          // this.dataSource[index]['isActive']=isActive;
+        }
+      },
+      error: (err: any) => {
+
+      }
+    })
+    this.gerRoomList();
   }
 
   openDialog() {
