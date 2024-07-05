@@ -5,9 +5,9 @@
         <div class="card-header">
           <h3 class="mb-1">{{ roomInfo.roomId}}</h3>
           <table>
-            <tr><td>Entry Amount</td> <td></td></tr>
-            <tr><td>Total Fund Amount</td> <td></td></tr>
-            <tr><td>No of Winners</td> <td></td></tr>
+            <tr><td><b>Entry Amount:</b></td> <td>{{ roomInfo.entryFee}}</td></tr>
+            <tr><td><b>Total Fund Amount:</b></td> <td>{{ roomInfo.entryFee *  room.users.length}}</td></tr>
+            <tr><td><b>No of Winners:</b></td> <td>{{ room.users.length}}</td></tr>
           </table>
         </div>
         <div class="card-header">
@@ -34,7 +34,7 @@
                       [class.previous]="i === getPreviousUserIndex(currentScrollingUserIndex)"
                       [class.current]="i === currentScrollingUserIndex"
                       [class.next]="i === getNextUserIndex(currentScrollingUserIndex)">
-                      {{ user.username }}
+                      {{ user.user_id }}
                     </li>
                   </ul>
                 </div>
