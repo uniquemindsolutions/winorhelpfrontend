@@ -18,6 +18,7 @@ export class LoginComponent {
 
   login!: FormGroup;
   submitted = false;
+  private token: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,16 +52,19 @@ export class LoginComponent {
       this.authService.login(this.login.value).subscribe({
         next: (res: any) => {
           if(res && res.status){
-            console.log(res,"userID");
+            console.log(res.token,"userID");
             localStorage.setItem("user_id",res.data.uniq_id);
             this.dialog.openSnackBar({ message:'Login successfully completed.', title: 'Login Done'}, 'Success');
             localStorage.setItem("loginsession","true");
+
+           this.setToken(res.token)
+
+
             if(this.login.value.email=='admin@gmail.com'){
               this.router.navigate(['/admin']);
             }else{
               this.router.navigate(['/home']);
             }
-           
             this.authService.markUnTouchedAndReset(this.login);
           }else{
             this.dialog.openSnackBar({ message:'Login failed. Please try again.', title: 'Login failed'}, 'Error');
@@ -72,6 +76,19 @@ export class LoginComponent {
     } else {
      this.authService.markFormGroupTouched(this.login);
     }
+  }
+
+
+  setToken(token: string) {
+    this.token = token;
+    localStorage.setItem('token', token);
+  }
+
+  getToken(): string | null {
+    if (!this.token) {
+      this.token = localStorage.getItem('token');
+    }
+    return this.token;
   }
 
 }

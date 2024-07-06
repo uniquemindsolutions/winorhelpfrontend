@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable ,afterNextRender} from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from './../../environments/environment';
@@ -88,20 +88,27 @@ export class CustomeServiceService {
         return this.router.url;
     }
 
+    getAuthHeaders() {
+        const token = localStorage.getItem('token');
+        return new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        });
+      }
+
     getTransList() {
         const userid=localStorage.getItem('user_id');
-        return this.http.get(`${this.baseUrl}/Wallettoperation/users_getwallet?page=1&limit=50&user_id=`+userid);
+        return this.http.get(`${this.baseUrl}/Wallettoperation/users_getwallet?page=1&limit=50&user_id=`+userid,{ headers: this.getAuthHeaders() });
     }
     debitWalletamount(data:any) {
-      return this.http.post(`${this.baseUrl}/Wallettoperation/walletwithdraw`,data);
+      return this.http.post(`${this.baseUrl}/Wallettoperation/walletwithdraw`,data,{ headers: this.getAuthHeaders() });
   }
 
   roomuserlistInsert(data:any) {
-    return this.http.post(`${this.baseUrl}/Wallettoperation/roomuserlistInsert`,data);
+    return this.http.post(`${this.baseUrl}/Wallettoperation/roomuserlistInsert`,data,{ headers: this.getAuthHeaders() });
 }
 
 getCurrentWalletAmount() {
-    return this.http.get(`${this.baseUrl}/Wallettoperation/getCurrentAmount?user_id=`+localStorage.getItem('user_id'));
+    return this.http.get(`${this.baseUrl}/Wallettoperation/getCurrentAmount?user_id=`+localStorage.getItem('user_id'),{ headers: this.getAuthHeaders() });
 }
 
 

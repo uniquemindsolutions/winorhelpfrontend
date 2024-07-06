@@ -170,9 +170,10 @@ export class AdminLayout implements OnInit {
   }
 
   logout() {
-    this.router.navigateByUrl("/login");
     localStorage.clear();
     sessionStorage.clear();
+    this.router.navigateByUrl("/login");
+    
   }
 
   onSizeChange(event: any) {
