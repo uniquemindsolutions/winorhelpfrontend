@@ -12,30 +12,31 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="deposite-content">
                     <div class="diposite-box">
-                        <div class="deposite-table">
+                        <div class="deposite-table table-responsive">
                             <table>
-                                <tbody><tr>
-                                   
-                                    <th>ROOM ID</th>
-                                    <th>Draw Date</th>
-                                    <th>Entry Fee</th>
-                                    <th>Total Participants</th>
-                                    <th>Total Winning price</th>
-                                    <th>Vied Details</th>
-                                </tr>
-                                <tr  *ngFor="let item of dataSource">
-                                    
-                                   <td>{{item.roomId}}</td> 
-                                   <td>{{item.latter_datetime}}</td>
-                                    <td>{{item.entryFee}} </td>
-                                    <td>{{item.totalParticipants}}</td>
-                                    <td>Rs.{{item.winningAmount}}</td>
-                                    <td><a href="#" [routerLink]="['/listwindetails']" [queryParams]="{id: item.roomId}">View Details </a></td>
-                              
-                                </tr>
-                                
-                                
-                            </tbody></table>
+                                <tbody>
+                                    <tr>
+
+                                        <th>ROOM ID</th>
+                                        <th>Draw Date</th>
+                                        <th>Entry Fee</th>
+                                        <th>Total Participants</th>
+                                        <th>Total Winning price</th>
+                                        <th>Vied Details</th>
+                                    </tr>
+                                    <tr *ngFor="let item of dataSource">
+
+                                        <td>{{item.roomId}}</td>
+                                        <td>{{item.latter_datetime}}</td>
+                                        <td>{{item.entryFee}} </td>
+                                        <td>{{item.totalParticipants}}</td>
+                                        <td>Rs.{{item.winningAmount}}</td>
+                                        <td><a href="#" [routerLink]="['/listwindetails']"
+                                                [queryParams]="{id: item.roomId}">View Details </a></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

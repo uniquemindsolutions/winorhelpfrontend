@@ -2,16 +2,16 @@
   <div class="row">
     <div class="col-6">
       <ol class="breadcrumb">
-        <li class="active p-0">User List</li>
+        <li class="active p-0 fs-5">User List</li>
       </ol>
     </div>
-    <div class="col-6 text-end">
+    <div class="col-6 text-end my-2">
       <button (click)="addUsers()" style="border-radius: 100px; margin-top: 9px;" sm mat-flat-button color="primary"><span
           style="font-size: 18px;">+</span>&nbsp;Create User</button>
     </div>
   </div>
   <div class="row">
-    <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="col-12 col-md-12 col-lg-12 col-xl-12 table-responsive">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z1" style="max-height: 200px; overflow-y: auto;" >
         <ng-container matColumnDef="sno">
           <th mat-header-cell *matHeaderCellDef>S.NO.</th>
