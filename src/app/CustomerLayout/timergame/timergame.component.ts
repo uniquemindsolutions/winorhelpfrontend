@@ -71,13 +71,13 @@ ngOnInit(): void {
 
     this.checkingEntitlements();
 
-    this.intervalId = setInterval(() => {
-      if(this.gameview===true){
-        clearInterval(this.intervalId);
-      }else{
-        this.checkingEntitlements();
-      }
-    }, 10000);
+    // this.intervalId = setInterval(() => {
+    //   if(this.gameview===true){
+    //     clearInterval(this.intervalId);
+    //   }else{
+    //     this.checkingEntitlements();
+    //   }
+    // }, 10000);
    
   
   }

@@ -53,9 +53,9 @@
 
 
 
-<nav class="navbar navbar-expand-lg bg-light shadow sticky-top"  style="flex-basis: none;"> <!--[ngClass]="{'fixed-top': isFixed}"-->
+<nav class="navbar navbar-expand-lg text-whte shadow sticky-top"  style="flex-basis: none;"> <!--[ngClass]="{'fixed-top': isFixed}"-->
   <div class="container">
-    <a class="navbar-brand py-0" href="#"><img src="./../../../assets/images/logo.jpeg" class="img-fluid" style="height: 70px; width: auto;" alt=""></a>
+    <a class="navbar-brand py-0 text-white fs-2 fw-bold" href="#">Fund for Need</a>
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -124,26 +124,26 @@
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content mt-lg-5">
       <div class="modal-header bg-primary text-white">
         <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body py-5">
+      <div class="modal-body bg-light py-4 table-responsive">
 
         <table class="table table-borderless">
-           <tbody>
+           <tbody class=" py-3">
             <tr>
-              <td>User Name</td>
-              <td>: <b>{{userDetails.username}} </b></td>
+              <td class="fw-bold">User Name</td>
+              <td class="text-primary">: <b>{{userDetails.username}} </b></td>
             </tr>
             <tr>
-              <td>Wallet Amount</td>
-              <td>: ₹ <b>{{userDetails.wallet_amount}}</b></td>
+              <td class="fw-bold">Wallet Amount</td>
+              <td>: <span class="text-dark fw-bold"> ₹</span> <b class="text-primary">{{userDetails.wallet_amount}}</b></td>
             </tr>
             <tr>
-              <td>Email</td>
-              <td>: <b>{{userDetails.email}}</b></td>
+              <td class="fw-bold">Email</td>
+              <td class="text-primary">: <b>{{userDetails.email}}</b></td>
             </tr>
           </tbody>
         </table>

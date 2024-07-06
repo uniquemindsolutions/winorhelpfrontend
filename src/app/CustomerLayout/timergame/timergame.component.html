@@ -1,17 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3 mt-5">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="mb-1">{{ roomInfo.roomId}}</h3>
+      <div class="card bg-black text-white">
+        <div class="card-header border">
+          <h3 class="mb-1 text-warning">{{ roomInfo.roomId}}</h3>
+          <hr>
           <table>
-            <tr><td><b>Entry Amount:</b></td> <td>{{ roomInfo.entryFee}}</td></tr>
-            <tr><td><b>Total Fund Amount:</b></td> <td>{{ roomInfo.entryFee *  room.users.length}}</td></tr>
-            <tr><td><b>No of Winners:</b></td> <td>{{ room.users.length}}</td></tr>
+            <tr><td><b>Entry Amount:</b> </td> <td> <span class="fs-5 text-info"> {{ roomInfo.entryFee}}</span></td></tr>
+            <tr><td><b>Total Fund Amount: </b></td> <td> <span class="fs-5 text-info"> {{ roomInfo.entryFee *  room.users.length}}</span></td></tr>
+            <tr><td><b>No of Winners:</b> </td> <td> <span class="fs-5 text-info"> {{ room.users.length}}</span></td></tr>
           </table>
         </div>
         <div class="card-header">
-          <h3 class="mb-1"><b>Fund Allocation Date:</b>{{ roomInfo.latter_datetime }}</h3>
+          <h4 class="mb-0 text-primary"><b>Fund Allocation Date:</b>{{ roomInfo.latter_datetime }}</h4>
        
         </div>
         <div class="card-body" >
@@ -43,24 +44,24 @@
             </div>
 
 
-              <div *ngIf="!gameviewWinners ">
-                <table class="table table-bordered" >
-                  <thead bg-color="red"  class="thead-dark sticky-header">
+              <div *ngIf="!gameviewWinners FundAllocation table-responsive">
+                <table class="table table-bordered table-striped table-hover" >
+                  <thead class="thead-dark sticky-header">
                    
-                    <tr>
+                    <tr style="background-color: #2c2c9c;color:white">
                       <!-- <th scope="col">ID</th> -->
                       <th scope="col">Username</th>
                       <th scope="col">User ID</th>
-                      <th scope="col">Winning Amount</th>
+                      <th scope="col">Winning Amount</th> 
                     </tr>
                   </thead>
                   <tbody>
           
                     <tr *ngFor="let item of room.winners;let i=index">
                       <!-- <td>{{i+1}}</td> -->
-                      <td>{{ item.username }}</td>
-                      <td>{{ item.user_id }}</td>
-                      <td> {{((winningamount * percentagearray[i].winAmountPer) / 100)-(((winningamount *
+                      <td style="font-weight: 500;">{{ item.username }}</td>
+                      <td style="font-weight: 500;">{{ item.user_id }}</td>
+                      <td style="font-weight: 500;"> {{((winningamount * percentagearray[i].winAmountPer) / 100)-(((winningamount *
                         percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100) }}</td>
                     </tr>
                     <tr *ngFor="let item of room.users;let i=index">

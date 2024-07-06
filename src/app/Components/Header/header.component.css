@@ -6,10 +6,22 @@ body {
     color: #848484;
     padding: 5px 0 5px;
 }
+.navbar  {
+    width: 100%;
+    transition: top 0.3s;
+    background-color: #06067b;
+    color: white;
+}
+.navbar-toggler {
+    background-color: white!important;
+}
 a.nav-link {
-    color: #444;
+    color: #fff;
     font-weight: 400;
     margin-right: 20px;
+}
+a.nav-link:hover { 
+    color: #adadff;
 }
 .address-bar {
     background-color: #eee;

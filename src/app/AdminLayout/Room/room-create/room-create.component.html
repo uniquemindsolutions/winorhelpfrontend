@@ -1,7 +1,7 @@
 <div class="container p-4">
     <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
         <div class="row">
-            <div class="col-8">
+            <div class="col-7 col-md-7">
                 <mat-form-field xs appearance="outline" class="mb-2" >
                     <mat-label>Start Date</mat-label>
                     <input matInput [matDatepicker]="picker" formControlName="startDate" required>
@@ -12,7 +12,7 @@
                     }
                 </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-5 col-md-5">
                 <mat-form-field xs appearance="outline" class="mb-2" >
                     <mat-label>Start Time</mat-label>
                     <input matInput type="time" formControlName="startTime" required>
@@ -24,7 +24,7 @@
         </div>
 
         <div class="row">
-            <div class="col-8">
+            <div class="col-7 col-md-7">
                 <mat-form-field xs appearance="outline" class="mb-2" >
                     <mat-label>End Date</mat-label>
                     <input matInput [matDatepicker]="picker1" formControlName="endDate" required>
@@ -35,7 +35,7 @@
                     }
                 </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-5 col-md-5">
                 <mat-form-field xs appearance="outline" class="mb-2" >
                     <mat-label>Start Time</mat-label>
                     <input matInput type="time" formControlName="endTime" required>
@@ -47,7 +47,7 @@
         </div>
 
         <div class="row">
-            <div class="col-8">
+            <div class="col-7 col-md-7">
                 <mat-form-field xs appearance="outline" class="mb-2" >
                     <mat-label>Lottery Date</mat-label>
                     <input matInput [matDatepicker]="picker2" formControlName="lotteryDate" required>
@@ -58,7 +58,7 @@
                     }
                 </mat-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-5 col-md-5">
                 <mat-form-field xs appearance="outline" class="mb-2" >
                     <mat-label>Lottery Time</mat-label>
                     <input matInput type="time" formControlName="lotteryTime" required>
@@ -68,7 +68,8 @@
                 </mat-form-field>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-12">
         <mat-form-field xxs appearance="outline" class="mb-2" >
             <mat-label>Entry Fee</mat-label>
             <input matInput type="number" formControlName="entryFee" required>
@@ -79,7 +80,8 @@
                 <mat-error>Entry Fee must be a positive number</mat-error>
             }
         </mat-form-field>
-
+        </div>
+        </div>
         <mat-form-field xxs appearance="outline" class="mb-2" >
             <mat-label>Background COlor</mat-label>
             <input matInput type="text" formControlName="bgcolor" required>
