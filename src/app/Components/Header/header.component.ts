@@ -4,6 +4,8 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { AdminService } from '../../Services/Admin.service';
+import { environment } from '../../../environments/environment';
+import { AuthService } from '../../Services/Auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,7 @@ import { AdminService } from '../../Services/Admin.service';
   imports: [NgbDropdownModule,RouterLink, NgbModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
-  providers:[AdminService]
+  providers:[AdminService,AuthService]
 })
 export class HeaderComponent {
   public isCollapsed = true;
@@ -19,7 +21,7 @@ export class HeaderComponent {
 
 userDetails: any;
 
-constructor(private admin: AdminService) { 
+constructor(private admin: AdminService,private service:AuthService) { 
   
 }
 
@@ -37,7 +39,7 @@ loginheader:boolean=true;
 
       this.userDetails = res.data;
       localStorage.setItem("walletamount",res.data.wallet_amount);
-      console.log(res.data, "res test")
+      console.log(res.data, "res test");
       }, error: (err: any) => {
         //this.dialog.openSnackBar({ message:'Login failed. Please try again.', title: 'Login failed'}, 'Error');
       }
@@ -45,6 +47,14 @@ loginheader:boolean=true;
   }) 
 }
 
+logout() {
+  localStorage.removeItem(environment.STORAGE_KEY);
+  localStorage.clear();
+  sessionStorage.clear();
+  localStorage.setItem('logoutEvent', 'true');
+  localStorage.removeItem('loginEvent');
+  this.service.navigateTo('/auth/login');
+}
 
 
 }

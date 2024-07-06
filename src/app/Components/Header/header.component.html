@@ -111,7 +111,7 @@
       <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#exampleModal"  *ngIf="visiblelable">
        My&nbsp;Profile
       </button>
-          <button type="button" routerLink="/auth/login" class="btn btn-warning" *ngIf="visiblelable">
+          <button type="button" (click)="logout()" class="btn btn-warning" *ngIf="visiblelable">
        Logout
       </button>
       <div class="col-lg-1 col-md-1">

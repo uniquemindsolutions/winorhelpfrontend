@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable ,afterNextRender} from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from './../../environments/environment';
@@ -86,36 +86,43 @@ export class AdminService {
         return this.router.url;
     }
 
+    getAuthHeaders() {
+        const token = localStorage.getItem('token');
+        return new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        });
+      }
+
     createRoom(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/create_room`, data);
+        return this.http.post(`${this.baseUrl}/admin/create_room`, data,{ headers: this.getAuthHeaders() });
     }
 
     roomList(page:number, limit:number) {
-        return this.http.get(`${this.baseUrl}/admin/roomList?page=${page}&limit=${limit}`);
+        return this.http.get(`${this.baseUrl}/admin/roomList?page=${page}&limit=${limit}`,{ headers: this.getAuthHeaders() });
     }
     adminroomList(page:number, limit:number) {
-        return this.http.get(`${this.baseUrl}/admin/adminroomList?page=${page}&limit=${limit}`);
+        return this.http.get(`${this.baseUrl}/admin/adminroomList?page=${page}&limit=${limit}`,{ headers: this.getAuthHeaders() });
     }
 
     usersList(page:number, limit:number) {
         console.log("baseurlchecking",this.baseUrl);
-        return this.http.get(`${this.baseUrl}/admin/users?page=${page}&limit=${limit}`);
+        return this.http.get(`${this.baseUrl}/admin/users?page=${page}&limit=${limit}`,{ headers: this.getAuthHeaders() });
     }
 
     updateStatus(id:number, isActive:number) {
-        return this.http.post(`${this.baseUrl}/admin/updateStatus/${id}`,{isActive});
+        return this.http.post(`${this.baseUrl}/admin/updateStatus/${id}`,{isActive},{ headers: this.getAuthHeaders() });
     }
 
     roomAllocation(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/roomAllocation`,data);
+        return this.http.post(`${this.baseUrl}/admin/roomAllocation`,data,{ headers: this.getAuthHeaders() });
     }
 
     debitRequest(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/debitRequest`,data);
+        return this.http.post(`${this.baseUrl}/admin/debitRequest`,data,{ headers: this.getAuthHeaders() });
     }
 
     creditRequest(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/creditRequest`,data);
+        return this.http.post(`${this.baseUrl}/admin/creditRequest`,data),{ headers: this.getAuthHeaders() };
     }
 
     
@@ -151,77 +158,77 @@ export class AdminService {
     }
 
     updateTerms(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/updateterms`, data);
+        return this.http.post(`${this.baseUrl}/admin/updateterms`, data,{ headers: this.getAuthHeaders() });
     }
 
     getTerms() {
-        return this.http.get(`${this.baseUrl}/admin/getTerms`);
+        return this.http.get(`${this.baseUrl}/admin/getTerms`,{ headers: this.getAuthHeaders() });
     }
 
     updatePrivacy(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/updateprivacy`, data);
+        return this.http.post(`${this.baseUrl}/admin/updateprivacy`, data,{ headers: this.getAuthHeaders() });
     }
 
     getPrivacy() {
-        return this.http.get(`${this.baseUrl}/admin/getprivacy`);
+        return this.http.get(`${this.baseUrl}/admin/getprivacy`,{ headers: this.getAuthHeaders() });
     }
 
     getroomUserList(data:any) {
-        return this.http.get(`${this.baseUrl}/admin/getroomUserlist`);
+        return this.http.get(`${this.baseUrl}/admin/getroomUserlist`,{ headers: this.getAuthHeaders() });
     }
 
    
 
     getRoomDetail(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/getRoomDetails`, data);
+        return this.http.post(`${this.baseUrl}/admin/getRoomDetails`, data,{ headers: this.getAuthHeaders() });
     }
 
     saveWinners(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/winnerSave`, data);
+        return this.http.post(`${this.baseUrl}/admin/winnerSave`, data,{ headers: this.getAuthHeaders() });
     }
 
     getRoomUsersList(roomId:any) {
-        return this.http.post(`${this.baseUrl}/admin/getRoomUsersList`, {roomId});
+        return this.http.post(`${this.baseUrl}/admin/getRoomUsersList`, {roomId},{ headers: this.getAuthHeaders() });
     }
     
     winnerpecr(page:number, limit:number) {
-        return this.http.get(`${this.baseUrl}/admin/roomWinnerList?page=${page}&limit=${limit}`);
+        return this.http.get(`${this.baseUrl}/admin/roomWinnerList?page=${page}&limit=${limit}`,{ headers: this.getAuthHeaders() });
     }
 
     roomwinerperUpdate(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/roomwinerperUpdate`,data);
+        return this.http.post(`${this.baseUrl}/admin/roomwinerperUpdate`,data,{ headers: this.getAuthHeaders() });
     }
 
     getmasterdata() {
-        return this.http.get(`${this.baseUrl}/admin/masterdata`);
+        return this.http.get(`${this.baseUrl}/admin/masterdata`,{ headers: this.getAuthHeaders() });
     }
 
     masterdataUpdate(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/masterdataupdate`,data);
+        return this.http.post(`${this.baseUrl}/admin/masterdataupdate`,data,{ headers: this.getAuthHeaders() });
     }
 
     getUserMasterDetails(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/getUserMasterDetails`, data);
+        return this.http.post(`${this.baseUrl}/admin/getUserMasterDetails`, data,{ headers: this.getAuthHeaders() });
     }
 
     submitWinners(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/submitWinners`, data);
+        return this.http.post(`${this.baseUrl}/admin/submitWinners`, data,{ headers: this.getAuthHeaders() });
     }
     getsubmitWinners(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/getsubmitWinners`, data);
+        return this.http.post(`${this.baseUrl}/admin/getsubmitWinners`, data,{ headers: this.getAuthHeaders() });
     }
 
 
     roommasterdataupdate(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/roommasterdataupdate`,data);
+        return this.http.post(`${this.baseUrl}/admin/roommasterdataupdate`,data,{ headers: this.getAuthHeaders() });
     }
 
     roomListWinners(page:number, limit:number) {
-        return this.http.get(`${this.baseUrl}/admin/roomListWinners?page=${page}&limit=${limit}`);
+        return this.http.get(`${this.baseUrl}/admin/roomListWinners?page=${page}&limit=${limit}`,{ headers: this.getAuthHeaders() });
     }
 
     deleteRoom(id:number) {
-        return this.http.post(`${this.baseUrl}/admin/deleteroom`,{id});
+        return this.http.post(`${this.baseUrl}/admin/deleteroom`,{id},{ headers: this.getAuthHeaders() });
     }
    
 
