@@ -63,9 +63,9 @@ export class HomeComponent {
     })
     this.masterdata();
 
-    interval(1000).subscribe(() => {
-      this.getRoomList();
-    });
+    // interval(1000).subscribe(() => {
+    //   this.getRoomList();
+    // });
 
 
    }
@@ -184,7 +184,7 @@ export class HomeComponent {
     roomalocate(roomid:any,roomamount:any){
      
       const dialogRef = this.dialog.open(ConfirmationComponent, {
-        width: '250px',
+        width: '350px', height:'200px', 
         data: { title: 'Confirm Action', message: 'Are you sure you want to do this?' }
       });
   

@@ -38,10 +38,11 @@
     border-bottom: 2px solid transparent;
     padding: 40px 20px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-    margin: 15px 0;
+    margin: 15px 10px;
     /* background: #198754; */
     color: white;
 }
+
 .ticket-rate {
     position: absolute;
     left: 0px;
@@ -93,17 +94,15 @@
     display: block;
     color: #fff;
     background: linear-gradient(45deg, #00438b, #0d6efd);
-    border: 2px solid #5796da;
+    border: 1px solid #5796da;
     border-radius: 5px;
-    min-width: 70px;
+    min-width: 55px;
     min-height: 50px;
-    justify-content: center;
-    align-items: center;
-    line-height: 25px;
-    margin: 0px 5px;
-    padding: 5px 5px;
+    line-height: 20px;
+    margin: 0px 3px;
+    padding: 5px 2px;
     box-sizing: border-box;
-    outline: 2px solid #00438b;
+    outline: 1px solid #00438b;
     box-shadow: 2px 2px 4px 4px #00000020;
 }
 * a{
@@ -137,12 +136,18 @@
     .section-title-bg {
         display: none;
     }
+    .single-ticket { 
+        margin: 0;
+        margin-bottom: 1rem;
+    }
 }
 .nums {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: .5;
+    margin-top: 7px;
 }
 .strings {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 300;
 }

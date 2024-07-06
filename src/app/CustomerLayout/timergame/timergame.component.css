@@ -1,5 +1,5 @@
 .room-container {
-    padding: 20px;
+    padding: 6px;
     height: calc(100% - 176px);
   }
 
@@ -8,7 +8,10 @@
     overflow-y: auto;
     padding: 20x 0;
   }
-
+  .FundAllocation table tbody tr td {
+    font-weight: 500;
+    color: #333;
+  }
   .user-list {
     max-height: 30px; /* Adjust based on your needs */
     overflow: hidden;

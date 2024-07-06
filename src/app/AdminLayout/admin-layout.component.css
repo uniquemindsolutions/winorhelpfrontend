@@ -16,7 +16,7 @@ mat-toolbar {
         padding: 0;
         background-color: transparent !important;
         .header-bar{
-            margin-left: 15rem;
+            padding-left: 0rem;
             transition-property: margin-left;
             transition-duration: 0.2s;
         }
