@@ -71,13 +71,13 @@ ngOnInit(): void {
 
     this.checkingEntitlements();
 
-    // this.intervalId = setInterval(() => {
-    //   if(this.gameview===true){
-    //     clearInterval(this.intervalId);
-    //   }else{
-    //     this.checkingEntitlements();
-    //   }
-    // }, 10000);
+    this.intervalId = setInterval(() => {
+      if(this.gameview===true){
+        clearInterval(this.intervalId);
+      }else{
+        this.checkingEntitlements();
+      }
+    }, 10000);
    
   
   }
@@ -286,7 +286,7 @@ ngOnInit(): void {
     console.log("usersdata",this.filtermanuvallist);
    this.room.manualWinners=this.filtermanuvallist;
     let winner: User;
-    if (this.room.manualWinners && this.room.manualWinners.length >= this.room.currentRound) {
+    if (this.room.manualWinners && this.room.manualWinners.length > this.room.currentRound) {
       //console.log("checkingmanuvalwinners",this.room.manualWinners);
       winner = this.room.manualWinners[this.room.currentRound-1];
       console.log("winnersdatadddd",winner);

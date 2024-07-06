@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
@@ -21,7 +21,7 @@ export class HeaderComponent {
 
 userDetails: any;
 
-constructor(private admin: AdminService,private service:AuthService) { 
+constructor(private admin: AdminService,private service:AuthService,private router:Router) { 
   
 }
 
@@ -30,9 +30,14 @@ constructor(private admin: AdminService,private service:AuthService) {
 loginheader:boolean=true;
   ngOnInit() {
     const userid=localStorage.getItem('user_id');
-    if(userid!=''){
-     this.visiblelable=true;
+  
+    
+    if(userid==null || userid==''){
+      this.visiblelable=false;
+    }else{
+      this.visiblelable=true;
     }
+    
     const data = {"user_id": localStorage.getItem('user_id')}
     this.admin.getUserMasterDetails(data).subscribe({
       next: (res: any) => {
@@ -54,6 +59,10 @@ logout() {
   localStorage.setItem('logoutEvent', 'true');
   localStorage.removeItem('loginEvent');
   this.service.navigateTo('/auth/login');
+ // this.service.navigateTo('/home');
+  // this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+  //   this.router.navigate(['/home']);
+  // });
 }
 
 

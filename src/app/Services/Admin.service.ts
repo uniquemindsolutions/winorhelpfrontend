@@ -122,7 +122,7 @@ export class AdminService {
     }
 
     creditRequest(data:any) {
-        return this.http.post(`${this.baseUrl}/admin/creditRequest`,data),{ headers: this.getAuthHeaders() };
+        return this.http.post(`${this.baseUrl}/admin/creditRequest`,data,{ headers: this.getAuthHeaders() });
     }
 
     

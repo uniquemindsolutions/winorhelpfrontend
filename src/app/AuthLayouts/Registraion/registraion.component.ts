@@ -44,7 +44,7 @@ export class RegistraionComponent implements OnInit {
   }
 
   onSubmit(): void {
-   alert("hiii");
+   //alert("hiii");
     this.submitted = true;
 
     if (this.registrationForm.invalid) {

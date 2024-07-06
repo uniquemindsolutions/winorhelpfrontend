@@ -43,11 +43,12 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-
+  
     const userid=localStorage.getItem('user_id');
     if(userid!=''){
      this.visiblelable=true;
     }
+
     if (localStorage.getItem('user_id') == '') {
       this.router.navigate(['/home']);
     }
@@ -63,9 +64,9 @@ export class HomeComponent {
     })
     this.masterdata();
 
-    // interval(1000).subscribe(() => {
-    //   this.getRoomList();
-    // });
+    interval(1000).subscribe(() => {
+      this.getRoomList();
+    });
 
 
    }
@@ -118,8 +119,8 @@ export class HomeComponent {
             console.log('Iteration:', this.dataSource[i]);
 
                 const now_valid = new Date().getTime();
-               // const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
-                const end_valid = new Date(this.dataSource[i].latter_datetime).getTime();
+                const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                //const end_valid = new Date(this.dataSource[i].latter_datetime).getTime();
                 const distance_valid = end_valid - now_valid;
 
                 if(distance_valid<=0){
