@@ -27,6 +27,7 @@ export class WithdrareqComponent {
     localStorage.setItem("loginsession", "false");
     this.withdraw = this.formBuilder.group({
       amount: ['', [Validators.required]],
+      upi: '',
     });
 
     
@@ -52,8 +53,8 @@ export class WithdrareqComponent {
     if (this.withdraw.valid) {
       
       console.log("formvalues",this.withdraw.value)
-      const data={"amount":this.withdraw.value,"user_id":localStorage.getItem('user_id')};
-     
+      const data={"amount":this.withdraw.value.amount,"upi":this.withdraw.value.upi,"user_id":localStorage.getItem('user_id')};
+     console.log("payload",data)
 
       this.customeservice.debitWalletamount(data).subscribe({
         next: (result:any) => {

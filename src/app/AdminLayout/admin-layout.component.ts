@@ -93,6 +93,14 @@ export class AdminLayout implements OnInit {
         icon: 'dot',
         visibility: true
       },
+      {
+        id: 5,
+        displayName: 'User Tansaction Data',
+        link: '/admin/transhist',
+        iconType: 'png',
+        icon: 'dot',
+        visibility: true
+      },
 
       // {
       //   id: 3,

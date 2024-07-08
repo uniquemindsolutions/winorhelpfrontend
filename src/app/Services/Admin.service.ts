@@ -230,6 +230,11 @@ export class AdminService {
     deleteRoom(id:number) {
         return this.http.post(`${this.baseUrl}/admin/deleteroom`,{id},{ headers: this.getAuthHeaders() });
     }
+
+    getallTransList() {
+        const userid=localStorage.getItem('user_id');
+        return this.http.get(`${this.baseUrl}/admin/userhist`,{ headers: this.getAuthHeaders() });
+    }
    
 
 }

@@ -17,6 +17,11 @@
                                 <div *ngIf="f['amount'].errors['required']">Amount is required</div>
                             </div>
                         </div>
+                        <div class="mb-1">
+                            <label for="exampleFormControlInput1" class="form-label fw-medium">UPI ID</label>
+                            <input type="text" id="form3Example3c" formControlName="upi" class="form-control" />
+                           
+                        </div>
                         <div class="mt-4">
                             <button type="submit" class="btn btn-success px-4">Submit</button>
                         </div>
