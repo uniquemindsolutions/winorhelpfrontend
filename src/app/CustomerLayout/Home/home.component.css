@@ -90,21 +90,7 @@
 .winning-number li {
     display: inline-block;
 }
-.winning-number li a {
-    display: block;
-    color: #fff;
-    background: linear-gradient(45deg, #00438b, #0d6efd);
-    border: 1px solid #5796da;
-    border-radius: 5px;
-    min-width: 55px;
-    min-height: 50px;
-    line-height: 20px;
-    margin: 0px 3px;
-    padding: 5px 2px;
-    box-sizing: border-box;
-    outline: 1px solid #00438b;
-    box-shadow: 2px 2px 4px 4px #00000020;
-}
+
 * a{
     text-decoration: none;
 }
@@ -114,13 +100,13 @@
     text-align: center;
 }
 .custom-button {
-    color: #198754;
+    color: #030303;
     border-radius: 30px;
     font-weight: 500;
     text-transform: uppercase;
     padding: 8px 30px;
     font-size: 20px;
-    background: #f3f1f1;
+    background: #ffffff;
     box-shadow: -1.04px 4.891px 20px 0px rgb(27 27 27 / 50%);
     font-family: "Roboto", sans-serif;
     border: solid 3px #ffffff;
@@ -142,12 +128,30 @@
     }
 }
 .nums {
-    font-size: 17px;
-    font-weight: 500;
-    line-height: .5;
-    margin-top: 7px;
+    font-size: 20px;
+    font-weight: 600;
+    /* line-height: .5; */
+    /* margin-top: 7px; */
+    background-color: white;
+    padding: 7px 2px;
 }
 .strings {
     font-size: 12px;
-    font-weight: 300;
+    font-weight: 500;
+    color: #fff;
+}
+.winning-number li a {
+    display: block;
+    color: #0f0f0f;
+    /* background: #fff; */
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    min-width: 55px;
+    min-height: 50px;
+    line-height: 20px;
+    margin: 0px 3px;
+    /* padding: 5px 2px; */
+    box-sizing: border-box;
+    /* outline: 1px solid #808080; */
+    box-shadow: 2px 2px 4px 4px #00000020;
 }

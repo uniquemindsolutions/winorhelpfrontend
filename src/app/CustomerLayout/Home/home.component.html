@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="section-title">
-                    <h2>Our Game</h2>
+                    <h2>Our Funds</h2>
                 <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat hendrerit dictum. Praesent porta, purus eget sagittis imperdiet.</p> -->
             <!-- <span class="section-title-bg">Services</span>     -->
             </div>
@@ -15,9 +15,9 @@
                     <div class="col-lg-4" >
                 <div class="single-ticket" [ngStyle]="{'background': item.css}" *ngIf="item.showroom" >
                   
-                    <span class="ticket-rate">Room ID:&nbsp;{{item.roomId}}  </span><br>
-                    <span class="win-price">Win price:&nbsp;₹{{item.winningtot}} </span>
-                    <span class="win-money">Entry Fee:&nbsp;₹{{item.entryFee}}</span>
+                    <span class="ticket-rate">Fund ID:&nbsp;{{item.roomId}}  </span><br>
+                    <span class="win-money">Entry Amount:&nbsp;₹{{item.entryFee}}</span>
+                    <span class="win-price">Total Fund:&nbsp;₹{{item.winningtot}} </span>
                     <!-- <img src="../../assets/images/win-gift.png" alt="" class="img-fluid w-25"> -->
                    
                     <div class="mt-3">
