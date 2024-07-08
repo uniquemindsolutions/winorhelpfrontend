@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3 mt-5">
-      <div class="card bg-black text-white">
+      <div class="card">
         <div class="card-header border">
           <h3 class="mb-1 text-warning">{{ roomInfo.roomId}}</h3>
           <hr>
           <table>
-            <tr><td><b>Entry Amount:</b> </td> <td> <span class="fs-5 text-info"> {{ roomInfo.entryFee}}</span></td></tr>
-            <tr><td><b>Total Fund Amount: </b></td> <td> <span class="fs-5 text-info"> {{ roomInfo.entryFee *  room.users.length}}</span></td></tr>
-            <tr><td><b>No of Winners:</b> </td> <td> <span class="fs-5 text-info"> {{ room.users.length}}</span></td></tr>
+            <tr><td><b>Entry Amount:</b> </td> <td> <span class="fs-5 text-primary"> {{ roomInfo.entryFee}}</span></td></tr>
+            <tr><td><b>Total Fund Amount: </b></td> <td> <span class="fs-5 text-primary"> {{ roomInfo.entryFee *  room.users.length}}</span></td></tr>
+            <tr><td><b>No of Winners:</b> </td> <td> <span class="fs-5 text-primary"> {{percentagearray?.length}}</span></td></tr>
           </table>
         </div>
         <div class="card-header">
@@ -29,8 +29,8 @@
               @if(!isRoundComplited){
               <div>
                 <h4>Users:</h4>
-                <div class="user-list">
-                  <ul>
+                <div class="user-list bg-black text-white" >
+                  <ul >
                     <li *ngFor="let user of room.users; let i = index"
                       [class.previous]="i === getPreviousUserIndex(currentScrollingUserIndex)"
                       [class.current]="i === currentScrollingUserIndex"

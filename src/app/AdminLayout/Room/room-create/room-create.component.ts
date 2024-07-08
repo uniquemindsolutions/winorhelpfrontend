@@ -35,7 +35,7 @@ export class RoomCreateComponent {
       lotteryTime: ['', [Validators.required]],
       winingPercentageInfo: this.fb.array([]),
       bgcolor: ['', [Validators.required]],
-      // manuval_winners: ['', [Validators.required]],
+      manuval_winners: ['', [Validators.required]],
       
       
     });

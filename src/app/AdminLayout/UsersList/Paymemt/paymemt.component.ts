@@ -82,14 +82,15 @@ export class PaymemtComponent {
   }
 
   makeDebitCreditRequest=()=>{
-    console.log(this.data.item,'this.data', this.data.item);
+    
     if(this.transationAmount.valid){
       const objData={
         userId:this.data.item?.uniq_id,
         amount:this.transationAmount.value
       }
-
+      console.log(this.data.item,'this.data', objData);
       let apiInstance:any=this.api.creditRequest(objData);
+      console.log('this.data', apiInstance);
       let msgType='Credited';
       if(this.data.action=='debit'){
         msgType='Debited';

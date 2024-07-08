@@ -43,11 +43,12 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-
+  
     const userid=localStorage.getItem('user_id');
     if(userid!=''){
      this.visiblelable=true;
     }
+
     if (localStorage.getItem('user_id') == '') {
       this.router.navigate(['/home']);
     }
@@ -94,9 +95,11 @@ export class HomeComponent {
 
      const now = new Date().getTime();
     const end = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+    const start = new Date(this.dataSource[i].startDate+' '+this.dataSource[i].startTime).getTime();
     const distance = end - now;
 
 
+   
 
     console.log('Iteration:', this.dataSource[i]);
     if (distance <= 0) {
@@ -118,32 +121,39 @@ export class HomeComponent {
             console.log('Iteration:', this.dataSource[i]);
 
                 const now_valid = new Date().getTime();
-               // const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
-                const end_valid = new Date(this.dataSource[i].latter_datetime).getTime();
+                const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                //const end_valid = new Date(this.dataSource[i].latter_datetime).getTime();
+                const start_valid = new Date(this.dataSource[i].startDate+' '+this.dataSource[i].startTime).getTime();
                 const distance_valid = end_valid - now_valid;
 
-                if(distance_valid<=0){
-                  this.dataSource[i]['visibility'] = false;
-                }else{
+                const rangecheck=this.isWithinRange(start_valid,end_valid,new Date());
+                console.log("rangecheck",rangecheck);
+
+                if(rangecheck===true){
                   this.dataSource[i]['visibility'] = true;
+                }else{
+                  this.dataSource[i]['visibility'] = false;
                 }
 
               
 
-                const today =new Date().toISOString().split('T')[0];
+                // const today =new Date().toISOString().split('T')[0];
                 
-                const future = this.dataSource[i].startDate;
+                // const endate = this.dataSource[i].endDate;
 
-                if (future > today) {
-                 
-                  this.dataSource[i]['showroom'] = true;
-                  
-                } else if (future < today) {
+                const todaytime = new Date().getTime();
+                const endatetime = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+
+                if (todaytime > endatetime) {
                  
                   this.dataSource[i]['showroom'] = false;
+                  
+                } else if (todaytime < endatetime) {
+                 
+                  this.dataSource[i]['showroom'] = true;
                 } else {
                   
-                  this.dataSource[i]['showroom'] = true;
+                  this.dataSource[i]['showroom'] = false;
                 }
 
 
@@ -256,6 +266,12 @@ export class HomeComponent {
       }
     })
       
+  }
+
+  isWithinRange(fromdate:any,todate:any,givendate:any): boolean {
+    const currentTime = givendate.getTime();
+     console.log("dates",fromdate,'---',todate,'---',givendate);
+    return currentTime >= fromdate && currentTime <= todate;
   }
  
 

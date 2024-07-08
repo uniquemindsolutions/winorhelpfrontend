@@ -11,6 +11,7 @@ import { WinnerpercentageComponent } from './winnerpercentage/winnerpercentage.c
 import { MastervalueComponent } from './mastervalue/mastervalue.component';
 import { WinnersdataComponent } from './winnersdata/winnersdata.component';
 import { WinnersdataDetailComponent } from './winnersdata-detail/winnersdata-detail.component';
+import { TranshistComponent } from './transhist/transhist.component';
 
 const routes: Routes = [
 { path: '', redirectTo: '/admin/dashboard', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'masterdata', component: MastervalueComponent },
       { path: 'winnersdata', component: WinnersdataComponent },
       { path: 'winnersdatadetails', component: WinnersdataDetailComponent },
+      { path: 'transhist', component: TranshistComponent },
 
       // { path: 'dashboard', loadChildren: () => import('./Dashboard/dashboard.component').then(m => m.DashboardComponent) },
       // { path: 'user-list', loadChildren: () => import('./UsersList/users-list.component').then(m => m.UsersListComponent) },
