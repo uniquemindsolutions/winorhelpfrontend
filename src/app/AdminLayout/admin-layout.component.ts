@@ -93,6 +93,14 @@ export class AdminLayout implements OnInit {
         icon: 'dot',
         visibility: true
       },
+      {
+        id: 5,
+        displayName: 'User Tansaction Data',
+        link: '/admin/transhist',
+        iconType: 'png',
+        icon: 'dot',
+        visibility: true
+      },
 
       // {
       //   id: 3,
@@ -170,9 +178,10 @@ export class AdminLayout implements OnInit {
   }
 
   logout() {
-    this.router.navigateByUrl("/login");
     localStorage.clear();
     sessionStorage.clear();
+    this.router.navigateByUrl("/login");
+    
   }
 
   onSizeChange(event: any) {

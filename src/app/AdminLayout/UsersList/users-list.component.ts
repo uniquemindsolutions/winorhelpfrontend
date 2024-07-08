@@ -47,6 +47,7 @@ export class UsersListComponent {
   }
 
   openDialog(item:any, action:string) {
+   // alert("Hii");
     const dialogRef = this.dialog.open(PaymemtComponent, {data:{item, action}, width:'40%'});
     dialogRef.afterClosed().subscribe((result:any) => {
       console.log(`Dialog result: ${result}`);

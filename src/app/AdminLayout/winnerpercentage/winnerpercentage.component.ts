@@ -44,7 +44,7 @@ export class WinnerpercentageComponent {
     }
 
     onSubmit() {
-      alert("ReactiveFormsModule ");
+      //alert("ReactiveFormsModule ");
       console.log(this.dataSource); // Replace with actual form submission logic
 
 

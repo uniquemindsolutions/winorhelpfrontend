@@ -10,6 +10,7 @@ import MuiDialogService from './../../../Services/MuiDialog.service';
 import {MatRippleModule} from '@angular/material/core';
 import { SetWinnerComponent } from '../SetWinner/set-winner.component';
 import { CommonModule, DatePipe } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 export interface RoomList {
   roomId: string;
@@ -27,7 +28,9 @@ export interface RoomList {
 @Component({
   selector: 'app-room-list',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatSlideToggleModule, MatRippleModule, CommonModule],
+  imports: [MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatSlideToggleModule, MatRippleModule, CommonModule,
+    MatDatepickerModule 
+  ],
   providers: [DatePipe],
   templateUrl: './room-list.component.html',
   styleUrl: './room-list.component.css'
