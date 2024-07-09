@@ -1,6 +1,8 @@
 .room-container {
     padding: 6px;
     height: calc(100% - 176px);
+    width: 250px;
+    margin: auto;
   }
 
   .room {
