@@ -52,6 +52,12 @@
           <th mat-header-cell *matHeaderCellDef>Email Verify</th>
           <td mat-cell *matCellDef="let el">{{el.email_veri ===1 ? 'YES' : 'NO'}}</td>
         </ng-container>
+        <ng-container matColumnDef="upi">
+          <th mat-header-cell *matHeaderCellDef>UPI</th>
+          <td mat-cell *matCellDef="let el">{{el.upi}}</td>
+        </ng-container>
+
+        
         <!-- 'name', 'email', 'phone', 'email_veri', 'ref_code' -->
         <!-- Total Participants Column -->
         <ng-container matColumnDef="ref_code">
