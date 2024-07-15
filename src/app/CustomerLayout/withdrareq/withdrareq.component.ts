@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CustomeServiceService } from '../../Services/custome-service.service';
+import MuiDialogService from '../../Services/MuiDialog.service';
 
 @Component({
   selector: 'app-withdrareq',
@@ -20,7 +21,8 @@ export class WithdrareqComponent {
   constructor(
     private formBuilder: FormBuilder,
     private customeservice:CustomeServiceService,
-    private router: Router
+    private router: Router,
+    private muiDialog: MuiDialogService,
   ) { }
 
   ngOnInit() {
@@ -58,6 +60,10 @@ export class WithdrareqComponent {
 
       this.customeservice.debitWalletamount(data).subscribe({
         next: (result:any) => {
+
+          this.muiDialog.openSnackBar({ title: 'Success!', message: 'Rsuccessfully deducted from your wallet it will credit into your bank in next 1 or 2 hours' }, 'Success')
+          //this.dialogRef.close({reload:true});
+
           console.log("resultval",result);
           this.router.navigate(['/mytransaction']);
         },

@@ -34,7 +34,8 @@ export class RegistraionComponent implements OnInit {
          password: ['', [Validators.required, Validators.minLength(6)]],
          email: ['', [Validators.required, Validators.email]],
          phone: ['', Validators.required],
-         ref_code:''
+         ref_code:'',
+         terms: [false, Validators.requiredTrue]
       });
   }
 
