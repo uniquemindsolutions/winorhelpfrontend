@@ -121,9 +121,11 @@ export class HomeComponent {
             console.log('Iteration:', this.dataSource[i]);
 
                 const now_valid = new Date().getTime();
-                const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
-                //const end_valid = new Date(this.dataSource[i].latter_datetime).getTime();
+                const newEndTime = this.addMinutesToTime(this.dataSource[i].latter_datetime, 12);
+                //const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                const end_valid = new Date(newEndTime).getTime();
                 const start_valid = new Date(this.dataSource[i].startDate+' '+this.dataSource[i].startTime).getTime();
+                //console.log(end_valid,now_valid,"timechecking")
                 const distance_valid = end_valid - now_valid;
 
                 const rangecheck=this.isWithinRange(start_valid,end_valid,new Date());
@@ -142,7 +144,12 @@ export class HomeComponent {
                 // const endate = this.dataSource[i].endDate;
 
                 const todaytime = new Date().getTime();
-                const endatetime = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                //const endatetime = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                //const endatetime = new Date(this.dataSource[i].latter_datetime).getTime();
+
+
+                const newEndTime22 = this.addMinutesToTime(this.dataSource[i].latter_datetime, 10);
+                const endatetime = new Date(newEndTime22).getTime();
 
                 if (todaytime > endatetime) {
                  
@@ -272,6 +279,12 @@ export class HomeComponent {
     const currentTime = givendate.getTime();
      console.log("dates",fromdate,'---',todate,'---',givendate);
     return currentTime >= fromdate && currentTime <= todate;
+  }
+
+  addMinutesToTime(time: string | Date, minutes: number): string {
+    const date = new Date(time); // Create a new Date object from the given time
+    date.setMinutes(date.getMinutes() + minutes); // Add the specified minutes
+    return date.toISOString(); // Return the new time as an ISO string
   }
  
 

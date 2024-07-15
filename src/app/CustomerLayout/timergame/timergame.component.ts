@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { CustomeServiceService } from '../../Services/custome-service.service';
 
 
 @Component({
@@ -57,7 +58,7 @@ export class TimergameComponent {
 
   currentScrollingUserIndex: number = 0;
 
-  constructor(private api:AdminService,private changeDetectorRef: ChangeDetectorRef,) {
+  constructor(private api:AdminService,private changeDetectorRef: ChangeDetectorRef,private customeservice:CustomeServiceService,) {
     console.log(new Date(new Date(this.roomInfo.latter_datetime).getTime() + this.roundDuration), 'popat');
 
   }
@@ -213,7 +214,7 @@ ngOnInit(): void {
           this.countdownSubscription.unsubscribe(); // Properly unsubscribe from the interval
           console.log("enduser","test");
           setTimeout(() => {
-          this.submitWinners(this.winnerlistfinal);
+          this.submitWinners(this.winnerlistfinal,this.room);
           this.gameview=false;
           this.gameviewWinners=true;
           },6000);
@@ -346,12 +347,12 @@ ngOnInit(): void {
     return (index + 1) % this.room.users.length;
   }
 
-  submitWinners(winnersdata:any){
+  submitWinners(winnersdata:any,roomdetails:any){
    
-    
-
+  // this.winningamount=roomdetails.entryFee *  roomdetails.users.length;
+  console.log("winnersfinaldata",this.winningamount);
     winnersdata.forEach((item:any, index:any) => {
-     //console.log("winnersfinaldata",item);
+     console.log("winnersfinaldata",item);
      const amounttobepaid=((this.winningamount * this.percentagearray[index].winAmountPer) / 100)-(((this.winningamount *
       this.percentagearray[index].winAmountPer) / 100)*this.percentagearray[index].deductAmountPer/100);
       const payload={
@@ -362,7 +363,9 @@ ngOnInit(): void {
         "tot_amount_send":amounttobepaid
       }
       // console.log("winnersfinaldata",payload);
+ 
 
+      this.creditamount(payload);
 
       this.api.submitWinners(payload).subscribe({
       });
@@ -403,4 +406,21 @@ ngOnInit(): void {
     return user;
     //console.log("Userdetails22",user);
   }
+
+  creditamount(payload:any){
+
+
+    const data={"amount":payload.tot_amount_send,"upi":'',"user_id":localStorage.getItem('user_id')};
+     console.log("payload",data)
+
+      this.customeservice.debitWalletamount(data).subscribe({
+        next: (result:any) => {
+          console.log("resultval",result);
+        },
+        error: (err: any) => {
+
+        }
+      })
+  }
+
 }

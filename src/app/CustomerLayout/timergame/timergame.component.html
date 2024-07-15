@@ -9,6 +9,7 @@
             <tr><td><b>Entry Amount:</b> </td> <td> <span class="fs-5 text-primary"> {{ roomInfo.entryFee}}</span></td></tr>
             <tr><td><b>Total Fund Amount: </b></td> <td> <span class="fs-5 text-primary"> {{ roomInfo.entryFee *  room.users.length}}</span></td></tr>
             <tr><td><b>No of Winners:</b> </td> <td> <span class="fs-5 text-primary"> {{percentagearray?.length}}</span></td></tr>
+            <tr><td><b>No of People:</b> </td> <td> <span class="fs-5 text-primary"> {{room.users?.length}}</span></td></tr>
           </table>
         </div>
         <div class="card-header">
@@ -61,7 +62,7 @@
                       <!-- <td>{{i+1}}</td> -->
                       <td style="font-weight: 500;">{{ item.username }}</td>
                       <td style="font-weight: 500;">{{ item.user_id }}</td>
-                      <td style="font-weight: 500;"> {{((winningamount * percentagearray[i].winAmountPer) / 100)-(((winningamount *
+                      <td style="font-weight: 500;"> {{((roomInfo.entryFee *  room.users.length * percentagearray[i].winAmountPer) / 100)-(((roomInfo.entryFee *  room.users.length *
                         percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100) }}</td>
                     </tr>
                     <tr *ngFor="let item of room.users;let i=index">
