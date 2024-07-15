@@ -1,10 +1,12 @@
 .room-container {
     padding: 6px;
     height: calc(100% - 176px);
-    width: 250px;
+    width: 100%;
     margin: auto;
   }
-
+.timerHead {
+  background: url(./../../../assets/images/lottry-bg.png);
+}
   .room {
     max-height: 500px;
     overflow-y: auto;
@@ -15,12 +17,13 @@
     color: #333;
   }
   .user-list {
-    max-height: 30px; /* Adjust based on your needs */
+    height: 50px; /* Adjust based on your needs */
     overflow: hidden;
     border: 1px solid #ccc;
     padding: 10px;
-    margin-bottom: 20px;
     position: relative;
+    width: 25px;
+    margin: 0 auto 20px;
   }
 
   .user-list ul {
