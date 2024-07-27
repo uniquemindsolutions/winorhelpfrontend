@@ -6,10 +6,10 @@
           <h3 class="mb-1 text-warning">{{ roomInfo.roomId}}</h3>
           <hr>
           <table class="text-white">
-            <tr><td><b>Entry Amount:</b> </td> <td> <span class="fs-5 text-warning fw-bold"> {{ roomInfo.entryFee}}</span></td></tr>
-            <tr><td><b>Total Fund Amount: </b></td> <td> <span class="fs-5 text-warning fw-bold"> {{ roomInfo.entryFee *  room.users.length}}</span></td></tr>
-            <tr><td><b>No of Winners:</b> </td> <td> <span class="fs-5 text-warning fw-bold"> {{percentagearray?.length}}</span></td></tr>
-            <tr><td><b>No of People:</b> </td> <td> <span class="fs-5 text-warning fw-bold"> {{room.users?.length}}</span></td></tr>
+            <tr><td><b>Entry Amount:</b> </td> <td> <span class="fs-5 fw-bold ms-3"> {{ roomInfo.entryFee}}</span></td></tr>
+            <tr><td><b>Total Fund Amount: </b></td> <td> <span class="fs-5 fw-bold ms-3"> {{ roomInfo.entryFee *  room.users.length}}</span></td></tr>
+            <tr><td><b>No of Winners:</b> </td> <td> <span class="fs-5 fw-bold ms-3"> {{percentagearray?.length}}</span></td></tr>
+            <tr><td><b>No of People:</b> </td> <td> <span class="fs-5 fw-bold ms-3"> {{room.users?.length}}</span></td></tr>
           </table>
         </div>
         <div class="card-header">
@@ -26,6 +26,8 @@
                   room.timeRemaining.minutes
                   }}m {{ room.timeRemaining.seconds }}s</p> -->
               </div>
+              
+             
      
               @if(!isRoundComplited){
               <div>

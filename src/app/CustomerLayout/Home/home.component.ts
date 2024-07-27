@@ -64,9 +64,9 @@ export class HomeComponent {
     })
     this.masterdata();
 
-    interval(1000).subscribe(() => {
-      this.getRoomList();
-    });
+    // interval(5000).subscribe(() => {
+    //   this.getRoomList();
+    // });
 
 
    }

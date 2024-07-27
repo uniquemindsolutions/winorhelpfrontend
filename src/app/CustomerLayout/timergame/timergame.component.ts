@@ -49,7 +49,10 @@ export class TimergameComponent {
 
   winnerlistfinalresultarray: any[] = [];
   activeround:any=0;
-  scrollstop:boolean=true;
+  scrollstop:boolean=false;
+
+  restartgame:boolean=false;
+
   
   room: Room = {
     id: 1,
@@ -76,13 +79,15 @@ ngOnInit(): void {
 
   
   this.checkRoomUsersList();
+
   
 
   interval(1000).subscribe(() => {
+    this.checkRoomUsersList();
     this.getwinnersdata();
-    this.cdr.detectChanges();
-    console.log(this.winnerlistfinalresult?.length,"lenght",this.totalNoOfRoundGame);
-    if(this.winnerlistfinalresult?.length===undefined){
+  
+    console.log(this.winnerlistfinalresult?.length,"lenght",this.totalNoOfRoundGame,this.restartgame);
+    if(this.winnerlistfinalresult?.length===undefined || this.restartgame===true){
     
       setTimeout(() => {
 
@@ -93,24 +98,25 @@ ngOnInit(): void {
        
          
         }else if(this.winnerlistfinalresult?.length>0){
-    
+          this.scrollstop=true;
           this.gameviewWinners=true;
           this.gameview=true;
           this.startScrolling();
+          
          
 
         }else{
+         // alert("Start")
           this.gameview=true;
           this.gameviewWinners=false;
           this.getRoomUsersList();
         
         }
-
-        
         
       }, 1000);
+
+      
     }
-    
     
   });
  
@@ -174,11 +180,13 @@ ngOnInit(): void {
           
             const now = new Date().getTime();
             const end = new Date(this.roomsInfo.latter_datetime).getTime();
+         
             const distance = end - now;
             console.log("roomsInfo",distance);
             if(distance<=0 && this.winnerlistfinal.length<=0){
               
               this.gameview=true;
+              this.scrollstop=true;
               this.startCountdown();
               this.startScrolling();
             }
@@ -397,23 +405,25 @@ ngOnInit(): void {
   }
 
   submitWinners(winnersdata:any,roomdetails:any){
-   
+   this.getwinnersdata();
   // this.winningamount=roomdetails.entryFee *  roomdetails.users.length;
-console.log(winnersdata,"checkingwindata");
+console.log(winnersdata,"winningamountchecking",this.winnerlistfinalresult?.length);
  //   winnersdata.forEach((item:any, index:any) => {
      //console.log("winnersfinaldata",item);
-     const amounttobepaid=((this.winningamount * this.percentagearray[this.activeround].winAmountPer) / 100)-(((this.winningamount *
-      this.percentagearray[this.activeround].winAmountPer) / 100)*this.percentagearray[this.activeround].deductAmountPer/100);
+     
+     const amounttobepaid=((this.winningamount * this.percentagearray[this.winnerlistfinalresult?.length].winAmountPer) / 100)-(((this.winningamount *
+      this.percentagearray[this.winnerlistfinalresult?.length].winAmountPer) / 100)*this.percentagearray[this.winnerlistfinalresult?.length].deductAmountPer/100);
       const payload={
         "room_id":winnersdata.room_id,
         "user_id":winnersdata.user_id,
         "username":winnersdata.username,
-        "winner_orderid":this.activeround,
-        "tot_amount_send":amounttobepaid
+        "winner_orderid":this.winnerlistfinalresult?.length,
+        "tot_amount_send":amounttobepaid,
+        "totround":this.totalNoOfRoundGame
       }
       // console.log("winnersfinaldata",payload);
 
-      this.creditamount(payload);
+     // this.creditamount(payload);
       this.api.submitWinners(payload).subscribe({
       });
 
@@ -441,6 +451,8 @@ console.log(winnersdata,"checkingwindata");
   if(this.winnerlistfinalresult?.length==this.totalNoOfRoundGame){
     this.scrollstop=false;
   }
+
+  this.cdr.detectChanges();
     
   }
 
@@ -517,13 +529,15 @@ console.log(winnersdata,"checkingwindata");
             const now = new Date().getTime();
             const end = new Date(this.roomsInfo.latter_datetime).getTime();
             const distance = end - now;
-            console.log("roomsInfo",distance);
-            // if(distance<=0 && this.winnerlistfinal.length<=0){
+            sessionStorage.setItem('lattertime',this.roomsInfo.latter_datetime);
+            console.log("checkroomsInfo",distance);
+            if(distance<=0  && this.restartgame===false){
               
-            //   this.gameview=true;
-            //   this.startCountdown();
-            //   this.startScrolling();
-            // }
+              this.restartgame=true;
+              // this.gameview=true;
+              // this.startCountdown();
+              // this.startScrolling();
+            }
          
           this.changeDetectorRef.detectChanges();
         }
