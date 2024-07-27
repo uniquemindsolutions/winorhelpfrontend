@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterModule } from '@angular/router';
-import { interval, Subscription } from 'rxjs';
+import { from, interval, Subscription } from 'rxjs';
 import { Room, User } from '../room.model';
 import { environment } from '../../../environments/environment';
 import { AdminService } from '../../Services/Admin.service';
@@ -28,7 +28,7 @@ export class TimergameComponent {
   private countdownSubscription: Subscription | undefined;
   private scrollSubscription: Subscription | undefined;
   private _countdownSubscription: Subscription | undefined;
-  public roundDuration = 6000; // 1 minute per round
+  public roundDuration = 60000; // 1 minute per round
   public roomInfo: any = JSON.parse(atob(sessionStorage.getItem(`${environment.STORAGE_KEY}/roomDetail`) || '') || '{}');
   winners:any=[];
   users:any=[];
@@ -44,6 +44,12 @@ export class TimergameComponent {
   winnerlistfinalresult:any;
   intervalId: any;
   filtermanuvallist:any=[];
+  testarray:any=[];
+
+
+  winnerlistfinalresultarray: any[] = [];
+  activeround:any=0;
+  scrollstop:boolean=true;
   
   room: Room = {
     id: 1,
@@ -58,44 +64,62 @@ export class TimergameComponent {
 
   currentScrollingUserIndex: number = 0;
 
-  constructor(private api:AdminService,private changeDetectorRef: ChangeDetectorRef,private customeservice:CustomeServiceService,) {
+  constructor(private api:AdminService,private changeDetectorRef: ChangeDetectorRef,private customeservice:CustomeServiceService,
+    private cdr: ChangeDetectorRef
+  ) {
     console.log(new Date(new Date(this.roomInfo.latter_datetime).getTime() + this.roundDuration), 'popat');
 
   }
+  
 
 ngOnInit(): void {
- 
-    
-    // console.log("roomsInfointial",this.roomsInfo);
-    // console.log("userwinning",this.users);        
+
+  
+  this.checkRoomUsersList();
+  
+
+  interval(1000).subscribe(() => {
     this.getwinnersdata();
+    this.cdr.detectChanges();
+    console.log(this.winnerlistfinalresult?.length,"lenght",this.totalNoOfRoundGame);
+    if(this.winnerlistfinalresult?.length===undefined){
+    
+      setTimeout(() => {
 
-    this.checkingEntitlements();
+        if(this.winnerlistfinalresult?.length==this.totalNoOfRoundGame && this.winnerlistfinalresult?.length!='0'){
+          this.gameview=false;
+          this.scrollstop=false;
+          this.gameviewWinners=true;
+       
+         
+        }else if(this.winnerlistfinalresult?.length>0){
+    
+          this.gameviewWinners=true;
+          this.gameview=true;
+          this.startScrolling();
+         
 
-    this.intervalId = setInterval(() => {
-      if(this.gameview===true){
-        clearInterval(this.intervalId);
-      }else{
-        this.checkingEntitlements();
-      }
-    }, 10000);
+        }else{
+          this.gameview=true;
+          this.gameviewWinners=false;
+          this.getRoomUsersList();
+        
+        }
+
+        
+        
+      }, 1000);
+    }
+    
+    
+  });
+ 
+          
    
   
   }
 
-  checkingEntitlements(){
-    setTimeout(() => {
-      console.log("winnerlistfinalresult",this.winnerlistfinalresult);  
-      if(this.winnerlistfinalresult?.length>0){
-        //alert("Hii");
-        this.gameview=false;
-        this.gameviewWinners=true;
-      }else{
-       // alert("byee");
-        this.getRoomUsersList();
-      }
-      },2000)
-  }
+  
 
   splitStringToArray(input: string): string[] {
     return input.split(',');
@@ -124,6 +148,7 @@ ngOnInit(): void {
             let arrwin=this.roomsInfo['manuval_winners'].split(',')
            
             console.log("manuvalist",arrwin);
+            this.filtermanuvallist=[];
             for (let i = 0; i < arrwin.length; i++) {
              const filterdata =this.findUserById(arrwin[i]);
               
@@ -151,7 +176,8 @@ ngOnInit(): void {
             const end = new Date(this.roomsInfo.latter_datetime).getTime();
             const distance = end - now;
             console.log("roomsInfo",distance);
-            if(distance<=0){
+            if(distance<=0 && this.winnerlistfinal.length<=0){
+              
               this.gameview=true;
               this.startCountdown();
               this.startScrolling();
@@ -188,24 +214,34 @@ ngOnInit(): void {
   }
 
   startCountdown(): void {
-    // this.updateCountdown();
+    this.updateCountdown(3000);
    
 
     let timer=this.users.length * 3000;
     console.log(timer, 'timer');
-    
+  
     console.log(new Date(), 'AA');
-    this._countdownSubscription = interval(timer).subscribe(() => {
-      this.selectWinnerForRound();
+    this._countdownSubscription = interval(10000).subscribe(() => {
+   console.log("winnnerlenght",this.room.winners.length,this.totalNoOfRoundGame);
+    
+   if(this.room.winners.length<=this.totalNoOfRoundGame){
+   this.selectWinnerForRound();
+   }
+
       if(this.room.winners.length==this.totalNoOfRoundGame){
-        this.isRoundComplited=true;
+         this.gameview=false;
+         this.gameviewWinners=true;
+       this.isRoundComplited=true;
         if (this._countdownSubscription) {
           this._countdownSubscription.unsubscribe(); // Properly unsubscribe from the interval
         }
       }
+  
+
+    
     })
 
-    this.countdownSubscription = interval(1000).subscribe(() => {
+    this.countdownSubscription = interval(10000).subscribe(() => {
       this.updateCountdown(timer);
       this.ifAutoWinnerSelectedThenRemoveFromList();
       if(this.room.winners.length==this.totalNoOfRoundGame){
@@ -213,15 +249,9 @@ ngOnInit(): void {
         if (this.countdownSubscription) {
           this.countdownSubscription.unsubscribe(); // Properly unsubscribe from the interval
           console.log("enduser","test");
-          setTimeout(() => {
-          this.submitWinners(this.winnerlistfinal,this.room);
-          this.gameview=false;
-          this.gameviewWinners=true;
-          },6000);
 
-          setTimeout(() => {
-            this.getwinnersdata();
-            },7000)
+
+          
 
 
         }
@@ -242,21 +272,26 @@ ngOnInit(): void {
   }
 
   updateCountdown(timer:number): void {
+   
     console.log(this.totalNoOfRoundGame,'this.totalNoOfRoundGame');
     
     const now = new Date().getTime();
-    const distance = this.room.lotteryDate.getTime() - now;
+    const distance = now-this.room.lotteryDate.getTime();
     console.log(distance, 'distance check');
     
 
     if (distance < 0) {
+      console.log("rounds",this.room.currentRound);
+      
       if (this.room.currentRound < this.totalNoOfRoundGame) {
+        //console.log();
         this.room.currentRound += 1;
         if (this.room.currentRound <= this.totalNoOfRoundGame) {
           this.room.lotteryDate = new Date(new Date().getTime() + timer);
           // this.room.lotteryDate = new Date(new Date().getTime() + this.roundDuration);
           this.room.scrolling = true;
         }
+        
       }
       this.room.timeRemaining = {
         days: 0,
@@ -283,26 +318,40 @@ ngOnInit(): void {
   }
 
   selectWinnerForRound(): void {
-    console.log("usersdata",this.users);
-    console.log("usersdata",this.filtermanuvallist);
+
+    
    this.room.manualWinners=this.filtermanuvallist;
     let winner: User;
-    if (this.room.manualWinners && this.room.manualWinners.length > this.room.currentRound) {
-      //console.log("checkingmanuvalwinners",this.room.manualWinners);
-      winner = this.room.manualWinners[this.room.currentRound-1];
-      console.log("winnersdatadddd",winner);
+    if (this.room.manualWinners && this.room.manualWinners.length>0) {
+      
+      winner = this.room.manualWinners[this.activeround];
+     
     } else {
-     // console.log("checkingmanuvalwinners",this.room.manualWinners);
+
       winner = this.selectAutomaticWinner();
+      
     }
     console.log("this.winnerlistfinal",winner)
     if (winner) {
       
       this.room.winners.push(winner);
-      this.room.scrolling = false;
+      //this.room.scrolling = false;
       this.winnerlistfinal=this.room.winners;
     
+
+      //if(this.gameviewWinners!=true){
+        this.submitWinners(winner,this.room);
+      //}
+
+      //this.submitWinners(winner,this.room);
+      
+      // this.gameview=true;
+      // this.gameviewWinners=true;
+
+
     }
+
+    this.activeround += 1;
     
   }
 
@@ -350,50 +399,48 @@ ngOnInit(): void {
   submitWinners(winnersdata:any,roomdetails:any){
    
   // this.winningamount=roomdetails.entryFee *  roomdetails.users.length;
-  console.log("winnersfinaldata",this.winningamount);
-    winnersdata.forEach((item:any, index:any) => {
-     console.log("winnersfinaldata",item);
-     const amounttobepaid=((this.winningamount * this.percentagearray[index].winAmountPer) / 100)-(((this.winningamount *
-      this.percentagearray[index].winAmountPer) / 100)*this.percentagearray[index].deductAmountPer/100);
+console.log(winnersdata,"checkingwindata");
+ //   winnersdata.forEach((item:any, index:any) => {
+     //console.log("winnersfinaldata",item);
+     const amounttobepaid=((this.winningamount * this.percentagearray[this.activeround].winAmountPer) / 100)-(((this.winningamount *
+      this.percentagearray[this.activeround].winAmountPer) / 100)*this.percentagearray[this.activeround].deductAmountPer/100);
       const payload={
-        "room_id":item.room_id,
-        "user_id":item.user_id,
-        "username":item.username,
-        "winner_orderid":index+1,
+        "room_id":winnersdata.room_id,
+        "user_id":winnersdata.user_id,
+        "username":winnersdata.username,
+        "winner_orderid":this.activeround,
         "tot_amount_send":amounttobepaid
       }
       // console.log("winnersfinaldata",payload);
- 
 
       this.creditamount(payload);
-
       this.api.submitWinners(payload).subscribe({
       });
 
 
 
-    });
+    //});
    // this.getwinnersdata();
+
+  
     
   }
 
   getwinnersdata(){
 
-    
+
     const getpayload={"room_id":this.roomInfo.roomId}
 
 
-    this.api.getsubmitWinners(getpayload).subscribe({
-      next: (res: any) => {
-    console.log("winnersfinaldata",res);
-    
-    this.winnerlistfinalresult=res.data;
-    console.log("winnerlistfinalresult",this.winnerlistfinalresult);  
-      }, error: (err: any) => {
-        //this.dialog.openSnackBar({ message:'Login failed. Please try again.', title: 'Login failed'}, 'Error');
-      }
-
+    this.api.getsubmitWinners(getpayload).subscribe((res: any) => {
+      console.log("getwinnersdata222",res);
+      this.winnerlistfinalresult=res.data;
+      //this.gameview=false;
+      //this.gameviewWinners=true;
   }) 
+  if(this.winnerlistfinalresult?.length==this.totalNoOfRoundGame){
+    this.scrollstop=false;
+  }
     
   }
 
@@ -413,14 +460,78 @@ ngOnInit(): void {
     const data={"amount":payload.tot_amount_send,"upi":'',"user_id":localStorage.getItem('user_id')};
      console.log("payload",data)
 
-      this.customeservice.debitWalletamount(data).subscribe({
-        next: (result:any) => {
-          console.log("resultval",result);
-        },
-        error: (err: any) => {
+     const objData={
+      userId:localStorage.getItem('user_id'),
+      amount:payload.tot_amount_send
+    }
+    this.api.creditRequest(objData);
+  }
 
+  checkRoomUsersList() {
+    this.isLoading = true;
+    let that = this;
+    this.api.getRoomUsersList(this.roomInfo.roomId).subscribe({
+      next: (res: any) => {
+        const jsonstringfy=res.roomsInfo.winingPercentageInfo;
+        console.log("roomdetails",res);
+       
+        this.isLoading = false;
+        if (res && res.status && res.users.length) {
+          that.isLoading = false;
+          this.users = res.users;
+          this.winningamount=this.users.length*res.roomsInfo.entryFee;
+          this.roomsInfo = res.roomsInfo;
+          console.log("roomsInfo",this.roomsInfo);
+          this.percentagearray=JSON.parse(res.roomsInfo.winingPercentageInfo);
+          console.log(this.percentagearray[0],"percentagearray");
+          this.winners = [];
+          if(this.roomsInfo['manuval_winners']){
+            let win:any[]=this.roomsInfo['manuval_winners'];
+            let arrwin=this.roomsInfo['manuval_winners'].split(',')
+           
+            console.log("manuvalist",arrwin);
+            this.filtermanuvallist=[];
+            for (let i = 0; i < arrwin.length; i++) {
+             const filterdata =this.findUserById(arrwin[i]);
+              
+              this.filtermanuvallist.push(filterdata);
+              console.log("manuvalist",filterdata);
+              this.winners.push({
+                user_id:arrwin[i],
+                username:''
+              })
+            }
+          
+
+          }
+          console.log("manuvalist",this.filtermanuvallist); 
+          this.totalNoOfRoundGame=0;
+          if(this.roomsInfo && this.roomsInfo['winingPercentageInfo']){
+              let temp:any=JSON.parse(this.roomsInfo['winingPercentageInfo']);
+              this.totalNoOfRoundGame=temp.length;
+          }
+
+          this.addUsernameAndRemoveMatchingItems();
+         
+          
+            const now = new Date().getTime();
+            const end = new Date(this.roomsInfo.latter_datetime).getTime();
+            const distance = end - now;
+            console.log("roomsInfo",distance);
+            // if(distance<=0 && this.winnerlistfinal.length<=0){
+              
+            //   this.gameview=true;
+            //   this.startCountdown();
+            //   this.startScrolling();
+            // }
+         
+          this.changeDetectorRef.detectChanges();
         }
-      })
+      },
+      error: (err: any) => {
+        this.isLoading = false;
+      }
+    })
   }
 
 }

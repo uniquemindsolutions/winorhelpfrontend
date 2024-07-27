@@ -42,8 +42,6 @@ export class WinnersdataDetailComponent {
 
     
     const getpayload={"room_id":this.paramValue}
-
-
     this.api.getsubmitWinners(getpayload).subscribe({
       next: (res: any) => {
     console.log("winnersfinaldata",res);
