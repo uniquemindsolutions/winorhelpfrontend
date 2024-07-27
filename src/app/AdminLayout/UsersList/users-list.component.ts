@@ -48,14 +48,14 @@ export class UsersListComponent {
 
   openDialog(item:any, action:string) {
    // alert("Hii");
-    const dialogRef = this.dialog.open(PaymemtComponent, {data:{item, action}, width:'40%'});
+    const dialogRef = this.dialog.open(PaymemtComponent, {data:{item, action}});
     dialogRef.afterClosed().subscribe((result:any) => {
       console.log(`Dialog result: ${result}`);
     });
   }
 
   addUsers() {
-    const dialogRef = this.dialog.open(NewUserComponent, {width:'40%'});
+    const dialogRef = this.dialog.open(NewUserComponent,);
     dialogRef.afterClosed().subscribe((result:any) => {
       console.log(`Dialog result: ${result}`);
       this.gerUsersList();

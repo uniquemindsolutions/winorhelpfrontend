@@ -64,9 +64,9 @@ export class HomeComponent {
     })
     this.masterdata();
 
-    interval(1000).subscribe(() => {
-      this.getRoomList();
-    });
+    // interval(5000).subscribe(() => {
+    //   this.getRoomList();
+    // });
 
 
    }
@@ -260,6 +260,7 @@ export class HomeComponent {
 
   viewDetails(item: any) {
     sessionStorage.setItem(`${environment.STORAGE_KEY}/roomDetail`, btoa(JSON.stringify(item)));
+    //this.router.navigate(['/latterygame'], { queryParams: { id: item.roomId } });
     this.router.navigate(['/timergame'], { queryParams: { id: item.roomId } });
   }
   masterroomUpdate(roomId:any,winningAmount:any,totusers:any){
