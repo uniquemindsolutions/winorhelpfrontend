@@ -27,15 +27,15 @@
                   }}m {{ room.timeRemaining.seconds }}s</p> -->
               </div>
               
-             
+             {{restartgame}}
      
               @if(!isRoundComplited){
               <div>
                 
                 <!-- <h4>Users:</h4> -->
-           
+                <!-- Game Started -->
                 <div class="user-list bg-black text-white" *ngIf="scrollstop">
-                
+              
                   <ul>
                     <li *ngFor="let user of room.users; let i = index"
                       [class.previous]="i === getPreviousUserIndex(currentScrollingUserIndex)"
@@ -49,8 +49,46 @@
               }
             </div>
 
+
+            <div class="card-body" >
+          
+              <div *ngIf="winnerlistfinalresultarray.length>0">
+                <div><b>Winners Data</b></div>
+                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                  <table class="table table-bordered" >
+                    <thead bg-color="red"  class="thead-dark sticky-header">
+                     
+                      <tr>
+                        <th scope="col">ID</th>
+                        <!-- <th scope="col">ROOM ID</th> -->
+                        <th scope="col">USERID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Winning Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                 
+                      <tr *ngFor="let winitem of winnerlistfinalresult;let i=index">
+                        <td>{{i+1}}</td>
+                        <!-- <td>{{ winitem.room_id  }}</td> -->
+                        <td>{{ winitem.user_id }}</td>
+                        <td>{{ winitem.username }}</td>
+                        <td>{{ winitem.tot_amount_send	 }}</td>
+                        <!-- <td> {{((winningamount * percentagearray[i].winAmountPer) / 100)-(((winningamount *
+                          percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100) }}</td> -->
+                      </tr>
+    
+                    </tbody>
+            
+                  </table>
+                </div>
+    
+              </div>
+              </div>
+
   
-              <div *ngIf="!gameviewWinners FundAllocation table-responsive">
+              <div >
+                <div><b>Participate  List</b></div>
                 <table class="table table-bordered table-striped table-hover" >
                   <thead class="thead-dark sticky-header">
                    
@@ -63,13 +101,12 @@
                   </thead>
                   <tbody>
           
-                    <tr *ngFor="let item of room.winners;let i=index">
-                      <!-- <td>{{i+1}}</td> -->
+                    <!-- <tr *ngFor="let item of winnerlistfinalresult;let i=index">
                       <td style="font-weight: 500;">{{ item.username }}</td>
                       <td style="font-weight: 500;">{{ item.user_id }}</td>
                       <td style="font-weight: 500;"> {{((roomInfo.entryFee *  room.users.length * percentagearray[i].winAmountPer) / 100)-(((roomInfo.entryFee *  room.users.length *
                         percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100) }}</td>
-                    </tr>
+                    </tr> -->
                     <tr *ngFor="let item of room.users;let i=index">
                       <!-- <td>{{i+1}}</td> -->
                       <!-- {{item.user_id }} -->
@@ -97,41 +134,7 @@
 
         <!-- {{gameviewWinners}} -->
         
-        <div class="card-body" *ngIf="gameviewWinners">
-          
-          <div>
-            <div><b>Winners Data</b></div>
-            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-              <table class="table table-bordered" >
-                <thead bg-color="red"  class="thead-dark sticky-header">
-                 
-                  <tr>
-                    <th scope="col">ID</th>
-                    <!-- <th scope="col">ROOM ID</th> -->
-                    <th scope="col">USERID</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Winning Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-             
-                  <tr *ngFor="let winitem of winnerlistfinalresult;let i=index">
-                    <td>{{i+1}}</td>
-                    <!-- <td>{{ winitem.room_id  }}</td> -->
-                    <td>{{ winitem.user_id }}</td>
-                    <td>{{ winitem.username }}</td>
-                    <td>{{ winitem.tot_amount_send	 }}</td>
-                    <!-- <td> {{((winningamount * percentagearray[i].winAmountPer) / 100)-(((winningamount *
-                      percentagearray[i].winAmountPer) / 100)*percentagearray[i].deductAmountPer/100) }}</td> -->
-                  </tr>
-
-                </tbody>
         
-              </table>
-            </div>
-
-          </div>
-          </div>
       </div>
     </div>
   </div>

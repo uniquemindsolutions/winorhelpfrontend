@@ -21,7 +21,7 @@ export class HeaderComponent {
 
 userDetails: any;
 
-constructor(private admin: AdminService,private service:AuthService,private router:Router) { 
+constructor(private admin: AdminService,private service:AuthService,private router:Router,private authService: AuthService,) { 
   
 }
 
@@ -30,8 +30,6 @@ constructor(private admin: AdminService,private service:AuthService,private rout
 loginheader:boolean=true;
   ngOnInit() {
     const userid=localStorage.getItem('user_id');
-  
-    
     if(userid==null || userid==''){
       this.visiblelable=false;
     }else{
@@ -44,7 +42,7 @@ loginheader:boolean=true;
 
       this.userDetails = res.data;
       localStorage.setItem("walletamount",res.data.wallet_amount);
-      console.log(res.data, "res test");
+      console.log(res.data, "restest");
       }, error: (err: any) => {
         //this.dialog.openSnackBar({ message:'Login failed. Please try again.', title: 'Login failed'}, 'Error');
       }
@@ -53,16 +51,9 @@ loginheader:boolean=true;
 }
 
 logout() {
-  localStorage.removeItem(environment.STORAGE_KEY);
-  localStorage.clear();
-  sessionStorage.clear();
-  localStorage.setItem('logoutEvent', 'true');
-  localStorage.removeItem('loginEvent');
-  this.service.navigateTo('/auth/login');
- // this.service.navigateTo('/home');
-  // this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-  //   this.router.navigate(['/home']);
-  // });
+        this.authService.logout();
+       
+        this.router.navigate(['/home']);
 }
 
 

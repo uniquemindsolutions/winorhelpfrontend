@@ -51,7 +51,7 @@ export class TimergameComponent {
   activeround:any=0;
   scrollstop:boolean=false;
 
-  restartgame:boolean=false;
+  restartgame:string="start";
 
   
   room: Room = {
@@ -78,24 +78,30 @@ export class TimergameComponent {
 ngOnInit(): void {
 
   
+
+
   this.checkRoomUsersList();
 
-  
-
   interval(1000).subscribe(() => {
-    this.checkRoomUsersList();
+    // if(this.restartgame!="end"){
+    //   this.checkRoomUsersList();
+    // }else{
+    // }
+   
     this.getwinnersdata();
   
     console.log(this.winnerlistfinalresult?.length,"lenght",this.totalNoOfRoundGame,this.restartgame);
-    if(this.winnerlistfinalresult?.length===undefined || this.restartgame===true){
+    if(this.winnerlistfinalresult?.length===undefined){
     
+      console.log("restartstatus",this.restartgame);
+      
       setTimeout(() => {
 
         if(this.winnerlistfinalresult?.length==this.totalNoOfRoundGame && this.winnerlistfinalresult?.length!='0'){
           this.gameview=false;
           this.scrollstop=false;
           this.gameviewWinners=true;
-       
+          
          
         }else if(this.winnerlistfinalresult?.length>0){
           this.scrollstop=true;
@@ -103,10 +109,10 @@ ngOnInit(): void {
           this.gameview=true;
           this.startScrolling();
           
-         
 
         }else{
          // alert("Start")
+         
           this.gameview=true;
           this.gameviewWinners=false;
           this.getRoomUsersList();
@@ -132,6 +138,7 @@ ngOnInit(): void {
   }
 
   getRoomUsersList() {
+   
     this.isLoading = true;
     let that = this;
     this.api.getRoomUsersList(this.roomInfo.roomId).subscribe({
@@ -183,12 +190,15 @@ ngOnInit(): void {
          
             const distance = end - now;
             console.log("roomsInfo",distance);
+
+            console.log("restartcheck",distance,this.winnerlistfinal.length);
             if(distance<=0 && this.winnerlistfinal.length<=0){
-              
+             
               this.gameview=true;
               this.scrollstop=true;
               this.startCountdown();
               this.startScrolling();
+              this.restartgame="end";
             }
          
           this.changeDetectorRef.detectChanges();
@@ -445,12 +455,31 @@ console.log(winnersdata,"winningamountchecking",this.winnerlistfinalresult?.leng
     this.api.getsubmitWinners(getpayload).subscribe((res: any) => {
       console.log("getwinnersdata222",res);
       this.winnerlistfinalresult=res.data;
+      this.winnerlistfinalresultarray=res.data;
       //this.gameview=false;
       //this.gameviewWinners=true;
   }) 
   if(this.winnerlistfinalresult?.length==this.totalNoOfRoundGame){
     this.scrollstop=false;
   }
+
+  if(sessionStorage.getItem('lattertime')!=''){
+
+    const now = new Date().getTime();
+  const end = new Date(sessionStorage.getItem('lattertime') as string).getTime();
+  const distance = end - now;
+  
+  console.log("checkroomsInfo",distance);
+  if(now!=end){
+  
+    // this.restartgame="begin";
+   
+  }else{
+    window.location.reload();
+  }
+
+  }
+  
 
   this.cdr.detectChanges();
     
@@ -531,13 +560,10 @@ console.log(winnersdata,"winningamountchecking",this.winnerlistfinalresult?.leng
             const distance = end - now;
             sessionStorage.setItem('lattertime',this.roomsInfo.latter_datetime);
             console.log("checkroomsInfo",distance);
-            if(distance<=0  && this.restartgame===false){
+            // if(distance<=0  && this.restartgame=="start"){
               
-              this.restartgame=true;
-              // this.gameview=true;
-              // this.startCountdown();
-              // this.startScrolling();
-            }
+            //   this.restartgame="begin";
+            // }
          
           this.changeDetectorRef.detectChanges();
         }

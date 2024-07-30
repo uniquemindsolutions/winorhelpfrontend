@@ -12,6 +12,7 @@ import { CustomeServiceService } from '../../Services/custome-service.service';
 import { environment } from '../../../environments/environment';
 import { ConfirmationComponent } from '../../Components/Confirmation/confirmation.component';
 import { interval } from 'rxjs';
+import { AuthService } from '../../Services/Auth.service';
 
 
 
@@ -40,6 +41,8 @@ export class HomeComponent {
     private customeservice: CustomeServiceService,
     private router: Router,
   ) {
+
+   
   }
 
   ngOnInit() {
