@@ -159,14 +159,15 @@ export class RoomListComponent {
     return date < today;
   }
 
-  applyFilter(filterValue: string) {
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     const tableFilters = [];
     tableFilters.push({
       id: 'roomId',
       value: filterValue
     });
     
-    console.log("filterddata",tableFilters,this.dataSource);
+   // console.log("filterddata",tableFilters,this.dataSource);
     if (this.dataSource) {
     this.dataSource.filter = JSON.stringify(tableFilters);
     if (this.dataSource.paginator) {

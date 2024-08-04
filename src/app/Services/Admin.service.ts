@@ -260,6 +260,13 @@ export class AdminService {
         return this.http.get(`${this.baseUrl}/auth/is_logged_in`,{ headers: this.getAuthHeaders() });
     }
 
+
+    changepassword(payload:any) {
+        return this.http.post(`${this.baseUrl}/admin/changepassword`,payload,{ headers: this.getAuthHeaders() });
+      }
+    
+    
+
    
    
 
