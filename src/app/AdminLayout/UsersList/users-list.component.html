@@ -12,7 +12,7 @@
   </div>
   <div class="row">
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
     </mat-form-field>
     <div class="col-12 col-md-12 col-lg-12 col-xl-12 table-responsive">
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1" style="max-height: 200px; overflow-y: auto;" >
@@ -69,17 +69,32 @@
         </ng-container> -->
 
         <!-- Total Winning Column -->
+
+
         <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>Status</th>
           <td mat-cell *matCellDef="let el">Active</td>
         </ng-container>
 
         <ng-container matColumnDef="room_allot">
-          <th mat-header-cell *matHeaderCellDef>Room Allocation Request</th>
+          <th mat-header-cell *matHeaderCellDef>Room <br>Allot</th>
           <td mat-cell *matCellDef="let el">
             <button (click)="openDialog(el, 'allocation')" style="border-radius: 100px; margin-top: 9px;" sm mat-flat-button color="primary"><span
                 style="font-size: 18px;"></span>&nbsp;Action</button>
           </td>
+        </ng-container>
+
+        <ng-container matColumnDef="wlamount">
+          <th mat-header-cell *matHeaderCellDef>WallentAmount</th>
+          <td mat-cell *matCellDef="let el">{{el.wallet_amount}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="changepass">
+          <th mat-header-cell *matHeaderCellDef>ChangePass</th>
+          <td mat-cell *matCellDef="let el">
+            <button (click)="changepass(el.uniq_id)"  style="border-radius: 100px; margin-top: 9px;" sm mat-flat-button
+              color="primary"><span style="font-size: 18px;"></span>&nbsp;Action</button>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="debit_action">
@@ -94,7 +109,8 @@
           <th mat-header-cell *matHeaderCellDef>Credit Request</th>
           <td mat-cell *matCellDef="let el">
             <button (click)="openDialog(el, 'credit')"  style="border-radius: 100px; margin-top: 9px;" sm mat-flat-button
-              color="primary"><span style="font-size: 18px;"></span>&nbsp;Action</button></td>
+              color="primary"><span style="font-size: 18px;"></span>&nbsp;Action</button>
+            </td>
         </ng-container>
 
         <!-- View Details Column -->

@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 
 export interface useList {
@@ -29,7 +30,9 @@ export interface useList {
   styleUrl: './users-list.component.css'
 })
 export class UsersListComponent {
-  displayedColumns: string[] = ['sno', 'name','UserID', 'email', 'phone', 'email_veri','upi', 'status','room_allot','debit_action','credit_action'];
+  displayedColumns: string[] = ['sno', 'name','UserID', 'email', 'phone', 'email_veri','upi', 'status','room_allot',
+  "wlamount","changepass",
+  'debit_action','credit_action'];
   //dataSource :RoomList[]=[];
   // dataSource: MatTableDataSource<any> | undefined;
   dataSource = new MatTableDataSource<useList>;
@@ -42,7 +45,7 @@ export class UsersListComponent {
   }
 
  ngOnInit(){
-  
+  // alert("Hii");
   this.gerUsersList();
 
  
@@ -101,8 +104,17 @@ export class UsersListComponent {
     });
   }
 
+  changepass(user_id:any) {
+    const dialogRef = this.dialog.open(ChangepasswordComponent,{data:{user_id}});
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log(`Dialog result: ${result}`);
+      //this.gerUsersList();
+    });
+  }
 
-  applyFilter(filterValue: string) {
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
     const tableFilters = [];
     tableFilters.push({
       id: 'username',
@@ -121,3 +133,7 @@ export class UsersListComponent {
 
 
 }
+
+
+
+
