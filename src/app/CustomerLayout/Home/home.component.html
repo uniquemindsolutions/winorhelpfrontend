@@ -47,7 +47,9 @@
         <div class="row">
 
             <ng-container *ngFor="let item of dataSource">
+
                 <div class="col-lg-4">
+                    
                     <div class="single-ticket" [ngStyle]="{'background': item.css}" *ngIf="item.showroom">
 
                         <span class="ticket-rate">Fund ID:&nbsp;{{item.roomId}} </span><br>
@@ -99,7 +101,7 @@
                                 Click Here
                             </button>
                         </div>
-
+                     <!-- {{visiblelable}} -->
                         <div class="text-center mt-3" *ngIf="!visiblelable">
 
                             <button class="custom-button" routerLink="/auth/login">

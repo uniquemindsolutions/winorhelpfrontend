@@ -48,11 +48,13 @@ export class HomeComponent {
   ngOnInit() {
   
     const userid=localStorage.getItem('user_id');
-    if(userid!=''){
+   
+    if(userid!='' && userid!=null){
      this.visiblelable=true;
     }
 
     if (localStorage.getItem('user_id') == '') {
+      //window.location.reload();
       this.router.navigate(['/home']);
     }
     this.getRoomList();
@@ -124,9 +126,10 @@ export class HomeComponent {
             console.log('Iteration:', this.dataSource[i]);
 
                 const now_valid = new Date().getTime();
-                const newEndTime = this.addMinutesToTime(this.dataSource[i].latter_datetime, 12);
-                //const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
-                const end_valid = new Date(newEndTime).getTime();
+                //const newEndTime = this.addMinutesToTime(this.dataSource[i].latter_datetime, 12);
+                const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                //const newEndTime = this.addMinutesToTime(this.dataSource[i].endDate+' '+this.dataSource[i].endTime, 12);
+              //  const end_valid = new Date(newEndTime).getTime();
                 const start_valid = new Date(this.dataSource[i].startDate+' '+this.dataSource[i].startTime).getTime();
                 //console.log(end_valid,now_valid,"timechecking")
                 const distance_valid = end_valid - now_valid;
@@ -165,11 +168,14 @@ export class HomeComponent {
                   
                   this.dataSource[i]['showroom'] = false;
                 }
-
+            
+                
 
             this.api.getRoomUsersList(this.dataSource[i].roomId).subscribe({
               next: (res: any) => {
-             
+               
+             console.log("resusers", res);
+         
                 this.dataSource[i]['winningtot'] = res.users.length*this.dataSource[i].entryFee;
                 this.masterroomUpdate(this.dataSource[i].roomId,res.users.length*this.dataSource[i].entryFee,res.users.length)
                

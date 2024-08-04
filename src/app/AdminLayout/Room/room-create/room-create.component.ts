@@ -11,6 +11,8 @@ import { AuthService } from './../../../Services/Auth.service';
 import MuiDialogService from './../../../Services/MuiDialog.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AdminService } from '../../../Services/Admin.service';
+import { formatDate } from '@angular/common';
+import moment from 'moment-timezone';
 
 @Component({
   selector: 'app-room-create',
@@ -60,8 +62,36 @@ export class RoomCreateComponent {
 
   onSubmit() {
     if (this.roomForm.valid) {
-      //console.log("roomcreatedpayload",date(this.roomForm.value.startDate));
-      this.api.createRoom(this.roomForm.value).subscribe({
+      console.log("roomcreatedpayload",this.roomForm.value);
+
+    //   const selectedDate = this.roomForm.value.startDate; // Assuming you get the date from the date picker
+    //  const utcDate = new Date(Date.UTC(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()));
+    //  console.log("roomcreatedpayload",utcDate);
+    //  const formattedDate = formatDate(utcDate, 'yyyy-MM-dd', 'en-IN', '+0530');
+
+     const selectedDatestartDate = this.roomForm.value.startDate; // Get the date from the date picker
+     const startDate = moment(selectedDatestartDate).tz('Asia/Kolkata').format('YYYY-MM-DD');
+     const selectedDateendDate = this.roomForm.value.endDate; // Get the date from the date picker
+     const endDate = moment(selectedDateendDate).tz('Asia/Kolkata').format('YYYY-MM-DD');
+
+     const lotteryDate = this.roomForm.value.lotteryDate; // Get the date from the date picker
+     const lotteryDateval = moment(lotteryDate).tz('Asia/Kolkata').format('YYYY-MM-DD');
+
+
+      const payload={
+        'entryFee' :this.roomForm.value.entryFee,
+            'startDate':startDate,
+            'endDate':endDate,
+            'startTime':this.roomForm.value.startTime,
+            'endTime':this.roomForm.value.endTime,
+            'winingPercentageInfo':this.roomForm.value.winingPercentageInfo,
+            'lotteryDate':lotteryDateval,
+            'lotteryTime':this.roomForm.value.lotteryTime,
+            'bgcolor':this.roomForm.value.bgcolor,
+            'manuval_winners':this.roomForm.value.manuval_winners
+      }
+      
+      this.api.createRoom(payload).subscribe({
         next: (any) => {
           this.muiDialog.openSnackBar({ title: 'Success!', message: 'Room Created Successfully' }, 'Success')
           this.dialogRef.close({reload:true});

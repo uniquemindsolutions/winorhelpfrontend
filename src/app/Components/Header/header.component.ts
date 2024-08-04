@@ -32,6 +32,8 @@ loginheader:boolean=true;
     const userid=localStorage.getItem('user_id');
     if(userid==null || userid==''){
       this.visiblelable=false;
+        // window.location.reload();
+        // this.router.navigate(['/home']);
     }else{
       this.visiblelable=true;
     }
@@ -44,7 +46,12 @@ loginheader:boolean=true;
       localStorage.setItem("walletamount",res.data.wallet_amount);
       console.log(res.data, "restest");
       }, error: (err: any) => {
-        //this.dialog.openSnackBar({ message:'Login failed. Please try again.', title: 'Login failed'}, 'Error');
+       
+        sessionStorage.removeItem('currentUser');
+        sessionStorage.removeItem('user_id');
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('token');
+        this.router.navigate(['/home']);
       }
 
   }) 
