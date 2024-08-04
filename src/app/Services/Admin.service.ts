@@ -251,6 +251,16 @@ export class AdminService {
       selectWinner(roomId: string, manualWinners: any[] = []) {
         return this.http.post(`${this.baseUrl}/api/select-winner`, { roomId, manualWinners },{ headers: this.getAuthHeaders() });
       }
+
+      getlogout() {
+        return this.http.get(`${this.baseUrl}/auth/logout`,{ headers: this.getAuthHeaders() });
+    }
+
+    isLoggedIn() {
+        return this.http.get(`${this.baseUrl}/auth/is_logged_in`,{ headers: this.getAuthHeaders() });
+    }
+
+   
    
 
 }

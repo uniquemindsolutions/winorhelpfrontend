@@ -1,14 +1,5 @@
-<!-- <img src="./../../../assets/images/banner1.jpg" class="img-fluid" alt="Los Angeles"> -->
 
-<div id="demo" class="carousel slide" data-bs-ride="carousel">
-
-    <!-- Indicators/dots -->
-    <!-- <div class="carousel-indicators">
-      <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-      <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-      <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-    </div>
-     -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel">    
     <!-- The slideshow/carousel -->
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -56,7 +47,9 @@
         <div class="row">
 
             <ng-container *ngFor="let item of dataSource">
+
                 <div class="col-lg-4">
+                    
                     <div class="single-ticket" [ngStyle]="{'background': item.css}" *ngIf="item.showroom">
 
                         <span class="ticket-rate">Fund ID:&nbsp;{{item.roomId}} </span><br>
@@ -108,7 +101,7 @@
                                 Click Here
                             </button>
                         </div>
-
+                     <!-- {{visiblelable}} -->
                         <div class="text-center mt-3" *ngIf="!visiblelable">
 
                             <button class="custom-button" routerLink="/auth/login">
