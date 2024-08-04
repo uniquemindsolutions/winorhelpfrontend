@@ -1,0 +1,45 @@
+<div class="container">
+  <h1>{{ room.name }}</h1>
+  
+  <!-- Countdown Timer -->
+  <div *ngIf="!gameview">
+    <h2>Countdown</h2>
+
+    <p *ngIf="room.timeRemaining">Current Round: {{ room.currentRound }}</p>
+    <p *ngIf="room.timeRemaining">Time Remaining: 
+      {{ room.timeRemaining.days }} Days 
+      {{ room.timeRemaining.hours }} Hours 
+      {{ room.timeRemaining.minutes }} Minutes 
+      {{ room.timeRemaining.seconds }} Seconds
+    </p>
+  </div>
+
+  <!-- Game View -->
+  <div *ngIf="gameview">
+    <h2>Scrolling Users</h2>
+    <div *ngIf="room.users.length > 0">
+      <mat-card *ngFor="let user of room.users; let i = index" [ngClass]="{'highlighted': i === currentScrollingUserIndex}">
+        <mat-card-title>{{ user.username }}</mat-card-title>
+        <mat-card-content>User ID: {{ user.user_id }}</mat-card-content>
+      </mat-card>
+    </div>
+    <button (click)="startCountdown()">Start Countdown</button>
+  </div>
+
+  <!-- Winners View -->
+  <div *ngIf="gameviewWinners">
+    <h2>Winners</h2>
+    <table mat-table [dataSource]="winnerlistfinal" class="mat-elevation-z8">
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>Username</th>
+        <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+      </ng-container>
+      <ng-container matColumnDef="user_id">
+        <th mat-header-cell *matHeaderCellDef>User ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.user_id }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

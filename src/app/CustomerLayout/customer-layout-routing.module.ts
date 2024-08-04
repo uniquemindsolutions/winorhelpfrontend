@@ -13,6 +13,7 @@ import { TermscondComponent } from './termscond/termscond.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TimergameComponent } from './timergame/timergame.component';
 import { ListofwindetailsComponent } from './listofwindetails/listofwindetails.component';
+import { LatterygameComponent } from './latterygame/latterygame.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
       { path: 'privacy', component: PrivacyComponent },
       { path: 'timergame', component: TimergameComponent },
       { path: 'listwindetails', component: ListofwindetailsComponent },
+      { path: 'latterygame', component: LatterygameComponent },
     ]
   }
 ];

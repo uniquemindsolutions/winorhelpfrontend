@@ -1,0 +1,15 @@
+.container {
+    padding: 20px;
+  }
+
+  .highlighted {
+    background-color: #f0f0f0;
+  }
+
+  mat-card {
+    margin-bottom: 10px;
+  }
+
+  table {
+    width: 100%;
+  }

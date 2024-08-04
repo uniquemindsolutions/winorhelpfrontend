@@ -126,6 +126,23 @@
         margin: 0;
         margin-bottom: 1rem;
     }
+    .carousel-caption {
+        padding-bottom: 0;
+        bottom: 15%!important;
+    }
+    .carousel-caption h3 {
+        font-size: 13px;
+        margin-bottom: 0rem;
+        bottom: 10px;
+    }
+    .xs-mt-3 {
+        margin-top: 3rem;
+    }
+}
+.carousel-caption {
+    position: absolute;
+    right: 15%;
+    bottom: 30%;
 }
 .nums {
     font-size: 20px;
