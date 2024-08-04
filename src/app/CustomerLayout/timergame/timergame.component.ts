@@ -12,6 +12,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { CustomeServiceService } from '../../Services/custome-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @Component({
@@ -19,6 +22,7 @@ import { CustomeServiceService } from '../../Services/custome-service.service';
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink, CommonModule, HttpClientModule,
     MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatCardModule,FormsModule,
+    MatFormFieldModule, MatInputModule
   ],
   providers:[AdminService],
   templateUrl: './timergame.component.html',
@@ -69,7 +73,7 @@ export class TimergameComponent {
   currentScrollingUserIndex: number = 0;
 
   constructor(private api:AdminService,private changeDetectorRef: ChangeDetectorRef,private customeservice:CustomeServiceService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,private snackBar: MatSnackBar
   ) {
     console.log(new Date(new Date(this.roomInfo.latter_datetime).getTime() + this.roundDuration), 'popat');
 
@@ -448,6 +452,11 @@ ngOnInit(): void {
      //console.log("winnersfinaldata",item);
 
      //alert(winnersdata.user_id);
+
+    //  this.snackBar.open('This is a snackbar message!', 'Close', {
+    //   duration: 5000,
+    // });
+    
      
      const amounttobepaid=((this.winningamount * this.percentagearray[this.winnerlistfinalresult?.length].winAmountPer) / 100)-(((this.winningamount *
       this.percentagearray[this.winnerlistfinalresult?.length].winAmountPer) / 100)*this.percentagearray[this.winnerlistfinalresult?.length].deductAmountPer/100);
