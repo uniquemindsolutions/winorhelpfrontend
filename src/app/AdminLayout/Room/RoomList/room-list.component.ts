@@ -1,5 +1,5 @@
 import { Component, TemplateRef, ViewChild, viewChild } from '@angular/core';
-import {MatTableModule} from '@angular/material/table';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule, MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {RoomCreateComponent} from '../room-create/room-create.component'
@@ -11,6 +11,10 @@ import {MatRippleModule} from '@angular/material/core';
 import { SetWinnerComponent } from '../SetWinner/set-winner.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSort } from '@angular/material/sort';
 
 export interface RoomList {
   roomId: string;
@@ -28,8 +32,9 @@ export interface RoomList {
 @Component({
   selector: 'app-room-list',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatSlideToggleModule, MatRippleModule, CommonModule,
-    MatDatepickerModule 
+  imports: [MatTableModule, MatButtonModule, MatDialogModule, MatButtonModule, MatDialogModule,MatPaginatorModule,MatInputModule,
+    MatFormFieldModule,CommonModule,MatSlideToggleModule,RouterModule,MatRippleModule,MatDatepickerModule
+    
   ],
   providers: [DatePipe],
   templateUrl: './room-list.component.html',
@@ -37,9 +42,16 @@ export interface RoomList {
 })
 export class RoomListComponent {
   displayedColumns: string[] = ['sno', 'roomId', 'endDate', 'entryFee', 'totalParticipants', 'winningAmount', 'action', 'viewDetails'];
-  dataSource:RoomList[]=[];
+  //dataSource:RoomList[]=[];
+  // dataSource: MatTableDataSource<any> | undefined;
+  dataSource = new MatTableDataSource<RoomList>;
   currentPage:number=1;
   perPage:number=0;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  
+  @ViewChild(MatSort) sort!: MatSort;
+  
+
   today: Date = new Date();
   constructor(public dialog: MatDialog, private api:AdminService, private muiService:MuiDialogService) {
   }
@@ -54,7 +66,26 @@ export class RoomListComponent {
     this.api.adminroomList(this.currentPage,this.perPage).subscribe({
       next:(res:any) => {
         console.log(res.data, 'res.data;');
-        this.dataSource=res.data;
+        //this.dataSource=res.data;
+        
+
+        if (res.data) {
+          this.dataSource = new MatTableDataSource(res.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+       this.dataSource.filterPredicate = 
+      (data: any, filtersJson: string) => {
+          const matchFilter: any[] = [];
+          const filters = JSON.parse(filtersJson);
+      
+          filters.forEach((filter: { id: string | number; value: string; }) => {
+            const val = data[filter.id] === null ? '' : data[filter.id];
+            matchFilter.push(val.toLowerCase().includes(filter.value.toLowerCase()));
+          });
+            return matchFilter.every(Boolean);
+        };
+      }
+
       },
       error: (err: any) => {
 
@@ -126,5 +157,22 @@ export class RoomListComponent {
     const today = this.today.setHours(0, 0, 0, 0); // Set today's date to midnight to only compare the date part
     const date = new Date(itemDate).setHours(0, 0, 0, 0);
     return date < today;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    const tableFilters = [];
+    tableFilters.push({
+      id: 'roomId',
+      value: filterValue
+    });
+    
+   // console.log("filterddata",tableFilters,this.dataSource);
+    if (this.dataSource) {
+    this.dataSource.filter = JSON.stringify(tableFilters);
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+    }
   }
 }

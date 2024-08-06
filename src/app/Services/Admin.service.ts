@@ -235,6 +235,39 @@ export class AdminService {
         const userid=localStorage.getItem('user_id');
         return this.http.get(`${this.baseUrl}/admin/userhist`,{ headers: this.getAuthHeaders() });
     }
+
+    // getroomdata(roomId:any) {
+    //     return this.http.post(`${this.baseUrl}/api/room_state`, {roomId},{ headers: this.getAuthHeaders() });
+    // }
+
+    getroomdata(roomId:any) {
+        return this.http.get(`${this.baseUrl}/api/room_state?roomId=${roomId}`,{ headers: this.getAuthHeaders() });
+    }
+
+    updateGameState(roomId: string, gameState: any) {
+        return this.http.post(`${this.baseUrl}/api/update-game-state`, { roomId, gameState },{ headers: this.getAuthHeaders() });
+      }
+    
+      selectWinner(roomId: string, manualWinners: any[] = []) {
+        return this.http.post(`${this.baseUrl}/api/select-winner`, { roomId, manualWinners },{ headers: this.getAuthHeaders() });
+      }
+
+      getlogout() {
+        return this.http.get(`${this.baseUrl}/auth/logout`,{ headers: this.getAuthHeaders() });
+    }
+
+    isLoggedIn() {
+        return this.http.get(`${this.baseUrl}/auth/is_logged_in`,{ headers: this.getAuthHeaders() });
+    }
+
+
+    changepassword(payload:any) {
+        return this.http.post(`${this.baseUrl}/admin/changepassword`,payload,{ headers: this.getAuthHeaders() });
+      }
+    
+    
+
+   
    
 
 }

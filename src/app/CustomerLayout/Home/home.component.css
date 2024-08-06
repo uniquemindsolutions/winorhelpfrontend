@@ -126,6 +126,23 @@
         margin: 0;
         margin-bottom: 1rem;
     }
+    .carousel-caption {
+        padding-bottom: 0;
+        bottom: 15%!important;
+    }
+    .carousel-caption h3 {
+        font-size: 13px;
+        margin-bottom: 0rem;
+        bottom: 10px;
+    }
+    .xs-mt-3 {
+        margin-top: 3rem;
+    }
+}
+.carousel-caption {
+    position: absolute;
+    right: 15%;
+    bottom: 30%;
 }
 .nums {
     font-size: 20px;
@@ -155,3 +172,21 @@
     /* outline: 1px solid #808080; */
     box-shadow: 2px 2px 4px 4px #00000020;
 }
+
+
+
+
+@media only screen and (max-width: 768px) {
+    .carousel-item img {
+        border-radius: 15px;
+        margin-top: 1rem;
+        height: 170px;
+    }
+    .carousel-caption h3 {
+        font-size: 15px;
+        margin-bottom: 0rem;
+    }
+    .carousel-caption {
+       bottom: 12%!important;
+    }
+    }

@@ -12,6 +12,7 @@ import { CustomeServiceService } from '../../Services/custome-service.service';
 import { environment } from '../../../environments/environment';
 import { ConfirmationComponent } from '../../Components/Confirmation/confirmation.component';
 import { interval } from 'rxjs';
+import { AuthService } from '../../Services/Auth.service';
 
 
 
@@ -35,21 +36,28 @@ export class HomeComponent {
   roomlistdata:any=[];
   timeRemaining:any;
   visiblelable:boolean=false;
+  visiblelableclick:boolean=false;
+  sessionuser:boolean=false;
   constructor(public dialog: MatDialog, private muiService: MuiDialogService, private api: AdminService,
     private formBuilder: FormBuilder,
     private customeservice: CustomeServiceService,
     private router: Router,
   ) {
+
+   
   }
 
   ngOnInit() {
   
     const userid=localStorage.getItem('user_id');
-    if(userid!=''){
+  // alert(userid)
+    if(userid!='' && userid!=null){
+      this.sessionuser=true;
      this.visiblelable=true;
     }
 
     if (localStorage.getItem('user_id') == '') {
+      //window.location.reload();
       this.router.navigate(['/home']);
     }
     this.getRoomList();
@@ -64,7 +72,7 @@ export class HomeComponent {
     })
     this.masterdata();
 
-    interval(1000).subscribe(() => {
+    interval(5000).subscribe(() => {
       this.getRoomList();
     });
 
@@ -121,9 +129,12 @@ export class HomeComponent {
             console.log('Iteration:', this.dataSource[i]);
 
                 const now_valid = new Date().getTime();
-                const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
-                //const end_valid = new Date(this.dataSource[i].latter_datetime).getTime();
+                const newEndTime = this.addMinutesToTime(this.dataSource[i].latter_datetime, 12);
+               // const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                //const newEndTime = this.addMinutesToTime(this.dataSource[i].endDate+' '+this.dataSource[i].endTime, 12);
+                const end_valid = new Date(newEndTime).getTime();
                 const start_valid = new Date(this.dataSource[i].startDate+' '+this.dataSource[i].startTime).getTime();
+                //console.log(end_valid,now_valid,"timechecking")
                 const distance_valid = end_valid - now_valid;
 
                 const rangecheck=this.isWithinRange(start_valid,end_valid,new Date());
@@ -135,6 +146,15 @@ export class HomeComponent {
                   this.dataSource[i]['visibility'] = false;
                 }
 
+
+                const end_validclick = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                const rangecheckend=this.isWithinRange(start_valid,end_validclick,new Date());
+
+                if(rangecheckend===true){
+                  this.visiblelableclick = true;
+                }else{
+                  this.visiblelableclick  = false;
+                }
               
 
                 // const today =new Date().toISOString().split('T')[0];
@@ -142,7 +162,12 @@ export class HomeComponent {
                 // const endate = this.dataSource[i].endDate;
 
                 const todaytime = new Date().getTime();
-                const endatetime = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                //const endatetime = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                //const endatetime = new Date(this.dataSource[i].latter_datetime).getTime();
+
+
+                const newEndTime22 = this.addMinutesToTime(this.dataSource[i].latter_datetime, 10);
+                const endatetime = new Date(newEndTime22).getTime();
 
                 if (todaytime > endatetime) {
                  
@@ -155,11 +180,14 @@ export class HomeComponent {
                   
                   this.dataSource[i]['showroom'] = false;
                 }
-
+            
+                
 
             this.api.getRoomUsersList(this.dataSource[i].roomId).subscribe({
               next: (res: any) => {
-             
+               
+             console.log("resusers", res);
+         
                 this.dataSource[i]['winningtot'] = res.users.length*this.dataSource[i].entryFee;
                 this.masterroomUpdate(this.dataSource[i].roomId,res.users.length*this.dataSource[i].entryFee,res.users.length)
                
@@ -253,6 +281,7 @@ export class HomeComponent {
 
   viewDetails(item: any) {
     sessionStorage.setItem(`${environment.STORAGE_KEY}/roomDetail`, btoa(JSON.stringify(item)));
+    //this.router.navigate(['/latterygame'], { queryParams: { id: item.roomId } });
     this.router.navigate(['/timergame'], { queryParams: { id: item.roomId } });
   }
   masterroomUpdate(roomId:any,winningAmount:any,totusers:any){
@@ -272,6 +301,12 @@ export class HomeComponent {
     const currentTime = givendate.getTime();
      console.log("dates",fromdate,'---',todate,'---',givendate);
     return currentTime >= fromdate && currentTime <= todate;
+  }
+
+  addMinutesToTime(time: string | Date, minutes: number): string {
+    const date = new Date(time); // Create a new Date object from the given time
+    date.setMinutes(date.getMinutes() + minutes); // Add the specified minutes
+    return date.toISOString(); // Return the new time as an ISO string
   }
  
 

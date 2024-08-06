@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable ,afterNextRender} from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from './../../environments/environment';
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable, map } from "rxjs";
 import { FormControl, FormGroup } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
@@ -25,12 +25,19 @@ export class AuthService {
     private messageSource = new BehaviorSubject({});
     currentMessage: any = {};
 
+    private currentUserSubject: BehaviorSubject<any>;
+    public currentUser: Observable<any>;
+
     constructor(private http: HttpClient, private router: Router, private bPoint: BreakpointObserver, public location: Location) {
         this.currentMessage = this.messageSource.asObservable();
 
         afterNextRender(() => {
             this.getAuthData();
         });
+
+
+        this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser') || '{}'));
+       this.currentUser = this.currentUserSubject.asObservable();
     }
 
 
@@ -90,6 +97,14 @@ export class AuthService {
         return this.router.url;
     }
 
+
+    getAuthHeaders() {
+        const token = localStorage.getItem('token');
+        return new HttpHeaders({
+          'Authorization': `Bearer ${token}`
+        });
+      }
+
    
     /**@FORGOT_PASSWORD_WITH_ID_or_EMAIL */
     forgotPassword(body: any) {
@@ -107,9 +122,70 @@ export class AuthService {
     }
     
     /**@SIGN_IN_USER */
-    login(credentials: any) {
-        return this.http.post(`${this.baseUrl}/auth/login`, credentials);
-    }
+    // login(credentials: any) {
+    //     return this.http.post(`${this.baseUrl}/auth/login`, credentials);
+    // }
+
+    login(credentials:any) {
+        //console.log("tockenchecking",credentials);
+        return this.http.post<any>(`${this.baseUrl}/auth/login`,credentials)
+          .pipe(map(user => {
+           
+            if (user && user.token) {
+                console.log("tockenchecking",user);
+              sessionStorage.setItem('currentUser', JSON.stringify(user));
+              localStorage.setItem('user_id', user.data.uniq_id);
+              localStorage.setItem('token',user.token);
+              this.currentUserSubject.next(user);
+
+              if(credentials.email=='admin@gmail.com'){
+                this.router.navigate(['/admin']);
+              }
+             
+            }
+            return user;
+          }));
+      }
+
+      
+
+      public get currentUserValue(): any {
+        return this.currentUserSubject.value;
+      }
+
+      logout() {
+        return this.http.get<any>(`${this.baseUrl}/auth/logout`,{ headers: this.getAuthHeaders() }).subscribe( {
+           
+
+            next: (res: any) => {
+                sessionStorage.removeItem('currentUser');
+                sessionStorage.removeItem('user_id');
+                localStorage.removeItem('user_id');
+                localStorage.removeItem('token');
+                this.currentUserSubject.next(null);
+                window.location.reload();
+                console.log("logoutres",res)
+          
+            }, error: (err: any) => {
+               
+                sessionStorage.removeItem('currentUser');
+                sessionStorage.removeItem('user_id');
+                localStorage.removeItem('user_id');
+                localStorage.removeItem('token');
+                this.currentUserSubject.next(null);
+                window.location.reload();
+                this.router.navigate(['/home']);
+             // this.dialog.openSnackBar({ message:'Login failed. Please try again.', title: 'Login failed'}, 'Error');
+            }
+         
+          //this.router.navigate(['/login']);
+          
+        });
+      }
+    
+      isLoggedIn(): boolean {
+        return !!this.currentUserValue && !!this.currentUserValue.token;
+      }
     
     verifyEmail(token: string) {
         return this.http.get(`${this.baseUrl}/api/verify_email/${token}`);

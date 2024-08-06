@@ -5,7 +5,9 @@
     margin: auto;
   }
 .timerHead {
-  background: url(./../../../assets/images/lottry-bg.png);
+  background: #06067b;
+  background-size: cover;
+    background-position: center center;
 }
   .room {
     max-height: 500px;
@@ -17,13 +19,14 @@
     color: #333;
   }
   .user-list {
-    height: 50px; /* Adjust based on your needs */
+    height: 26px; /* Adjust based on your needs */
     overflow: hidden;
     border: 1px solid #ccc;
     padding: 10px;
     position: relative;
-    width: 25px;
+    width: 200px;
     margin: 0 auto 20px;
+    font-weight: 600;
   }
 
   .user-list ul {
@@ -53,10 +56,17 @@
     display: block;
     opacity: 1;
     transform: translateY(0);
+    margin-top: 4px;
   }
 
   .user-list li.next {
     display: block;
     opacity: 1;
     transform: translateY(20px);
+  }
+  .custom-snackbar {
+    background-color:blue;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
   }
