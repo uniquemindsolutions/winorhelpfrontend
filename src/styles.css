@@ -255,3 +255,8 @@ main table{
     text-align: center;
     display: block;
 }
+.mat-mdc-snack-bar-label{
+  background-color: blue;
+  margin-bottom: 250px;
+  width: 20px;
+}
