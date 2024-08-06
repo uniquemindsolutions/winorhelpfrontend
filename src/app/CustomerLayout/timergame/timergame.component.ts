@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { CustomeServiceService } from '../../Services/custome-service.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -22,7 +22,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink, CommonModule, HttpClientModule,
     MatTableModule, MatButtonModule, MatDialogModule, RouterModule, MatCardModule,FormsModule,
-    MatFormFieldModule, MatInputModule
+    MatFormFieldModule, MatInputModule,
+    MatSnackBarModule
   ],
   providers:[AdminService],
   templateUrl: './timergame.component.html',
@@ -83,10 +84,6 @@ export class TimergameComponent {
 ngOnInit(): void {
 
   
-
-  
-
-
   this.checkRoomUsersList();
 
   interval(1000).subscribe(() => {
@@ -269,7 +266,10 @@ ngOnInit(): void {
     console.log(timer, 'timer');
   
     console.log(new Date(), 'AA');
-    this._countdownSubscription = interval(10000).subscribe(() => {
+
+    let roundurationval=this.users.length * 2000;
+
+    this._countdownSubscription = interval(roundurationval).subscribe(() => {
    console.log("winnnerlenght",this.room.winners.length,this.totalNoOfRoundGame);
     
    if(this.room.winners.length<=this.totalNoOfRoundGame){
@@ -317,6 +317,7 @@ ngOnInit(): void {
 
   scrollToNextUser(): void {
     this.currentScrollingUserIndex = (this.currentScrollingUserIndex + 1) % this.room.users.length;
+    console.log("nextuser",this.currentScrollingUserIndex);
   }
 
   updateCountdown(timer:number): void {
@@ -400,6 +401,8 @@ ngOnInit(): void {
     }
 
     this.activeround += 1;
+
+    
     
   }
 
@@ -448,18 +451,21 @@ ngOnInit(): void {
    this.getwinnersdata();
   // this.winningamount=roomdetails.entryFee *  roomdetails.users.length;
    console.log(winnersdata,"winningamountchecking",this.winnerlistfinalresult?.length);
- //   winnersdata.forEach((item:any, index:any) => {
-     //console.log("winnersfinaldata",item);
 
-     //alert(winnersdata.user_id);
-
-    //  this.snackBar.open('This is a snackbar message!', 'Close', {
-    //   duration: 5000,
-    // });
+   const amounttobepaid=((this.winningamount * this.percentagearray[this.winnerlistfinalresult?.length].winAmountPer) / 100)-(((this.winningamount *
+    this.percentagearray[this.winnerlistfinalresult?.length].winAmountPer) / 100)*this.percentagearray[this.winnerlistfinalresult?.length].deductAmountPer/100);
+  
+ 
+   let winnerpopup="User Id:"+winnersdata.user_id+"--winning-- Fundamount:"+amounttobepaid;
+  
+   this.snackBar.open(winnerpopup, '', {
+    duration: 5000, // Show for 1 second,
+    horizontalPosition: 'center', 
+      verticalPosition: 'bottom'
+  });
     
      
-     const amounttobepaid=((this.winningamount * this.percentagearray[this.winnerlistfinalresult?.length].winAmountPer) / 100)-(((this.winningamount *
-      this.percentagearray[this.winnerlistfinalresult?.length].winAmountPer) / 100)*this.percentagearray[this.winnerlistfinalresult?.length].deductAmountPer/100);
+     
       const payload={
         "room_id":winnersdata.room_id,
         "user_id":winnersdata.user_id,
@@ -479,7 +485,6 @@ ngOnInit(): void {
     //});
    // this.getwinnersdata();
 
-  
     
   }
 
