@@ -1,4 +1,5 @@
 
+<div class="container mt-4">
 <div id="demo" class="carousel slide" data-bs-ride="carousel">    
     <!-- The slideshow/carousel -->
     <div class="carousel-inner">
@@ -32,6 +33,7 @@
       <span class="carousel-control-next-icon"></span>
     </button>
   </div>
+</div>
 
 <section class="services">
     <div class="container">
@@ -93,21 +95,30 @@
                             <a class="viewDetailsTxt" href="javasceipt:void(0)" (click)="viewDetails(item)"
                                 *ngIf="item.visibility">View Details </a>
                         </div> -->
-
-                        <div class="text-center mt-4" *ngIf="visiblelable">
+                       <!-- {{visiblelable}} -->
+                        <div class="text-center mt-4" *ngIf="sessionuser">
                             <a class="viewDetailsTxt" href="javasceipt:void(0)" (click)="viewDetails(item)"
                                 *ngIf="item.visibility">View Details </a>
                         </div>
 
-                        <div class="text-center mt-3" *ngIf="visiblelable">
+                      
+                        <div class="text-center mt-3" *ngIf="visiblelableclick && sessionuser">
 
                             <button class="custom-button" (click)="roomalocate(item.roomId,item.entryFee)"
-                                *ngIf="item.visibility">
+                               >
                                 Click Here
                             </button>
                         </div>
-                     <!-- {{visiblelable}} -->
-                        <div class="text-center mt-3" *ngIf="!visiblelable">
+
+
+                        <div class="text-center mt-4" *ngIf="!sessionuser">
+                           
+                                <button class="custom-button" routerLink="/auth/login">
+                                    View Details
+                                </button>
+                        </div>
+                 
+                        <div class="text-center mt-3" *ngIf="!sessionuser && visiblelableclick">
 
                             <button class="custom-button" routerLink="/auth/login">
                                 Click Here

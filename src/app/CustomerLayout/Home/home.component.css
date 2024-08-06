@@ -172,3 +172,21 @@
     /* outline: 1px solid #808080; */
     box-shadow: 2px 2px 4px 4px #00000020;
 }
+
+
+
+
+@media only screen and (max-width: 768px) {
+    .carousel-item img {
+        border-radius: 15px;
+        margin-top: 1rem;
+        height: 170px;
+    }
+    .carousel-caption h3 {
+        font-size: 15px;
+        margin-bottom: 0rem;
+    }
+    .carousel-caption {
+       bottom: 12%!important;
+    }
+    }

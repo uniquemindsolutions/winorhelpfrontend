@@ -36,6 +36,8 @@ export class HomeComponent {
   roomlistdata:any=[];
   timeRemaining:any;
   visiblelable:boolean=false;
+  visiblelableclick:boolean=false;
+  sessionuser:boolean=false;
   constructor(public dialog: MatDialog, private muiService: MuiDialogService, private api: AdminService,
     private formBuilder: FormBuilder,
     private customeservice: CustomeServiceService,
@@ -48,8 +50,9 @@ export class HomeComponent {
   ngOnInit() {
   
     const userid=localStorage.getItem('user_id');
-   
+  // alert(userid)
     if(userid!='' && userid!=null){
+      this.sessionuser=true;
      this.visiblelable=true;
     }
 
@@ -126,10 +129,10 @@ export class HomeComponent {
             console.log('Iteration:', this.dataSource[i]);
 
                 const now_valid = new Date().getTime();
-                //const newEndTime = this.addMinutesToTime(this.dataSource[i].latter_datetime, 12);
-                const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                const newEndTime = this.addMinutesToTime(this.dataSource[i].latter_datetime, 12);
+               // const end_valid = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
                 //const newEndTime = this.addMinutesToTime(this.dataSource[i].endDate+' '+this.dataSource[i].endTime, 12);
-              //  const end_valid = new Date(newEndTime).getTime();
+                const end_valid = new Date(newEndTime).getTime();
                 const start_valid = new Date(this.dataSource[i].startDate+' '+this.dataSource[i].startTime).getTime();
                 //console.log(end_valid,now_valid,"timechecking")
                 const distance_valid = end_valid - now_valid;
@@ -143,6 +146,15 @@ export class HomeComponent {
                   this.dataSource[i]['visibility'] = false;
                 }
 
+
+                const end_validclick = new Date(this.dataSource[i].endDate+' '+this.dataSource[i].endTime).getTime();
+                const rangecheckend=this.isWithinRange(start_valid,end_validclick,new Date());
+
+                if(rangecheckend===true){
+                  this.visiblelableclick = true;
+                }else{
+                  this.visiblelableclick  = false;
+                }
               
 
                 // const today =new Date().toISOString().split('T')[0];
