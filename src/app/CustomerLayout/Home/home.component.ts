@@ -58,6 +58,8 @@ export class HomeComponent {
 
     if (localStorage.getItem('user_id') == '') {
       //window.location.reload();
+      this.sessionuser=false;
+      this.visiblelable=false;
       this.router.navigate(['/home']);
     }
     this.getRoomList();

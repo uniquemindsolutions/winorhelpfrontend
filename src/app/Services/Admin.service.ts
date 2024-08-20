@@ -265,7 +265,16 @@ export class AdminService {
         return this.http.post(`${this.baseUrl}/admin/changepassword`,payload,{ headers: this.getAuthHeaders() });
       }
     
-    
+    excellUpload(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/upload_excel`,data,{ headers: this.getAuthHeaders() });
+    } 
+
+    forgot_password(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/forgot_password`,data);
+    } 
+    resetPassword(data:any) {
+        return this.http.post(`${this.baseUrl}/admin/reset_password`,data,);
+    } 
 
    
    

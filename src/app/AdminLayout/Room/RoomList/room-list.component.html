@@ -1,19 +1,39 @@
 <main class="mt-4">
   <div class="row">
-    <div class="col-6">
+    <div class="col-md-3">
       <ol class="breadcrumb">
         <li class="active p-0"><h5>Rooms List</h5></li>
       </ol>
     </div>
-    <div class="col-6 text-end mb-3">
+    <div class="col-md-3">
+      <mat-form-field class="w-100">
+        <input matInput (keyup)="applyFilter($event)" class="w-100" placeholder="Filter">
+      </mat-form-field>
+      </div>
+    <div class="col-md-6 text-end mb-3 d-lg-flex xs-btns">
       <button style="border-radius: 100px; margin-top: 9px; padding: 7px 14px;" (click)="openDialog()" sm mat-flat-button
         color="primary"><span style="font-size: 16px;">+&nbsp;Create Room</span></button>
+        <!-- <input type="file" (change)="onFileChange($event)" accept=".xlsx, .xls" /> -->
+
+        <!-- <div class="costom-file">
+          <label for="file-upload" class="custom-file-upload">  Upload sheet  </label>
+          <input id="file-upload" type="file" class="btn btn-outline-primary" (change)="onFileChange($event)" accept=".xlsx, .xls"/>
+        </div> -->
+
+        <button class="file_upload ms-4" type="button">
+          <span class="btn_lbl">Bulk Upload</span>
+          <span class="btn_colorlayer"></span>
+          <input type="file" name="fileupload" id="file_upload" (change)="onFileChange($event)" accept=".xlsx, .xls"/>
+        </button>
+
+       <button class="btn btn-primary btn-sm px-4 float-end ms-auto xs-center xs-mb-1" (click)="uploadFile()">
+        Submit
+       </button>
     </div>
   </div>
   <div class="row">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event)"  placeholder="Filter">
-    </mat-form-field>
+  
+   
     <div class="col-12 col-md-12 col-lg-12 col-xl-12 table-responsive">
 
       <!-- {{dataSource | json}} -->
@@ -71,7 +91,7 @@
             <!-- [routerLink]="" -->
 
 
-            <button *ngIf="!isDateValid(el.endDate);" [routerLink]="['/admin/room-details']"   [queryParams]="{id: el.roomId}" style="border-radius: 100px;" mat-icon-button color="primary">
+            <button  [routerLink]="['/admin/room-details']"   [queryParams]="{id: el.roomId}" style="border-radius: 100px;" mat-icon-button color="primary">
               <i style="font-size: 20px;" class="fa fa-eye"></i> </button>
 
               <!-- <button *ngIf="!isDateValid(el.endDate);" (click)="onDelete(el, i)" style="border-radius: 100px;" mat-icon-button color="warn">
