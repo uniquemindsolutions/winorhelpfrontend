@@ -15,6 +15,7 @@ import { TimergameComponent } from './timergame/timergame.component';
 import { ListofwindetailsComponent } from './listofwindetails/listofwindetails.component';
 import { LatterygameComponent } from './latterygame/latterygame.component';
 
+
 const routes: Routes = [
   {
     path: '', component: CustomerLayout,
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'timergame', component: TimergameComponent },
       { path: 'listwindetails', component: ListofwindetailsComponent },
       { path: 'latterygame', component: LatterygameComponent },
+      
     ]
   }
 ];

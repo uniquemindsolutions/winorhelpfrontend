@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -21,7 +21,9 @@ export class HeaderComponent {
 
 userDetails: any;
 
-constructor(private admin: AdminService,private service:AuthService,private router:Router,private authService: AuthService,) { 
+constructor(private admin: AdminService,private service:AuthService,private router:Router,private authService: AuthService,
+  private cd: ChangeDetectorRef
+) { 
   
 }
 
@@ -33,7 +35,9 @@ loginheader:boolean=true;
     if(userid==null || userid==''){
       this.visiblelable=false;
         // window.location.reload();
-        // this.router.navigate(['/home']);
+        this.cd.detectChanges();
+        this.router.navigate([this.router.url]);
+         this.router.navigate(['/home']);
     }else{
       this.visiblelable=true;
     }
@@ -55,6 +59,12 @@ loginheader:boolean=true;
       }
 
   }) 
+}
+checksession(){
+  const userid=localStorage.getItem('user_id');
+  if(userid==null || userid==''){
+  window.location.reload();
+  }
 }
 
 logout() {

@@ -15,6 +15,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSort } from '@angular/material/sort';
+import * as XLSX from 'xlsx';
 
 export interface RoomList {
   roomId: string;
@@ -48,12 +49,14 @@ export class RoomListComponent {
   currentPage:number=1;
   perPage:number=0;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
   @ViewChild(MatSort) sort!: MatSort;
+
+  file: File | null = null;
+  data: any[] = [];
   
 
   today: Date = new Date();
-  constructor(public dialog: MatDialog, private api:AdminService, private muiService:MuiDialogService) {
+  constructor(public dialog: MatDialog, private api:AdminService, private muiService:MuiDialogService,) {
   }
 
   
@@ -175,4 +178,48 @@ export class RoomListComponent {
     }
     }
   }
+
+
+
+  onFileChange(event: any) {
+    const target: DataTransfer = <DataTransfer>(event.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    this.file = target.files[0];
+
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      const binaryStr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(binaryStr, { type: 'binary' });
+
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      this.data = XLSX.utils.sheet_to_json(ws);
+    };
+    reader.readAsBinaryString(this.file);
+  }
+
+  uploadFile() {
+    if (this.data.length > 0) {
+      this.api.excellUpload(this.data).subscribe({
+        next:(res:any) => {
+          console.log(res.data, 'res.data;');
+          if(res.status){
+            // this.dataSource[index]['isActive']=isActive;
+            this.muiService.openSnackBar({ message:'Successfully Data Posted', title: 'Bulk Upload'}, 'Success');
+            setTimeout(() => {
+            window.location.reload();
+             }, 3000);
+          }
+        },
+        error: (err: any) => {
+  
+        }
+      })
+    } else {
+      console.error('No data available to upload');
+    }
+  }
+
+
 }
