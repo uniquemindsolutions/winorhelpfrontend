@@ -55,7 +55,10 @@ export class WithdrareqComponent {
     if (this.withdraw.valid) {
       
       console.log("formvalues",this.withdraw.value)
-      const data={"amount":this.withdraw.value.amount,"upi":this.withdraw.value.upi,"user_id":localStorage.getItem('user_id')};
+      const data={"amount":this.withdraw.value.amount,
+                  "upi":this.withdraw.value.upi,
+                  "user_id":localStorage.getItem('user_id'),
+                  "userrequest":"1"};
      console.log("payload",data)
 
       this.customeservice.debitWalletamount(data).subscribe({
