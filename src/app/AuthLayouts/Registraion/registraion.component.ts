@@ -66,13 +66,13 @@ export class RegistraionComponent implements OnInit {
             this.router.navigate(['/auth/login']);
           }else{
             //alert("byee");
-            this.dialog.openSnackBar({ message:'Sorry, Email id Already Exist', title: 'Registration Failed!'}, 'Error');
+            this.dialog.openSnackBar({ message:'Sorry, UserDetails  Already Exist', title: 'Registration Failed!'}, 'Error');
           }
         },
         error:(err:any) => {
           //alert("error");
           //this.dialog.openSnackBar('Sorry, Email id Already Exist', 'Error');
-          this.dialog.openSnackBar({ message:'Sorry, Email id Already Exist.', title: 'Registration Failed!'}, 'Error');
+          this.dialog.openSnackBar({ message:'Sorry, UserDetails  Already Exist.', title: 'Registration Failed!'}, 'Error');
         }
       });
     }

@@ -18,7 +18,7 @@
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1" style="max-height: 200px; overflow-y: auto;" >
         <ng-container matColumnDef="sno">
           <th mat-header-cell *matHeaderCellDef>S.NO.</th>
-          <td mat-cell *matCellDef="let i=index">{{(i+1)}}</td>
+          <td mat-cell *matCellDef="let i=index;">{{(i+1)}}</td>
         </ng-container>
 
         <ng-container matColumnDef="name">
@@ -112,6 +112,16 @@
               color="primary"><span style="font-size: 18px;"></span>&nbsp;Action</button>
             </td>
         </ng-container>
+
+        <ng-container matColumnDef="delete_action">
+          <th mat-header-cell *matHeaderCellDef>Delete User</th>
+          <td mat-cell *matCellDef="let el;let i=index">
+            
+            <button  (click)="onDelete(el, i+1)" style="border-radius: 100px;" mat-icon-button color="warn">
+              <i style="font-size: 20px;" class="fa fa-trash"></i> </button>
+        </ng-container>
+
+        
 
         <!-- View Details Column -->
         <!-- <ng-container matColumnDef="viewDetails">

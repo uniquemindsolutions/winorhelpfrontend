@@ -2,30 +2,53 @@
     <div class="row mt-4 mb-4">
       <div class="col-md-12 myTranscTbl">
         <div><b>Wallet Amount:</b>{{walletamount}}</div>
-        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-        <table class="table table-bordered" >
-          <thead bg-color="red"  class="thead-dark sticky-header">
-            <tr>
-              <th scope="col">USERID</th>
-              <th scope="col">Transaction Type</th>
-              <th scope="col">Amount</th>
-              <th scope="col">DATE</th>
-            </tr>
-          </thead>
-          <tbody>
+      
+
+        <div class="row">
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+          </mat-form-field>
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12 table-responsive">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z1" style="max-height: 200px; overflow-y: auto;" >
+          <ng-container matColumnDef="sno">
+            <th mat-header-cell *matHeaderCellDef>S.NO.</th>
+            <td mat-cell *matCellDef="let i=index;">{{(i+1)}}</td>
+          </ng-container>
   
-            <tr *ngFor="let item of dataSource">
-              <td>{{ item.user_id }}</td>
-              <td>{{ item.trans_type }}</td>
-              <td>{{ item.amount }}</td>
-              <td>{{ item.datetime }}</td>
-            </tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <ng-container matColumnDef="user_id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>USERID</th>
+            <td mat-cell *matCellDef="let el">{{el.user_id}}</td>
+          </ng-container>
   
-          </tbody>
+          <!-- Room ID Column -->
+          <ng-container matColumnDef="trans_type">
+            <th mat-header-cell *matHeaderCellDef>trans_type</th>
+            <td mat-cell *matCellDef="let el">{{el.trans_type}}</td>
+          </ng-container>
   
+          <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef>amount</th>
+            <td mat-cell *matCellDef="let el">{{el.amount}}</td>
+          </ng-container>
+  
+  
+          <!-- entryFee Column -->
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>date</th>
+            <td mat-cell *matCellDef="let el">{{el.datetime}}</td>
+          </ng-container>
+  
+         
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
       </div>
+      
+      </div>
+
+
+
       </div>
     </div>
   </div>

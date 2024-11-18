@@ -50,11 +50,11 @@ export class NewUserComponent {
             this.dialog.openSnackBar({ message: 'Registration successfully completed.', title: 'Registration Done' }, 'Success');
             this.dialogRef.close();
           } else {
-            this.dialog.openSnackBar({ message: 'Sorry, Email id Already Exist', title: 'Registration Failed!' }, 'Error');
+            this.dialog.openSnackBar({ message: 'Sorry, UserDetails  Already Exist', title: 'Registration Failed!' }, 'Error');
           }
         },
         error: (err: any) => {
-          this.dialog.openSnackBar({ message: 'Sorry, Email id Already Exist', title: 'Registration Failed!' }, 'Error');
+          this.dialog.openSnackBar({ message: 'Sorry, UserDetails  Already Exist', title: 'Registration Failed!' }, 'Error');
         }
       });
     }

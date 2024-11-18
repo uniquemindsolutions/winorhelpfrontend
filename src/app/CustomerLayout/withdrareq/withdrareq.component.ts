@@ -52,8 +52,9 @@ export class WithdrareqComponent {
 
   onSubmit(): void {
     this.submitted = true;
-    if (this.withdraw.valid) {
-      
+
+    if (this.withdraw.valid && this.withdraw.value.amount<=this.walletAmount && this.withdraw.value.amount>100) {
+  
       console.log("formvalues",this.withdraw.value)
       const data={"amount":this.withdraw.value.amount,
                   "upi":this.withdraw.value.upi,
@@ -64,7 +65,7 @@ export class WithdrareqComponent {
       this.customeservice.debitWalletamount(data).subscribe({
         next: (result:any) => {
 
-          this.muiDialog.openSnackBar({ title: 'Success!', message: 'Rsuccessfully deducted from your wallet it will credit into your bank in next 1 or 2 hours' }, 'Success')
+          this.muiDialog.openSnackBar({ title: 'Success!', message: 'successfully deducted from your wallet it will credit into your bank in next 1 or 2 hours' }, 'Success')
           //this.dialogRef.close({reload:true});
 
           console.log("resultval",result);
@@ -76,6 +77,14 @@ export class WithdrareqComponent {
       })
     } else {
       console.log('Form is not valid');
+
+      if(this.withdraw.value.amount>this.walletAmount){
+        this.muiDialog.openSnackBar({ message: 'Amount Should not greater than wallet amount', title: 'Withdraw Request' }, 'Error');
+      }
+      if(this.withdraw.value.amount<=100){
+        this.muiDialog.openSnackBar({ message: 'At Least one game win for withdra Amount', title: 'Withdraw Request' }, 'Error');
+      }
+
     }
 
       

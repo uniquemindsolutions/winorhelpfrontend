@@ -10,6 +10,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import MuiDialogService from '../../Services/MuiDialog.service';
 
 
 export interface useList {
@@ -32,7 +33,7 @@ export interface useList {
 export class UsersListComponent {
   displayedColumns: string[] = ['sno', 'name','UserID', 'email', 'phone', 'email_veri','upi', 'status','room_allot',
   "wlamount","changepass",
-  'debit_action','credit_action'];
+  'debit_action','credit_action','delete_action'];
   //dataSource :RoomList[]=[];
   // dataSource: MatTableDataSource<any> | undefined;
   dataSource = new MatTableDataSource<useList>;
@@ -41,7 +42,7 @@ export class UsersListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private api:AdminService) {
+  constructor(public dialog: MatDialog, private api:AdminService,private dialog2: MuiDialogService) {
   }
 
  ngOnInit(){
@@ -73,7 +74,9 @@ export class UsersListComponent {
       
           filters.forEach((filter: { id: string | number; value: string; }) => {
             const val = data[filter.id] === null ? '' : data[filter.id];
+            console.log("filtervalue",filter.value,val);
             matchFilter.push(val.toLowerCase().includes(filter.value.toLowerCase()));
+            console.log("filtervalueboolean",matchFilter);
           });
             return matchFilter.every(Boolean);
         };
@@ -128,6 +131,27 @@ export class UsersListComponent {
       this.dataSource.paginator.firstPage();
     }
     }
+  }
+
+  onDelete(e1:any,e2:any){
+    // this.dialog.
+
+    console.log(e1.id,"---",e2,"delete");
+
+    this.api.deleteUser(e1.id).subscribe({
+      next:(res:any) => {
+        console.log(res.data, 'res.data;');
+        if(res.status){
+          // this.dataSource[index]['isActive']=isActive;
+          this.dialog2.openSnackBar({ message: 'successfully Deleted.', title: 'Registration Done' }, 'Success');
+          this.gerUsersList();
+        }
+      },
+      error: (err: any) => {
+
+      }
+    })
+    this.gerUsersList();
   }
 
 
